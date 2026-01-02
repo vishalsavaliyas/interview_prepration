@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>React & JavaScript Interview Preparation (2 Years Experience)</title>
+  <style>
+    body { font-family: Arial, sans-serif; background:#f7f9fc; color:#222; padding:20px; }
+    h1,h2,h3 { color:#2c3e50; }
+    section { background:#fff; padding:20px; margin-bottom:20px; border-radius:8px; box-shadow:0 2px 6px rgba(0,0,0,.08); }
+    pre,code { background:#272822; color:#f8f8f2; padding:10px; border-radius:6px; overflow-x:auto; }
+    .question { font-weight:bold; color:#1a73e8; }
+  </style>
+</head>
+<body>
+
+<h1>Frontend Interview Preparation<br/>React & JavaScript (2 Years Experience)</h1>
+
+<section>
+<h2>JavaScript Core Questions</h2>
+
+<p class="question">1. What is JavaScript?</p>
+<p>JavaScript is a single-threaded, synchronous language that supports asynchronous programming using the event loop.</p>
+
+<p class="question">2. var vs let vs const</p>
+<ul>
+<li>var - function scoped</li>
+<li>let - block scoped</li>
+<li>const - block scoped, no reassignment</li>
+</ul>
+
+<p class="question">3. Closure</p>
+<pre><code>
+function outer() {
+  let count = 0;
+  return function() {
+    count++;
+    return count;
+  }
+}
+</code></pre>
+</section>
+
+<section>
+<h2>React Questions</h2>
+
+<p class="question">1. What is React?</p>
+<p>React is a JavaScript library used to build component-based UI using Virtual DOM.</p>
+
+<p class="question">2. useState</p>
+<pre><code>
+const [count, setCount] = useState(0);
+</code></pre>
+
+<p class="question">3. useEffect</p>
+<pre><code>
+useEffect(() => {
+  fetchData();
+}, []);
+</code></pre>
+</section>
+
+<section>
+<h2>Practical Tasks</h2>
+
+<h3>Counter App</h3>
+<pre><code>
+function Counter() {
+  const [count, setCount] = React.useState(0);
+  return (
+    <>
+      <button onClick={()=>setCount(count+1)}>+</button>
+      <p>{count}</p>
+    </>
+  );
+}
+</code></pre>
+</section>
+
+</body>
+</html>

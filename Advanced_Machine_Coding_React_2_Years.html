@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced Machine Coding – React (2 Years)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f6fb;color:#222;padding:20px;line-height:1.6}
+h1,h2,h3{color:#2c3e50}
+section{background:#fff;padding:20px;margin-bottom:24px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+pre{background:#1e1e1e;color:#f8f8f2;padding:12px;border-radius:6px;overflow-x:auto}
+.tip{background:#e8f0fe;padding:12px;border-left:4px solid #1a73e8;margin:12px 0}
+</style>
+</head>
+<body>
+
+<h1>Advanced Machine Coding Tasks<br>React (2 Years Experience)</h1>
+
+<!-- CART -->
+<section>
+<h2>1️⃣ Shopping Cart (MOST ASKED)</h2>
+
+<h3>Requirements</h3>
+<ul>
+<li>Add product to cart</li>
+<li>Increase / decrease quantity</li>
+<li>Calculate total price</li>
+</ul>
+
+<pre><code>
+function Cart() {
+  const [cart, setCart] = React.useState([]);
+
+  const addItem = (product) => {
+    const exists = cart.find(i => i.id === product.id);
+    if (exists) {
+      setCart(cart.map(i =>
+        i.id === product.id ? {...i, qty: i.qty + 1} : i
+      ));
+    } else {
+      setCart([...cart, {...product, qty: 1}]);
+    }
+  };
+
+  const total = cart.reduce(
+    (sum, item) => sum + item.price * item.qty, 0
+  );
+
+  return (
+    <>
+      <button onClick={() => addItem({id:1,name:'Item',price:100})}>
+        Add Item
+      </button>
+
+      {cart.map(item => (
+        <div key={item.id}>
+          {item.name} - Qty: {item.qty}
+        </div>
+      ))}
+
+      <h3>Total: ₹{total}</h3>
+    </>
+  );
+}
+</code></pre>
+
+<div class="tip">
+Explain: state immutability, array methods, derived state
+</div>
+</section>
+
+<!-- INFINITE SCROLL -->
+<section>
+<h2>2️⃣ Infinite Scroll</h2>
+
+<h3>Requirements</h3>
+<ul>
+<li>Load data when user reaches bottom</li>
+<li>Prevent multiple API calls</li>
+</ul>
+
+<pre><code>
+function InfiniteScroll() {
+  const [page, setPage] = React.useState(1);
+  const [list, setList] = React.useState([]);
+
+  React.useEffect(() => {
+    fetch(`/api/list?page=${page}`)
+      .then(res => res.json())
+      .then(data => {
+        setList(prev => [...prev, ...data]);
+      });
+  }, [page]);
+
+  React.useEffect(() => {
+    const onScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.body.offsetHeight - 50
+      ) {
+        setPage(p => p + 1);
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return list.map((item, i) => <div key={i}>{item}</div>);
+}
+</code></pre>
+
+<div class="tip">
+Explain: pagination, cleanup, performance
+</div>
+</section>
+
+<!-- AUTH FLOW -->
+<section>
+<h2>3️⃣ Authentication Flow (Login / Logout)</h2>
+
+<h3>Requirements</h3>
+<ul>
+<li>Login API</li>
+<li>Store token</li>
+<li>Protected route</li>
+</ul>
+
+<pre><code>
+// Login
+async function login(email, password) {
+  const res = await fetch('/login', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({email, password})
+  });
+  const data = await res.json();
+  localStorage.setItem('token', data.token);
+}
+
+// Protected Route
+function PrivateRoute({children}) {
+  return localStorage.getItem('token')
+    ? children
+    : <Navigate to="/login" />;
+}
+</code></pre>
+
+<div class="tip">
+Explain: token storage, auth flow, security basics
+</div>
+</section>
+
+<!-- INTERVIEW STRATEGY -->
+<section>
+<h2>How to Explain in Interview</h2>
+<div class="tip">
+<b>Requirement → State → Logic → Optimization</b>
+</div>
+<ul>
+<li>Explain before coding</li>
+<li>Use meaningful variable names</li>
+<li>Handle edge cases</li>
+</ul>
+</section>
+
+</body>
+</html>

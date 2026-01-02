@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Advanced React & JavaScript Interview Prep (2 Years)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f6fb;color:#222;padding:20px;line-height:1.6}
+h1,h2,h3{color:#2c3e50}
+section{background:#fff;padding:20px;margin-bottom:24px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+pre{background:#1e1e1e;color:#f8f8f2;padding:12px;border-radius:6px;overflow-x:auto}
+.question{font-weight:bold;color:#1a73e8;margin-top:16px}
+.tip{background:#e8f0fe;padding:12px;border-left:4px solid #1a73e8;margin:12px 0}
+</style>
+</head>
+<body>
+
+<h1>Advanced Frontend Interview Preparation<br>React & JavaScript (2 Years Experience)</h1>
+
+<section>
+<h2>Advanced JavaScript Interview Questions</h2>
+
+<p class="question">1. Explain the Event Loop in JavaScript</p>
+<p>The event loop allows JavaScript to handle asynchronous operations by executing synchronous code first, then microtasks (Promises), then macrotasks (setTimeout).</p>
+
+<p class="question">2. What are Promises and async/await?</p>
+<p>Promises represent future values. async/await is syntactic sugar over promises for cleaner asynchronous code.</p>
+<pre><code>
+async function fetchData() {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+}
+</code></pre>
+
+<p class="question">3. Shallow vs Deep Copy</p>
+<pre><code>
+const shallow = {...obj};
+const deep = JSON.parse(JSON.stringify(obj));
+</code></pre>
+
+<p class="question">4. Debouncing vs Throttling</p>
+<ul>
+<li>Debounce: Executes after delay ends</li>
+<li>Throttle: Executes at fixed intervals</li>
+</ul>
+
+<p class="question">5. Call, Apply, Bind</p>
+<pre><code>
+function greet(city) {
+  console.log(this.name + " from " + city);
+}
+greet.call({name:"A"}, "Delhi");
+</code></pre>
+</section>
+
+<section>
+<h2>Advanced React Interview Questions</h2>
+
+<p class="question">1. What is Virtual DOM?</p>
+<p>Virtual DOM is a lightweight copy of real DOM that React uses to optimize UI updates.</p>
+
+<p class="question">2. What is reconciliation?</p>
+<p>Reconciliation is React’s process of comparing old and new Virtual DOM trees to update only changed nodes.</p>
+
+<p class="question">3. useMemo vs useCallback</p>
+<pre><code>
+const memoValue = useMemo(() => heavyCalc(a), [a]);
+const memoFn = useCallback(() => doSomething(a), [a]);
+</code></pre>
+
+<p class="question">4. React.memo</p>
+<p>Prevents unnecessary re-renders of functional components.</p>
+
+<p class="question">5. Controlled vs Uncontrolled Components</p>
+<p>Controlled components use state; uncontrolled use refs.</p>
+</section>
+
+<section>
+<h2>Machine Coding Tasks (MOST IMPORTANT)</h2>
+
+<h3>Task 1: Todo App</h3>
+<pre><code>
+function Todo() {
+  const [list, setList] = React.useState([]);
+  const [text, setText] = React.useState("");
+
+  const addTodo = () => {
+    setList([...list, text]);
+    setText("");
+  };
+
+  return (
+    <>
+      <input value={text} onChange={e => setText(e.target.value)} />
+      <button onClick={addTodo}>Add</button>
+      <ul>
+        {list.map((item, i) => <li key={i}>{item}</li>)}
+      </ul>
+    </>
+  );
+}
+</code></pre>
+
+<h3>Task 2: Search Filter</h3>
+<pre><code>
+const filtered = users.filter(u =>
+  u.name.toLowerCase().includes(search.toLowerCase())
+);
+</code></pre>
+
+<h3>Task 3: API List with Loading</h3>
+<pre><code>
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      setUsers(data);
+      setLoading(false);
+    });
+}, []);
+</code></pre>
+
+<h3>Task 4: Debounce Input</h3>
+<pre><code>
+function debounce(fn, delay) {
+  let timer;
+  return function(...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  }
+}
+</code></pre>
+
+<h3>Task 5: Pagination Logic</h3>
+<pre><code>
+const start = (page - 1) * limit;
+const paginatedData = data.slice(start, start + limit);
+</code></pre>
+
+</section>
+
+<section>
+<h2>Must-Memorize Interview Answers</h2>
+<ul>
+<li>I mostly work with functional components and hooks.</li>
+<li>I focus on performance and clean code.</li>
+<li>I understand concepts deeply and can learn fast.</li>
+</ul>
+</section>
+
+<section>
+<h2>Final Interview Tips</h2>
+<div class="tip">
+Explain answers using: <b>What → Why → Example → Project usage</b>
+</div>
+<ul>
+<li>Practice coding without Google</li>
+<li>Explain while coding</li>
+<li>Stay calm and structured</li>
+</ul>
+</section>
+
+</body>
+</html>
