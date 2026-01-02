@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JavaScript Practical Interview Tasks</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    code {
+      color: #00e676;
+    }
+    .task {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .note {
+      background: #e3f2fd;
+      padding: 10px;
+      border-left: 5px solid #2196f3;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Practical Interview Tasks (With Solutions)</h1>
+<p>Real-world JavaScript tasks asked in practical & machine coding rounds.</p>
+
+<hr />
+
+<div class="task">
+  <h2>Task 1: Debounce Function</h2>
+  <p>Create a debounce function that delays execution.</p>
+  <pre><code>
+function debounce(fn, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
+}
+  </code></pre>
+</div>
+
+<div class="task">
+  <h2>Task 2: Throttle Function</h2>
+  <pre><code>
+function throttle(fn, limit) {
+  let lastCall = 0;
+  return function (...args) {
+    const now = Date.now();
+    if (now - lastCall >= limit) {
+      lastCall = now;
+      fn.apply(this, args);
+    }
+  };
+}
+  </code></pre>
+</div>
+
+<div class="task">
+  <h2>Task 3: Deep Clone Object</h2>
+  <pre><code>
+function deepClone(obj) {
+  if (obj === null || typeof obj !== "object") return obj;
+  const copy = Array.isArray(obj) ? [] : {};
+  for (let key in obj) {
+    if (obj.hasOwnProperty(key)) {
+      copy[key] = deepClone(obj[key]);
+    }
+  }
+  return copy;
+}
+  </code></pre>
+</div>
+
+<div class="task">
+  <h2>Task 4: Flatten Nested Array</h2>
+  <pre><code>
+function flatten(arr) {
+  return arr.reduce((acc, val) => {
+    return acc.concat(Array.isArray(val) ? flatten(val) : val);
+  }, []);
+}
+  </code></pre>
+</div>
+
+<div class="task">
+  <h2>Task 5: Promise.all Polyfill</h2>
+  <pre><code>
+function promiseAll(promises) {
+  return new Promise((resolve, reject) => {
+    const result = [];
+    let completed = 0;
+
+    promises.forEach((promise, index) => {
+      Promise.resolve(promise)
+        .then(value => {
+          result[index] = value;
+          completed++;
+          if (completed === promises.length) {
+            resolve(result);
+          }
+        })
+        .catch(reject);
+    });
+  });
+}
+  </code></pre>
+</div>
+
+<div class="task">
+  <h2>Task 6: Remove Duplicate Objects</h2>
+  <pre><code>
+function removeDuplicates(arr) {
+  const map = new Map();
+  arr.forEach(item => map.set(item.id, item));
+  return Array.from(map.values());
+}
+  </code></pre>
+</div>
+
+<div class="task">
+  <h2>Task 7: Event Delegation</h2>
+  <pre><code>
+&lt;div id="container"&gt;
+  &lt;button data-id="1"&gt;One&lt;/button&gt;
+  &lt;button data-id="2"&gt;Two&lt;/button&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+document.getElementById("container").addEventListener("click", e => {
+  if (e.target.tagName === "BUTTON") {
+    console.log("Clicked:", e.target.dataset.id);
+  }
+});
+&lt;/script&gt;
+  </code></pre>
+</div>
+
+<div class="task">
+  <h2>Task 8: First Non-Repeating Character</h2>
+  <pre><code>
+function firstUniqueChar(str) {
+  const freq = {};
+  for (let char of str) freq[char] = (freq[char] || 0) + 1;
+  for (let char of str) {
+    if (freq[char] === 1) return char;
+  }
+  return null;
+}
+  </code></pre>
+</div>
+
+<div class="task">
+  <h2>Task 9: Bind Polyfill</h2>
+  <pre><code>
+Function.prototype.myBind = function (context, ...args) {
+  const fn = this;
+  return function (...newArgs) {
+    return fn.apply(context, [...args, ...newArgs]);
+  };
+};
+  </code></pre>
+</div>
+
+<div class="task">
+  <h2>Task 10: Memoization</h2>
+  <pre><code>
+function memoize(fn) {
+  const cache = {};
+  return function (...args) {
+    const key = JSON.stringify(args);
+    if (cache[key]) return cache[key];
+    const result = fn(...args);
+    cache[key] = result;
+    return result;
+  };
+}
+  </code></pre>
+</div>
+
+<div class="note">
+  <strong>Interview Tip:</strong>  
+  Explain time complexity, edge cases, and real-world usage while coding.
+</div>
+
+</body>
+</html>
