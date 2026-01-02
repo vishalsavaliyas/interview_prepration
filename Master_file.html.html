@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>MASTER React & JavaScript Interview Prep (2 Years)</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{font-family:Arial,Helvetica,sans-serif;background:#f4f6fb;color:#222;padding:20px;line-height:1.7}
+h1,h2,h3{color:#2c3e50}
+section{background:#fff;padding:20px;margin-bottom:26px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,.08)}
+pre{background:#1e1e1e;color:#f8f8f2;padding:12px;border-radius:6px;overflow-x:auto}
+.tip{background:#e8f0fe;padding:12px;border-left:4px solid #1a73e8;margin:12px 0}
+.check{color:green;font-weight:bold}
+.question{font-weight:bold;color:#1a73e8;margin-top:12px}
+</style>
+</head>
+<body>
+
+<h1>MASTER FILE – React & JavaScript Interview Preparation<br>(2 Years Experience)</h1>
+
+<!-- JS CORE -->
+<section>
+<h2>1️⃣ JavaScript Core</h2>
+
+<p class="question">What is JavaScript?</p>
+<p>JavaScript is a single-threaded, synchronous language that handles async tasks using the event loop.</p>
+
+<p class="question">var vs let vs const</p>
+<ul>
+<li>var – function scoped</li>
+<li>let – block scoped</li>
+<li>const – block scoped, no reassignment</li>
+</ul>
+
+<p class="question">Closure</p>
+<pre><code>
+function outer() {
+  let count = 0;
+  return () => ++count;
+}
+</code></pre>
+
+<p class="question">== vs ===</p>
+<p>Always use === to avoid type coercion.</p>
+</section>
+
+<!-- JS ADVANCED -->
+<section>
+<h2>2️⃣ Advanced JavaScript</h2>
+
+<p class="question">Event Loop</p>
+<pre><code>
+console.log('A');
+setTimeout(()=>console.log('B'),0);
+Promise.resolve().then(()=>console.log('C'));
+console.log('D');
+</code></pre>
+<p><b>Output:</b> A D C B</p>
+
+<p class="question">Debounce</p>
+<pre><code>
+function debounce(fn, d) {
+ let t;
+ return (...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),d);}
+}
+</code></pre>
+</section>
+
+<!-- REACT CORE -->
+<section>
+<h2>3️⃣ React Fundamentals</h2>
+
+<p class="question">What is React?</p>
+<p>React is a JavaScript library for building component-based UIs using Virtual DOM.</p>
+
+<p class="question">Props vs State</p>
+<p>Props are read-only; state is mutable.</p>
+
+<p class="question">useState</p>
+<pre><code>
+const [count, setCount] = useState(0);
+</code></pre>
+
+<p class="question">useEffect</p>
+<pre><code>
+useEffect(()=>{ fetchData(); }, []);
+</code></pre>
+</section>
+
+<!-- REACT ADVANCED -->
+<section>
+<h2>4️⃣ Advanced React</h2>
+
+<p class="question">Re-render Rules</p>
+<ul>
+<li>State change</li>
+<li>Props change</li>
+<li>Parent re-render</li>
+</ul>
+
+<p class="question">Stale State Fix</p>
+<pre><code>
+setCount(prev => prev + 1);
+</code></pre>
+
+<p class="question">useMemo vs useCallback</p>
+<pre><code>
+useMemo(()=>calc(a),[a]);
+useCallback(()=>fn(a),[a]);
+</code></pre>
+</section>
+
+<!-- MACHINE CODING -->
+<section>
+<h2>5️⃣ Machine Coding (CRITICAL)</h2>
+
+<h3>Todo App</h3>
+<pre><code>
+const [todos, setTodos] = useState([]);
+</code></pre>
+
+<h3>Shopping Cart</h3>
+<pre><code>
+const total = cart.reduce((s,i)=>s+i.price*i.qty,0);
+</code></pre>
+
+<h3>Infinite Scroll</h3>
+<pre><code>
+window.addEventListener('scroll', loadMore);
+</code></pre>
+
+<h3>Authentication Flow</h3>
+<pre><code>
+localStorage.setItem('token', token);
+</code></pre>
+</section>
+
+<!-- PRACTICAL -->
+<section>
+<h2>6️⃣ Practical Patterns</h2>
+
+<h3>API Loading & Error</h3>
+<pre><code>
+if(loading) return 'Loading...';
+if(error) return 'Error';
+</code></pre>
+
+<h3>Form Handling</h3>
+<pre><code>
+setForm({...form,[name]:value});
+</code></pre>
+</section>
+
+<!-- SECURITY -->
+<section>
+<h2>7️⃣ Security Basics</h2>
+<ul>
+<li>XSS awareness</li>
+<li>Avoid storing sensitive data in localStorage</li>
+<li>Use HTTPS</li>
+</ul>
+</section>
+
+<!-- HR -->
+<section>
+<h2>8️⃣ HR + Communication</h2>
+
+<p class="question">Tell me about yourself</p>
+<p>I am a frontend developer with 2 years of experience working with React and JavaScript, focusing on clean and performant code.</p>
+
+<p class="question">Strength</p>
+<p>Strong fundamentals and problem-solving.</p>
+
+<p class="question">Weakness</p>
+<p>I am improving system design understanding.</p>
+</section>
+
+<!-- FINAL -->
+<section>
+<h2>FINAL CHECKLIST</h2>
+<ul>
+<li class="check">JavaScript fundamentals</li>
+<li class="check">React hooks mastery</li>
+<li class="check">Machine coding confidence</li>
+<li class="check">Explain while coding</li>
+</ul>
+
+<div class="tip">
+If you master this ONE file, you are ready to crack interviews for 2–3 years experience.
+</div>
+</section>
+
+</body>
+</html>
