@@ -1,0 +1,2292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Frontend Interview Preparation – JavaScript & React</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        background: #c0c3cf;
+        padding: 20px;
+        color: #333;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      h1 {
+        text-align: center;
+      }
+      section {
+        background: #ffffff;
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+      }
+      code {
+        background: #eee;
+        padding: 2px 6px;
+        border-radius: 4px;
+        font-family: Consolas, monospace;
+      }
+      pre {
+        background: #272822;
+        color: #f8f8f2;
+        padding: 15px;
+        overflow-x: auto;
+        border-radius: 6px;
+      }
+      ul {
+        margin-left: 20px;
+      }
+      .tip {
+        background: #eaf6ff;
+        padding: 10px;
+        border-left: 4px solid #3498db;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Frontend Interview Preparation<br />JavaScript & React</h1>
+
+    <!-- ====================== INTRO ====================== -->
+    <section>
+      <h2>Candidate Profile</h2>
+      <p><strong>Name:</strong> Bhavesh</p>
+      <p><strong>Role:</strong> Frontend Developer</p>
+      <p>
+        <strong>Skills:</strong> JavaScript, React, Hooks, Functional Components
+      </p>
+    </section>
+
+    <section>
+      <h2>REACT CORE (VERY IMPORTANT)</h2>
+      <h3>1️⃣ What is React? (Interview Answer)</h3>
+      <p>
+        React is a JavaScript library for building user interfaces. It allows
+        developers to create reusable UI components and manage state
+        efficiently.
+      </p>
+      <p>
+        React is a JavaScript library used to build user interfaces, especially
+        single-page applications. It is component-based, uses a virtual DOM for
+        better performance, and follows a unidirectional data flow.
+      </p>
+      <h3>JSX</h3>
+      <p>JSX allows us to write HTML-like syntax inside JavaScript.</p>
+      <pre>
+            const element = &lt;h1&gt;Hello, world!&lt;/h1&gt;;
+            export default element;
+      </pre>
+
+      <h3>2️⃣ What is a component? (Interview Answer)</h3>
+
+      <p>
+        A component is a self-contained UI element that can be reused across
+        different parts of an application. It encapsulates its own state and
+        logic.
+      </p>
+      <p>Two types:</p>
+      <p>1. Functional Component</p>
+      <p>2. Class Component</p>
+      <h3>3️⃣ What is a functional component? (Interview Answer)</h3>
+      <p>
+        A functional component is a pure function that returns JSX. It does not
+        have its own state and lifecycle.
+      </p>
+      <pre>
+            function Hello() {
+                    return &lt;h1&gt;Hello World&lt;/h1&gt;;
+            }
+            export default Hello;
+      </pre>
+      <h3>4️⃣ What is a class component? (Interview Answer)</h3>
+      <p>
+        A class component is a component that uses the
+        <code>class</code> keyword and has its own state and lifecycle.
+      </p>
+      <h3>5️⃣ Difference between functional and class components?</h3>
+      <ul>
+        <li>Functional components are simpler and easier to read.</li>
+        <li>
+          Class components have more features like state and lifecycle methods.
+        </li>
+        <li>Functional components can use hooks for state and side effects.</li>
+        <li>Class components can use state and lifecycle methods.</li>
+      </ul>
+      <h3>6️⃣ What is a virtual DOM? (Interview Answer)</h3>
+      <p>
+        The virtual DOM is a representation of the actual DOM in memory. It is a
+        JavaScript object that represents the current state of the UI. It is
+        used to efficiently update the UI when the state changes.
+      </p>
+      <h3>Q4. What is virtual DOM?</h3>
+      <p>
+        Virtual DOM is a lightweight copy of real DOM used to optimize
+        rendering.
+      </p>
+      <h3>What is memoization in React?</h3>
+      <p>
+        Memoization prevents unnecessary re-renders using React.memo, useMemo,
+        and useCallback.
+      </p>
+      <h3>27️⃣ What is lazy loading?</h3>
+      <p>
+        Lazy loading loads components only when needed to improve performance.
+      </p>
+      <h3>How do you handle API calls in React?</h3>
+      <p>
+        Using useEffect or libraries like React Query which manage loading,
+        error, and caching automatically.
+      </p>
+      <h3>What is reconciliation?</h3>
+      <p>
+        React’s process of comparing virtual DOM changes to update the real DOM
+        efficiently.
+      </p>
+      <h3>Q5. How do you optimize React apps?</h3>
+      <ul>
+        <li>Use React.memo to memoize components.</li>
+        <li>Use useCallback and useMemo to memoize functions and values.</li>
+        <li>Code-splitting with React.lazy and Suspense.</li>
+        <li>Avoid unnecessary re-renders by using keys properly.</li>
+        <li>
+          Optimize state management (e.g., use React Query for server state).
+        </li>
+        <li>Lazy load components using React.lazy and Suspense.</li>
+      </ul>
+      <h3>Testing (Say Honestly but Smartly)</h3>
+      <p>
+        I have a basic understanding of testing concepts and I am actively
+        improving my hands-on experience with testing tools like Jest and React
+        Testing Library.
+      </p>
+      <p>
+        I have basic understanding and have written simple test cases using Jest
+        and RTL, and I am actively improving my testing skills.
+      </p>
+
+      <h3>Props vs State (MOST ASKED)</h3>
+      <p>
+        Props are read-only data passed from parent to child components, while
+        state is mutable data managed within a component. (State Managed inside
+        component).
+      </p>
+      <pre>
+        Props Example:
+        function Parent() {
+            return &lt;Child name="Bhavesh" /&gt;;
+        }
+        function Child({ name }) {
+            return &lt;h1&gt;{name}&lt;/h1&gt;;
+        }
+        State Example:
+        import { useState } from 'react';
+        function Counter() {
+            const [count, setCount] = useState(0);
+            return (
+                &lt;div&gt;
+                    &lt;h1&gt;Count: {count}&lt;/h1&gt;
+                    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
+                &lt;/div&gt;
+            );
+        }   
+
+      </pre>
+      <p>
+        Props are used to pass data, state is used to manage dynamic data inside
+        a component.
+      </p>
+      <h3>7️⃣ What is a prop? (Interview Answer)</h3>
+      <p>
+        Props are data passed to a component from its parent. They are read-only
+        and can be used to configure the component.
+      </p>
+      <h3>8️⃣ What is a state? (Interview Answer)</h3>
+      <p>
+        State is data that is specific to a component and can be used to manage
+        its behavior. It is managed using the
+        <code>setState</code> method.
+      </p>
+      <h3>9️⃣ What is a lifecycle method? (Interview Answer)</h3>
+      <p>
+        Lifecycle methods are special methods that are called at different
+        stages of a component's lifecycle. They can be used to perform actions
+        like fetching data or cleaning up resources.
+      </p>
+      <h3>10️⃣ What is a React Hook? (Interview Answer)</h3>
+      <p>
+        React Hooks are functions that allow you to use state and other React
+        features in functional components.
+      </p>
+      <h3>Q3. What are hooks?</h3>
+      <p>
+        Hooks are special functions that let you "hook into" React features like
+        state and lifecycle methods from functional components.
+      </p>
+      <p>
+        Hooks are functions that allow functional components to use state and
+        lifecycle features.
+      </p>
+      <p>
+        Hooks allow functional components to use state and lifecycle features.
+      </p>
+      <h3>useState Hook</h3>
+      <p>
+        useState allows components to manage local state and re-render when
+        state changes.
+      </p>
+      <p>Used to manage state in functional components.</p>
+      <pre>
+import { useState } from 'react';
+function Counter() {
+    const [count, setCount] = useState(0);
+    return (
+        &lt;div&gt;
+            &lt;h1&gt;Count: {count}&lt;/h1&gt;
+            &lt;button onClick={() =&gt; setCount(count + 1)}&gt;Increment&lt;/button&gt;
+        &lt;/div&gt;
+    );
+}
+        </pre
+      >
+      <h3>Why dependency array in useEffect?</h3>
+      <p>
+        It controls when the effect should re-run based on dependency changes.
+      </p>
+      <h3>Why not use array index as key?</h3>
+      <p>
+        Because reordering or updating items can cause incorrect rendering and
+        performance issues.
+      </p>
+      <h3>useEffect Hook (VERY IMPORTANT)</h3>
+      <p>
+        Used to perform side effects in functional components, such as fetching
+        data or subscribing to events.
+      </p>
+      <p>
+        useEffect is used to handle side effects like API calls, subscriptions,
+        and lifecycle behavior.
+      </p>
+      <pre>
+Used for:
+
+API calls
+
+Side effects
+
+Lifecycle behavior
+
+useEffect runs after render. With empty dependency array, it runs once like componentDidMount.
+      </pre>
+      <pre>
+import { useEffect, useState } from 'react';
+function DataFetcher() {
+    const [data, setData] = useState(null);
+    useEffect(() =&gt; {
+        fetch('https://api.example.com/data')
+            .then(response =&gt; response.json())
+            .then(data =&gt; setData(data));
+    }, []);
+    return (
+        &lt;div&gt;
+            {data ? &lt;p&gt;Data: {data}&lt;/p&gt; : &lt;p&gt;Loading...&lt;/p&gt;}
+        &lt;/div&gt;
+    );
+}
+        </pre
+      >
+
+      <h3>11️⃣ What is a useCallback hook? (Interview Answer)</h3>
+      <p>
+        The <code>useCallback</code> hook is used to memoize a function so that
+        it is not recreated on every render.
+      </p>
+      <h3>12️⃣ What is a useMemo hook? (Interview Answer)</h3>
+      <p>
+        The <code>useMemo</code> hook is used to memoize a value so that it is
+        not recalculated on every render.
+      </p>
+      <h3>13️⃣ What is a useRef hook? (Interview Answer)</h3>
+      <p>
+        The <code>useRef</code> hook is used to create a mutable reference to a
+        value.
+      </p>
+      <h3>14️⃣ What is a useEffect hook? (Interview Answer)</h3>
+      <p>
+        The <code>useEffect</code> hook is used to perform side effects in
+        functional components.
+      </p>
+      <h3>15️⃣ What is a memo function? (Interview Answer)</h3>
+      <p>
+        The <code>memo</code> function is used to memoize a component so that it
+        is not recreated on every render.
+      </p>
+      <h3>16️⃣ What is a forwardRef function? (Interview Answer)</h3>
+      <p>
+        The <code>forwardRef</code> function is used to forward a ref to a child
+        component.
+      </p>
+      <h3>17️⃣ What is a useCallback function? (Interview Answer)</h3>
+      <p>
+        The <code>useCallback</code> function is used to memoize a function so
+        that it is not recreated on every render.
+      </p>
+      <h3>18️⃣ What is a useMemo function? (Interview Answer)</h3>
+      <p>
+        The <code>useMemo</code> function is used to memoize a value so that it
+        is not recalculated on every render.
+      </p>
+      <h3>19️⃣ What is a useReducer function? (Interview Answer)</h3>
+      <p>
+        The <code>useReducer</code> function is used to manage state in a
+        functional component.
+      </p>
+      <h3>What is React Query?</h3>
+      <p>
+        React Query is used for server-state management like fetching, caching,
+        and syncing API data.
+      </p>
+      <p>
+        React Query reduces manual state handling and provides caching and
+        automatic refetching.
+      </p>
+      <p>
+        React Query is a data-fetching library that simplifies API calls,
+        caching, and state management in React applications.
+      </p>
+      <pre>
+Example:
+import { useQuery } from "@tanstack/react-query";
+
+const fetchUsers = () =>
+  fetch("https://api.example.com/users").then(res => res.json());
+
+function Users() {
+  const { data, isLoading, error } = useQuery(["users"], fetchUsers);
+
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error</p>;
+
+  return data.map(user => <p key={user.id}>{user.name}</p>);
+}
+
+      </pre>
+      <h3>What is a React Context API?</h3>
+      <p>
+        The React Context API is a way to share data between components in a
+        React application.
+      </p>
+      <h3>What is a React Router?</h3>
+      <p>
+        React Router is a library for building client-side routing in React
+        applications.
+      </p>
+      <h3>What is a React Virtual DOM?</h3>
+      <p>
+        The React Virtual DOM is a representation of the actual DOM in memory.
+        It is a JavaScript object that represents the current state of the UI.
+        It is used to efficiently update the UI when the state changes.
+      </p>
+      <h3>Redux</h3>
+      <p>
+        Redux is a state management library for JavaScript applications. It
+        provides a centralized store to manage application state in a
+        predictable way.
+      </p>
+      <p>Redux is a global state management library.</p>
+      <pre>
+Key Parts:
+Store
+Actions
+Reducers
+      </pre>
+      <h3>When to use Redux?</h3>
+      <p>
+        Use Redux for complex state management across multiple components or
+        when state needs to be shared globally.
+      </p>
+      <p>When multiple components need the same data across the app.</p>
+      <h3>What is Tailwind?</h3>
+      <p>
+        Tailwind is a utility-first CSS framework for rapidly building custom
+        user interfaces.
+      </p>
+      <p>Utility-first CSS framework.</p>
+      <pre>
+Example:
+&lt;button class="bg-blue-500 text-white px-4 py-2 rounded"&gt;Click Me&lt;/button&gt;
+
+      </pre>
+      <h3>Why Tailwind?</h3>
+      <p>
+        Tailwind allows for rapid UI development with pre-defined utility
+        classes, reducing the need for custom CSS.
+      </p>
+      <ul>
+        <li>Faster development with utility classes</li>
+        <li>Highly customizable</li>
+        <li>Responsive design made easy</li>
+      </ul>
+      <h3>What is Next.js?</h3>
+      <p>
+        Next.js is a React framework for building server-side rendered and
+        statically generated web applications.
+      </p>
+      <p>
+        Next.js is a React framework that provides SSR, SSG, routing, and
+        performance optimization.
+      </p>
+      <pre>
+Example:
+import Image from "next/image";
+
+export default function Home() {
+  return (
+    &lt;div&gt;
+      &lt;Image
+        src="/vercel.svg"
+        alt="Vercel Logo"
+        width={100}
+        height={24}
+        priority
+      /&gt;
+    &lt;/div&gt;
+  );
+}
+File-based Routing:
+pages/
+ └── index.js → /
+ └── about.js → /about
+
+SSR vs CSR:
+
+CSR: Rendered in browser
+
+SSR: Rendered on server (better SEO)
+      </pre>
+    </section>
+    <section>
+      <h3>Difference between React & Next.js?</h3>
+      <p>
+        React is a JavaScript library for building user interfaces, while
+        Next.js is a framework built on top of React that provides additional
+        features like server-side rendering and static site generation.
+      </p>
+      <p>
+        React is a library, Next.js is a framework built on top of React that
+        provides SSR, routing, and optimization.
+      </p>
+      <h3>Q2. Redux vs React Query?</h3>
+      <p>
+        Redux is a global state management library, while React Query is a
+        server-state management library focused on data fetching and caching.
+      </p>
+      <p>
+        Redux manages client-side state, React Query manages server-side state.
+      </p>
+    </section>
+    <section>
+      <div class="tip">
+        <h3>💡 HOW TO HANDLE "I DON’T KNOW"</h3>
+        <p>
+          I haven’t used it extensively yet, but I understand the concept and
+          I’m comfortable learning it quickly.
+        </p>
+        <h3>If stuck:</h3>
+        <p>“I understand the concept, let me think through the output step by step.”</p>
+        <h3>Must-Say Interview Lines:</h3>
+        <ul>
+          <li>
+            “I have a strong understanding of JavaScript fundamentals which
+            helps me grasp new concepts quickly.”
+          </li>
+          <li>
+            “While I haven’t used that specific tool extensively, I’m eager to
+            learn and adapt.”
+          </li>
+          <li>
+            “I focus on writing clean, maintainable code and following best
+            practices.”
+          </li>
+          <li>
+            “I focus on writing clean, immutable JavaScript using ES6 features
+            like destructuring, spread operators, and functional array methods.”
+          </li>
+        </ul>
+        <ul>
+          <li>“React is component-based and uses virtual DOM”</li>
+
+          <li>
+            “Hooks allow functional components to manage state and side effects”
+          </li>
+        </ul>
+        <ul>
+          <li>
+            “I mainly use functional components and hooks like useState and
+            useEffect.”
+          </li>
+        </ul>
+      </div>
+    </section>
+    <section>
+      <h3>PRACTICE</h3>
+      <p>
+        Build small projects or features using React and JavaScript to apply
+        concepts learned.
+      </p>
+      <h3>🔹 Task 1: Counter App</h3>
+      <pre>
+import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;{count}&lt;/h1&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;+&lt;/button&gt;
+      &lt;button onClick={() =&gt; setCount(count - 1)}&gt;-&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+    </pre
+      >
+      <h3>Task 2: Fetch API using useEffect</h3>
+      <pre>
+    useEffect(() => {
+  fetch("https://jsonplaceholder.typicode.com/users")
+    .then(res => res.json())
+    .then(data => setUsers(data));
+}, []);
+
+“I fetch API data inside useEffect to avoid infinite re-renders.”
+</pre
+      >
+      <h3>Task 3: Form Validation</h3>
+      <pre>
+import { useState } from "react";
+export default function SimpleForm() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  return (
+    &lt;form&gt;
+      &lt;input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={e =&gt; setEmail(e.target.value)}
+      /&gt;
+      &lt;input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={e =&gt; setPassword(e.target.value)}
+      /&gt;
+      &lt;button type="submit"&gt;Submit&lt;/button&gt;
+    &lt;/form&gt;
+  );
+}
+        </pre
+      >
+      <h3>Reverse a string</h3>
+      <pre>
+function reverseString(str) {
+  return str.split('').reverse().join('');
+}
+        </pre
+      >
+      <h4>Reverse a string without using built-in reverse.</h4>
+      <pre>
+function reverseString(str) {
+  let reversed = '';
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversed += str[i];
+  }
+  return reversed;
+}
+        </pre
+      >
+      <h4>
+        I iterate from the end of the string and build a new reversed string.
+      </h4>
+      <h3>Check palindrome</h3>
+      <pre>
+function isPalindrome(str) {
+  const reversed = str.split('').reverse().join('');
+  return str === reversed;
+}
+        </pre
+      >
+      <h4>Check palindrome without using built-in reverse.</h4>
+      <pre>
+function isPalindrome(str) {
+  let reversed = '';
+  for (let i = str.length - 1; i >= 0; i--) {
+    reversed += str[i];
+  }
+  return str === reversed;
+}
+        </pre
+      >
+      <h4>
+        I reverse the string manually and compare it to the original string.
+      </h4>
+      <h4>Palindrom Number</h4>
+      <pre>
+function isPalindrome(num) {
+  const reversed = num.toString().split('').reverse().join('');
+  return num === parseInt(reversed);
+}
+
+</pre
+      >
+      <h4>Palindrom Number without using built-in reverse.</h4>
+      <pre>
+function isPalindrome(num) {
+  let reversed = '';
+  const numStr = num.toString();
+  for (let i = numStr.length - 1; i >= 0; i--) {
+    reversed += numStr[i];
+  }
+  return num === parseInt(reversed);
+}
+        </pre
+      >
+      <h3>Find max number in array</h3>
+      <pre>
+function findMax(arr) {
+  let max = arr[0];
+  for (let i = 1; i &lt; arr.length; i++) {
+    if (arr[i] &gt; max) {
+      max = arr[i];
+    }
+  }
+  return max;
+}
+<h4>or Logic based</h4>
+let max = arr[0];
+for (let i = 1; i < arr.length; i++) {
+  if (arr[i] > max) max = arr[i];
+}
+
+        </pre>
+      <pre>
+function findMax(arr) {
+  return Math.max(...arr);
+}</pre
+      >
+      <h3>Remove duplicates from array</h3>
+      <pre>
+const arr = [1, 2, 2, 3, 4];
+const unique = [...new Set(arr)];
+
+I use Set because it stores only unique values.
+
+OR
+
+function findDuplicates(arr) {
+  return arr.filter((item, index) => arr.indexOf(item) !== index);
+}
+
+        </pre
+      >
+      <h3>Count frequency of elements</h3>
+      <pre>
+function countFrequency(arr) {
+  const frequency = {};
+  for (let i = 0; i &lt; arr.length; i++) {
+    const num = arr[i];
+    if (frequency[num]) {
+      frequency[num]++;
+    } else {
+      frequency[num] = 1;
+    }
+  }
+  return frequency;
+}
+
+OR
+
+function frequency(arr) {
+  let map = {};
+  for (let item of arr) {
+    map[item] = (map[item] || 0) + 1;
+  }
+  return map;
+}
+
+
+</pre
+      >
+      <h4>
+        I use an object to track the count of each element as I iterate through
+        the array.
+      </h4>
+      <h3>Flatten an array</h3>
+      <pre>
+function flatten(arr) {
+  return arr.reduce((acc, val) => {
+    if (Array.isArray(val)) {
+      return acc.concat(flatten(val));
+    } else {
+      return acc.concat(val);
+    }
+  }, []);
+}
+
+function flatten(arr) {
+  return arr.flat(Infinity);
+}
+<h4>If they say “without flat”:</h4>
+function flatten(arr) {
+  return arr.reduce((acc, val) =>
+    acc.concat(Array.isArray(val) ? flatten(val) : val), []);
+}
+
+</pre>
+      <h4>
+        I use recursion to check if an element is an array and flatten it
+        accordingly.
+      </h4>
+    </section>
+    <!-- ====================== JAVASCRIPT FUNDAMENTALS ====================== -->
+    <section>
+      <h2>JavaScript Fundamentals</h2>
+
+      <h3>1. What is JavaScript?</h3>
+      <p>
+        JavaScript is a high-level, single-threaded programming language used to
+        build interactive web applications.
+      </p>
+      <h3>Is JavaScript synchronous or asynchronous?</h3>
+      <p>
+        JavaScript is synchronous and single-threaded by default, but it can
+        handle asynchronous operations using the event loop, callbacks,
+        promises, and async/await.
+      </p>
+
+      <h3>2. var vs let vs const</h3>
+      <ul>
+        <li><code>var</code> → function scope, can reassign</li>
+        <li><code>let</code> → block scope, can reassign</li>
+        <li><code>const</code> → block scope, cannot reassign</li>
+        <li>Use const by default, let when reassignment is needed.</li>
+      </ul>
+      <h3>What is the Temporal Dead Zone?</h3>
+      <p>
+        The Temporal Dead Zone is the time between variable hoisting and its
+        initialization where accessing let or const variables throws an error.
+      </p>
+      <h3>What is event bubbling and capturing?</h3>
+      <pre>
+Event bubbling propagates events from child to parent,
+Event capturing propagates from parent to child.
+
+      </pre>
+      <h3>3. Hoisting</h3>
+      <pre>
+Hoisting is JavaScript behavior where variable and function declarations are moved to the top of their scope during compilation.
+var variables are hoisted and initialized as undefined, while let and const are hoisted but not initialized.
+
+      </pre>
+      <p>
+        Hoisting moves variable and function declarations to the top of their
+        scope.
+      </p>
+      <p>
+        Variables and functions are moved to the top of their scope during
+        execution.
+      </p>
+      <p>❌ let & const are hoisted but in temporal dead zone.</p>
+      <pre>
+console.log(x); // undefined
+var x = 10;
+  </pre
+      >
+
+      <div class="tip">
+        let and const are hoisted but not initialized (Temporal Dead Zone).
+      </div>
+
+      <h3>4. == vs ===</h3>
+      <p>
+        <code>==</code> compares value, <code>===</code> compares value and type
+        (recommended).
+      </p>
+      <p>Always use === to avoid type coercion bugs.</p>
+
+      <h3>5. Closure</h3>
+      <p>
+        Closure allows an inner function to remember variables of its outer
+        scope even after execution.
+      </p>
+      <p>
+        Closure allows a function to remember variables from its outer scope.
+      </p>
+      <pre>
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  };
+}
+
+const counter = outer();
+counter(); // 1
+counter(); // 2
+
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    console.log(count);
+  }
+}
+const fn = outer();
+fn();
+fn();
+
+ans: 1
+2
+
+</pre
+      >
+      <h3>6. this keyword</h3>
+      <p>
+        <code>this</code> refers to the current execution context. Arrow
+        functions do not have their own <code>this</code>.
+      </p>
+      <h3>this Keyword (TRAP AREA)</h3>
+      <pre>
+        ❓ Output?
+        const obj = {
+  name: "JS",
+  getName() {
+    console.log(this.name);
+  }
+};
+obj.getName();
+
+answer : JS
+
+
+❓ Output?
+const obj = {
+  name: "JS",
+  getName: () => {
+    console.log(this.name);
+  }
+};
+obj.getName();
+
+answer : undefined (arrow function does not have its own this, refers to global)
+❌ Arrow functions don’t have their own this
+        </pre
+      >
+      <h3>What are map, filter, and reduce?</h3>
+
+      <p>
+        They are array methods used for transforming, filtering, and aggregating
+        data while maintaining immutability.
+      </p>
+      <h3>What is immutability?</h3>
+      <p>
+        Immutability means not modifying existing data but creating new copies,
+        which helps in predictable state management in React.
+      </p>
+      <p>
+        Immutability means data should not be modified directly; instead, a new
+        copy is created.
+      </p>
+      <pre>
+        Example:
+        const arr = [1,2,3];
+const newArr = [...arr, 4];
+
+
+      </pre>
+      <h3>7. map, filter, reduce</h3>
+      <ul>
+        <li><code>map</code> → transform data</li>
+        <li><code>filter</code> → select data</li>
+        <li><code>reduce</code> → accumulate data</li>
+      </ul>
+
+      <pre>
+const arr = [1, 2, 3, 4, 5];
+arr.map(x => x * 2);
+arr.filter(x => x > 5);
+arr.reduce((sum, x) => sum + x, 0);
+Used for immutability and cleaner code.
+
+      </pre>
+
+      <h3>8. Immutability</h3>
+      <p>
+        Immutable data cannot be changed directly; instead, new copies are
+        created.
+      </p>
+
+      <h3>9. Event Loop</h3>
+      <p>
+        JavaScript is single-threaded, but the event loop handles async tasks
+        using call stack and task queues.
+      </p>
+    </section>
+    <section>
+      <h2>ES6 Features</h2>
+
+      <h3>1. Arrow Functions</h3>
+      <p>
+        Concise syntax for writing functions. They do not have their own
+        <code>this</code>.
+      </p>
+      <pre>
+const add = (a, b) => a + b;
+        </pre
+      >
+
+      <h3>2. Template Literals</h3>
+      <p>Multi-line strings and string interpolation using backticks (``).</p>
+      <pre>
+const name = "John";
+const age = 30;
+const message = `My name is ${name} and I am ${age} years old.`;
+        </pre
+      >
+
+      <h3>3. Destructuring</h3>
+      <p>
+        Destructuring allows extracting values from arrays or objects into
+        variables.
+      </p>
+      <p>Assigning values from arrays and objects to variables.</p>
+      <pre>
+const person = { name: "John", age: 30 };
+const { name, age } = person;
+        </pre
+      >
+
+      <h3>4. Spread Operator</h3>
+      <p>
+        Spread operator expands elements of arrays or objects into a new copy,
+        useful for cloning and merging.
+      </p>
+      <p>
+        Expands iterable elements (arrays/objects) into individual elements.
+      </p>
+      <pre>
+const numbers = [1, 2, 3];
+const newNumbers = [...numbers, 4, 5];
+        </pre
+      >
+
+      <h3>5. Default Parameters</h3>
+      <p>Set default values for function parameters.</p>
+      <pre>
+function add(a = 0, b = 0) {
+  return a + b;
+}
+        </pre
+      >
+
+      <h3>6. Rest Parameters</h3>
+      <p>Collect remaining arguments into an array.</p>
+      <pre>
+function sum(...args) {
+  return args.reduce((acc, num) => acc + num, 0);
+}
+        </pre
+      >
+      <h3>7. Object Literal Shorthand</h3>
+      <p>Create object properties with concise syntax.</p>
+      <pre>
+const person = { name: "John", age: 30 };    
+        </pre
+      >
+
+      <h3>8. Class Syntax</h3>
+      <p>Define classes using the <code>class</code> keyword.</p>
+      <pre>
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+        </pre
+      >
+
+      <h3>9. Symbol</h3>
+      <p>Unique identifiers used for object properties.</p>
+      <pre>
+const symbol = Symbol("id");
+        </pre
+      >
+
+      <h3>10. Modules</h3>
+      <p>
+        Import and export code between files using <code>import</code> and
+        <code>export</code>.
+      </p>
+      <pre>
+    
+import { add } from "./module.js";
+        </pre
+      >
+
+      <h3>11. Generators</h3>
+      <p>Create iterators using the <code>yield</code> keyword.</p>
+      <pre>
+function* generateNumbers() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+        </pre
+      >
+
+      <h3>12. Async/Await</h3>
+      <p>
+        Handle asynchronous operations using the <code>async</code> and
+        <code>await</code> keywords.
+      </p>
+      <p>Makes async code readable and avoids callback hell.</p>
+      <pre>
+async function fetchData() {
+  const response = await fetch("https://api.example.com/data");
+  const data = await response.json();
+  return data;
+}
+        </pre
+      >
+    </section>
+    <section>
+      <h2>Common JavaScript Interview Questions</h2>
+
+      <h3>What is a Promise?</h3>
+      <p>
+        A Promise represents the eventual completion (or failure) of an
+        asynchronous operation and its resulting value. It have three states:
+        pending, fulfilled, and rejected.
+      </p>
+      <h3>Promise example</h3>
+      <pre>
+const promise = new Promise((resolve, reject) => {
+  // do something asynchronously
+  if (success) {
+    resolve(value);
+  } else {
+    reject(error);
+  }
+});
+        </pre
+      >
+      <pre>
+function asyncTask() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => resolve("Done"), 1000);
+  });
+}
+</pre
+      >
+      <h3>Async/Await conversion</h3>
+      <pre>
+async function fetchData() {
+    const response = await fetch("https://api.example.com/data");
+    const data = await response.json();
+    return data;
+    }
+            </pre
+      >
+      <pre>
+async function fetchData() {
+  const res = await fetch(url);
+  const data = await res.json();
+  return data;
+}
+</pre
+      >
+      <h3>What is async/await?</h3>
+      <p>
+        <code>async</code> functions return a Promise, and <code>await</code>
+        pauses execution until the Promise resolves.
+      </p>
+      <h3>Difference between Promise and async/await?</h3>
+      <p>
+        Promises use <code>.then()</code> for chaining, while
+        <code>async/await</code> provides a more synchronous-like syntax for
+        handling asynchronous code.
+      </p>
+      <p>
+        async/await is syntactic sugar over promises that makes asynchronous
+        code easier to read and write.
+      </p>
+      <h3>What is a callback function?</h3>
+      <p>
+        A callback function is a function passed as an argument to another
+        function and is executed after the completion of that function.
+      </p>
+
+      <h3>What is a higher-order function?</h3>
+      <p>
+        A higher-order function is a function that takes a function as an
+        argument or returns a function as a result.
+      </p>
+
+      <h3>What is a closure?</h3>
+      <p>
+        A closure is a function that has access to variables from its parent
+        scope, even after the parent function has returned.
+      </p>
+
+      <h3>What is a generator function?</h3>
+      <p>
+        A generator function is a function that uses the <code>yield</code>
+        keyword to pause and resume execution.
+      </p>
+
+      <h3>What is a proxy?</h3>
+      <p>
+        A proxy is an object that provides a custom behavior for another object.
+      </p>
+
+      <h3>What is a proxy handler?</h3>
+      <p>A proxy handler is an object that controls the behavior of a proxy.</p>
+
+      <h3>What is a proxy trap?</h3>
+      <p>A proxy trap is a function that controls the behavior of a proxy.</p>
+
+      <h3>What is a proxy trap handler?</h3>
+      <p>
+        A proxy trap handler is an object that controls the behavior of a proxy.
+      </p>
+
+      <h3>What is a proxy trap handler?</h3>
+      <p>
+        A proxy trap handler is an object that controls the behavior of a proxy.
+      </p>
+    </section>
+    <!-- ====================== JAVASCRIPT CODING ====================== -->
+    <section>
+      <h2>JavaScript Coding Questions</h2>
+
+      <h3>Reverse a String</h3>
+      <pre>
+function reverseString(str) {
+  return str.split('').reverse().join('');
+}
+  </pre
+      >
+
+      <h3>Remove Duplicates from Array</h3>
+      <pre>
+const arr = [1,2,2,3,4];
+const unique = [...new Set(arr)];
+  </pre
+      >
+
+      <h3>Array Output Example</h3>
+      <pre>
+[1,2,3].map(x => x * 2)
+// Output: [2,4,6]
+  </pre
+      >
+    </section>
+
+    <!-- ====================== REACT FUNDAMENTALS ====================== -->
+    <section>
+      <h2>React Fundamentals</h2>
+
+      <h3>What is React?</h3>
+      <p>
+        React is a JavaScript library for building component-based user
+        interfaces.
+      </p>
+      <h3>17️⃣ What are components?</h3>
+      <p>
+        Components are reusable, independent UI blocks that manage their own
+        state and logic.
+      </p>
+      <h3>18️⃣ Functional vs Class components</h3>
+      <p>Functional components use hooks and are simpler and more readable.</p>
+      <p>
+        Class components use lifecycle methods and are less commonly used now.
+      </p>
+
+      <h3>Components</h3>
+      <p>Reusable UI blocks that manage their own state and logic.</p>
+
+      <h3>useState</h3>
+      <p>Used to manage dynamic data inside components.</p>
+
+      <h3>useEffect</h3>
+      <p>Used for side effects such as API calls and lifecycle handling.</p>
+      <ul>
+        <li>Empty dependency array → runs once</li>
+        <li>No dependency array → runs on every render</li>
+      </ul>
+
+      <h3>API Calls</h3>
+      <p>
+        Handled using <code>useEffect</code> or preferably
+        <strong>React Query</strong>.
+      </p>
+
+      <h3>Why React Query?</h3>
+      <ul>
+        <li>Automatic loading & error handling</li>
+        <li>Caching</li>
+        <li>No manual state management</li>
+        <li>
+          “React Query manages server state and removes the need for manual
+          loading and error handling.”
+        </li>
+      </ul>
+
+      <h3>Keys in React</h3>
+      <p>
+        Avoid using array index as key because reordering causes unexpected
+        behavior.
+      </p>
+
+      <h3>Controlled vs Uncontrolled</h3>
+      <p>Controlled components use React state; uncontrolled use refs.</p>
+      <p>Controlled components use React state to manage inputs.</p>
+      <p>Uncontrolled components use DOM refs.</p>
+      <h3>Lazy Loading</h3>
+      <p>Loads components only when needed to improve performance.</p>
+    </section>
+
+    <!-- ====================== TESTING ====================== -->
+    <section>
+      <h2>Testing (Jest / RTL / Cypress)</h2>
+      <p>
+        Basic understanding of testing concepts and actively learning testing
+        tools.
+      </p>
+
+      <div class="tip">
+        Interview-safe line: <br />
+        “I understand testing concepts and I’m actively improving my hands-on
+        experience.”
+      </div>
+    </section>
+
+    <!-- ====================== HR ROUND ====================== -->
+    <section>
+      <h2>HR Round – Ready Answers</h2>
+
+      <h3>Tell me about yourself</h3>
+      <p>
+        I’m Bhavesh, a frontend developer with strong JavaScript and React
+        fundamentals. I enjoy building scalable UI and continuously improving my
+        skills.
+      </p>
+
+      <h3>Weakness</h3>
+      <p>
+        I focus on improving areas like testing and performance optimization and
+        actively practice them.
+      </p>
+
+      <h3>Why should we hire you?</h3>
+      <p>
+        I have strong fundamentals, a learning mindset, and I adapt quickly to
+        new tools and challenges.
+      </p>
+    </section>
+    <section>
+      <h3>Data Types</h3>
+      <ul>
+        <li>Primitive: string, number, boolean, null, undefined, symbol</li>
+        <li>Non-primitive: object, array, function</li>
+      </ul>
+      <h3>Function Types:</h3>
+      <ul>
+        <li>Normal</li>
+        <li>Callback</li>
+        <li>Arrow</li>
+        <li>const add = (a, b) => a + b;</li>
+      </ul>
+      <h3>8️⃣ Call, Apply, Bind</h3>
+      <p>
+        <code>call</code> and <code>apply</code> invoke functions with a
+        specific <code>this</code> context. <code>bind</code> returns a new
+        function with a bound <code>this</code>.
+      </p>
+      <ul>
+        <li>They are used to control the value of this.</li>
+        <li>call accepts arguments individually,</li>
+        <li>apply accepts arguments as an array,</li>
+        <li>bind returns a new function.</li>
+      </ul>
+      <pre>
+const person = { name: "Alice" };
+function greet(greeting) {
+  console.log(`${greeting}, ${this.name}`);
+}
+greet.call(person, "Hello"); // Output: "Hello, Alice"
+greet.apply(person, ["Hello"]); // Output: "Hello, Alice"
+
+const boundGreet = greet.bind(person);
+boundGreet("Hi"); // Output: "Hi, Alice"
+
+
+2. 
+function greet(city) {
+  console.log(this.name, city);
+}
+
+greet.call({name:"Nisha"}, "Delhi");
+
+      </pre>
+
+      <p>What is rest operator?</p>
+      <p>Rest operator collects multiple arguments into a single array.</p>
+      <h3>🔟 Spread & Rest Operator</h3>
+      <p>
+        The spread operator (<code>...</code>) expands iterable elements, while
+        the rest operator collects multiple elements into an array.
+      </p>
+      <pre>
+  // Spread Operator
+  const arr1 = [1, 2, 3];
+  const arr2 = [...arr1, 4, 5];
+  console.log(arr2); // Output: [1, 2, 3, 4, 5]
+
+  // Rest Operator
+  function sum(...nums) {
+    return nums.reduce((acc, num) => acc + num, 0);
+  }
+    console.log(sum(1, 2, 3, 4)); // Output: 10
+            </pre
+      >
+      <pre>
+const newArr = [...oldArr];
+function sum(...nums) {}
+</pre
+      >
+      <h3>Destructuring (VERY COMMON)</h3>
+      <p>
+        Destructuring allows unpacking values from arrays or properties from
+        objects into distinct variables.
+      </p>
+      <pre>
+// Array Destructuring
+const arr = [1, 2, 3];
+const [a, b, c] = arr; // a=1, b=2, c=3
+// Object Destructuring
+const obj = { name: "John", age: 30 };
+const { name, age } = obj; // name="John", age=30
+        </pre
+      >
+      <h3>Event Loop</h3>
+      <p>
+        The event loop manages asynchronous operations by using a call stack and
+        task queues to handle non-blocking code execution.
+      </p>
+      <p>
+        JS is single-threaded but asynchronous using event loop, call stack, and
+        queue.
+      </p>
+      <pre>
+console.log("Start");
+setTimeout(() =&gt; {
+    console.log("Timeout");
+}, 0);
+console.log("End");
+// Output: Start, End, Timeout
+        </pre
+      >
+      <h3>What is debouncing?</h3>
+      <p>
+        Debouncing is a technique to limit the rate at which a function is
+        executed by delaying its execution until a specified time has passed
+        since the last call.
+      </p>
+      <p>
+        Debouncing limits function execution by delaying it until a certain time
+        has passed since the last call, commonly used in search inputs.
+      </p>
+      <h3>What is throttling?</h3>
+      <p>
+        Throttling is a technique to limit the rate at which a function is
+        executed by ensuring it is called at most once in a specified time
+        interval.
+      </p>
+      <p>
+        Throttling ensures a function executes at most once in a given time
+        interval.
+      </p>
+      <h3>Debounce & Throttle (React-Relevant)</h3>
+      <p>
+        Debounce delays function execution until a specified time has passed
+        since the last call. Throttle limits function execution to once every
+        specified interval.
+      </p>
+      <p>
+        Debounce delays function execution until a certain time has passed since
+        the last call.
+      </p>
+      <p>
+        Throttle limits function execution to once in a specified time interval.
+      </p>
+      <pre>
+// Debounce
+<h4>this logic Used in search input to reduce API calls.</h4>
+function debounce(func, delay) {
+  let timeout;
+  return function () {
+    clearTimeout(timeout);
+    timeout = setTimeout(func, delay);
+  };
+}
+// Throttle
+function throttle(func, limit) {
+  let inThrottle;
+  return function () {
+    if (!inThrottle) {
+      func.apply(this, arguments);
+      inThrottle = true;
+      setTimeout(() => (inThrottle = false), limit);
+    }
+  };
+}
+        </pre>
+    </section>
+    <section>
+      <h3>What is JavaScript?</h3>
+      <p>
+        JavaScript is a high-level, interpreted programming language used to
+        create dynamic web content.
+      </p>
+      <p>
+        JavaScript is a lightweight, single-threaded, interpreted programming
+        language used to create dynamic and interactive web applications. It
+        runs in the browser as well as on servers using Node.js.
+      </p>
+      <h3>Why JavaScript?</h3>
+      <ul>
+        <li>Dynamic and interactive web applications</li>
+        <li>Client-side and server-side development</li>
+        <li>Flexibility and adaptability</li>
+        <li>Large community and ecosystem</li>
+      </ul>
+      <h3>What are the main features of JavaScript?</h3>
+      <ul>
+        <li>Dynamic and interactive web applications</li>
+        <li>Client-side and server-side development</li>
+        <li>Flexibility and adaptability</li>
+        <li>Large community and ecosystem</li>
+      </ul>
+      <h3>Difference between var, let, and const?</h3>
+      <ul>
+        <li>
+          <code>var</code>: function-scoped, can be redeclared and updated,
+          hoisted.
+        </li>
+        <li>
+          <code>let</code>: block-scoped, can be updated but not redeclared,
+          hoisted but not initialized.
+        </li>
+        <li>
+          <code>const</code>: block-scoped, cannot be updated or redeclared,
+          hoisted but not initialized.
+        </li>
+      </ul>
+      <ul>
+        <li>var is function-scoped and can be redeclared.</li>
+        <li>let and const are block-scoped.</li>
+        <li>const does not allow reassignment.</li>
+        <li>Best practice is to use const by default.</li>
+      </ul>
+      <h3>What is hoisting?</h3>
+      <p>
+        Hoisting is a JavaScript mechanism where variable and function
+        declarations are moved to the top of their containing scope during the
+        compilation phase. This means that you can use variables and functions
+        before they are declared in the code.
+      </p>
+      <ul>
+        <li>
+          Hoisting is JavaScript’s behavior of moving variable and function
+          declarations to the top of their scope during compilation.
+        </li>
+        <li>
+          Variables declared with var are hoisted and initialized as undefined,
+          while let and const remain in the temporal dead zone.
+        </li>
+      </ul>
+      <h3>Difference between == and ===?</h3>
+      <ul>
+        <li><code>==</code> checks for value equality with type coercion.</li>
+        <li>
+          <code>===</code> checks for both value and type equality without type
+          coercion.
+        </li>
+        <li>Always use === to avoid unexpected type coercion.</li>
+      </ul>
+      <ul>
+        <li>== compares values with type coercion.</li>
+        <li>=== compares both value and type, so it is safer and preferred.</li>
+      </ul>
+      <h3>What are data types in JavaScript?</h3>
+      <ul>
+        <li>Primitive: string, number, boolean, null, undefined, symbol</li>
+        <li>Non-primitive: object, array, function</li>
+      </ul>
+      <p>
+        JavaScript has primitive types like string, number, boolean, null,
+        undefined, symbol, and bigint, and non-primitive types like objects,
+        arrays, and functions.
+      </p>
+      <h3>Why is typeof null an object?</h3>
+      <p>
+        In JavaScript, the typeof operator returns "object" for null due to a
+        historical bug in the language. Null is actually a primitive type
+        representing the absence of any object value.
+      </p>
+      <p>
+        It is a known bug in JavaScript from early versions and was never fixed
+        for backward compatibility.
+      </p>
+      <h3>What is a closure?</h3>
+      <p>
+        A closure is a function that has access to its own scope, the outer
+        function's scope, and the global scope, even after the outer function
+        has returned.
+      </p>
+      <p>
+        A closure is created when a function remembers variables from its outer
+        lexical scope even after the outer function has finished execution.
+      </p>
+      <h3>What is the this keyword?</h3>
+      <p>
+        The <code>this</code> keyword refers to the context in which a function
+        is executed. Its value depends on how the function is called.
+      </p>
+      <ul>
+        <li>
+          this refers to the object that is executing the current function.
+        </li>
+        <li>
+          In arrow functions, this is lexically bound and does not have its own
+          context.
+        </li>
+      </ul>
+      <h3>Difference between arrow function and normal function?</h3>
+      <ul>
+        <li>
+          Arrow functions do not have their own <code>this</code> context; they
+          inherit it from the surrounding scope.
+        </li>
+        <li>
+          Normal functions have their own <code>this</code> context based on how
+          they are called.
+        </li>
+        <li>Arrow functions cannot be used as constructors.</li>
+      </ul>
+      <p>
+        Arrow functions do not have their own this, arguments, or prototype, and
+        they provide a shorter syntax.
+      </p>
+      <h3>What is event delegation?</h3>
+      <p>
+        Event delegation is a technique where a single event listener is added
+        to a parent element to handle events for its child elements, leveraging
+        event bubbling.
+      </p>
+      <p>
+        Event delegation is a technique where a single event listener is
+        attached to a parent element instead of multiple child elements,
+        improving performance.
+      </p>
+      <h3>What is the event loop?</h3>
+      <p>
+        The event loop is a mechanism that allows JavaScript to perform
+        non-blocking operations by offloading tasks to the browser or Node.js
+        environment and executing them asynchronously.
+      </p>
+      <p>
+        The event loop allows JavaScript to perform non-blocking operations by
+        moving asynchronous callbacks from the task queue to the call stack when
+        it is empty.
+      </p>
+      <h3>Difference between synchronous and asynchronous code?</h3>
+      <ul>
+        <li>
+          Synchronous code executes line by line, waiting for each line to
+          complete before moving on to the next line.
+        </li>
+        <li>Synchronous code blocks execution until it completes.</li>
+        <li>
+          Asynchronous code executes concurrently, allowing multiple lines to
+          run in parallel.
+        </li>
+        <li>Asynchronous code allows other tasks to run while waiting.</li>
+      </ul>
+      <h3>What is prototypal inheritance?</h3>
+      <p>
+        Prototypal inheritance is a mechanism where objects can inherit
+        properties and methods from other objects through a prototype chain.
+      </p>
+      <p>
+        JavaScript objects inherit properties and methods from their prototype
+        chain.
+      </p>
+      <h3>What is shallow vs deep copy?</h3>
+      <ul>
+        <li>
+          Shallow copy creates a new object with the same structure as the
+          original object, but with separate references to the original object's
+          properties.
+        </li>
+        <li>
+          Deep copy creates a new object with the same structure as the original
+          object, but with separate references to the original object's
+          properties and their nested objects.
+        </li>
+        <li>
+          Shallow copy copies references, deep copy creates independent copies
+          of nested objects.
+        </li>
+      </ul>
+      <h3>How does JavaScript help React performance?</h3>
+      <p>
+        JavaScript provides a virtual DOM, which is a representation of the
+        actual DOM, and React uses this virtual DOM to efficiently update the
+        user interface.
+      </p>
+      <p>
+        JavaScript concepts like immutability, closures, debouncing, and async
+        handling help optimize rendering and state updates in React.
+      </p>
+    </section>
+    <section>
+      <h3>Tell me about yourself</h3>
+      <p>
+        I'm Bhavesh, a frontend developer with strong JavaScript and React
+        fundamentals. I enjoy building scalable UI and continuously improving my
+        skills.
+      </p>
+      <p>
+        I am a front-end developer focusing on React. I work mainly with
+        functional components, hooks, React Query for API handling, Tailwind for
+        styling, and I have strong JavaScript fundamentals.
+      </p>
+      <h3>What is React?</h3>
+      <p>
+        React is a JavaScript library for building component-based user
+        interfaces using virtual DOM for efficient rendering.
+      </p>
+      <h3>👨‍💼 Difference between state and props?</h3>
+      <p>
+        Props are passed from parent to child and are immutable, while state is
+        managed inside the component and can change over time.
+      </p>
+      <h3>👨‍💼 Why hooks?</h3>
+      <p>
+        Hooks allow functional components to use state and lifecycle features
+        without class components.
+      </p>
+      <h3>👨‍💼 How do you fetch API data?</h3>
+      <p>
+        I usually use React Query because it handles loading, caching, and error
+        states automatically. Otherwise, I use useEffect with fetch or axios.
+      </p>
+      <h3>👨‍💼 Redux vs React Query?</h3>
+      <p>
+        Redux manages client-side global state, React Query manages server-side
+        asynchronous data.
+      </p>
+      <h3>👨‍💼 What is closure?</h3>
+      <p>
+        A closure allows a function to access variables from its outer scope
+        even after the outer function has finished execution.
+      </p>
+      <h3>👨‍💼 What is debounce?</h3>
+      <p>
+        Debounce delays function execution until a specified delay has passed,
+        useful for search inputs.
+      </p>
+      <h3>👨‍💼 How do you optimize React performance?</h3>
+      <p>
+        By memoization, lazy loading, avoiding unnecessary re-renders, and using
+        efficient state updates.
+      </p>
+      <h3>👨‍💼 Have you worked with testing?</h3>
+      <p>
+        I have basic experience writing unit tests using Jest and React Testing
+        Library, and I am improving my testing skills.
+      </p>
+      <h2>🔥 PART 3: TRAP QUESTIONS (VERY IMPORTANT)</h2>
+      <h3>⚠️ Trap 1: “Are you expert in React?”</h3>
+      <p>
+        I’m comfortable with core React concepts and continuously improving.
+      </p>
+      <h3>⚠️ Trap 2: [] == []</h3>
+      <p>✅ false 👉 Different memory references</p>
+      <h3>⚠️ Trap 3: console.log(1 + "2" + 3);</h3>
+      <p>✅ "123"</p>
+      <h3>⚠️ Trap 4: setTimeout(() => console.log(1), 0); console.log(2);</h3>
+      <p>Output: ✅ Output: 2 1</p>
+      <h3>⚠️ Trap 5: “Why not use index as key in React?”</h3>
+      <p>It causes rendering issues when list order changes.</p>
+      <h3>⚠️ Trap 6: “What happens if dependency array is empty?”</h3>
+      <p>useEffect runs only once after initial render.</p>
+      <h3>⚠️ Trap 7: typeof NaN</h3>
+      <p>✅ "number"</p>
+      <h3>⚠️ Trap 8: Mutating state</h3>
+      <p>❌state.count++; ✅ state = {...state, count: state.count + 1}</p>
+    </section>
+    <section>
+      <h2>FULL MOCK INTERVIEW</h2>
+      <h3>
+        “Can you briefly introduce yourself and explain your experience with
+        JavaScript and React?”
+      </h3>
+      <pre>
+My name is Bhavesh. I’m a front-end developer with a strong focus on JavaScript fundamentals and React.
+I mainly work with functional components and React hooks like useState and useEffect to build dynamic and responsive user interfaces.
+I also have experience handling API integration, managing state, and writing clean, reusable components.
+Currently, I’m strengthening my skills in React Query, performance optimization, and modern JavaScript patterns.
+
+      </pre>
+      <h3>
+        “What are the main differences between var, let, and const in
+        JavaScript?”
+      </h3>
+      <pre>
+var is function-scoped and can be redeclared and reassigned, which can cause bugs.
+let and const are block-scoped. let allows reassignment, while const does not allow reassignment.
+In modern JavaScript, we prefer using const by default and let only when reassignment is required.
+      </pre>
+      <h3>“What is hoisting in JavaScript? Explain with an example.”</h3>
+      <pre>
+Hoisting is JavaScript’s behavior of moving variable and function declarations to the top of their scope during compilation.
+Variables declared with var are hoisted and initialized with undefined, while let and const are hoisted but remain in the temporal dead zone.
+
+Example:
+console.log(x); // undefined
+var x = 10;
+console.log(y); // ReferenceError
+let y = 20;
+
+“let and const are hoisted but not accessible due to the temporal dead zone.”
+
+      </pre>
+      <h3>“What will be the output of the following code, and why?”</h3>
+      <p>console.log(1 + "2" + 3);</p>
+      <pre>
+The output will be "123".
+JavaScript evaluates expressions from left to right.
+When number 1 is added to string "2", it performs string concatenation, resulting in "12".
+Then "12" concatenated with 3 becomes "123".
+</pre
+      >
+      <h3>“What are closures in JavaScript, and where have you used them?”</h3>
+      <pre>
+A closure allows a function to remember and access variables from its outer or parent scope even after the outer function has finished execution.
+Closures are commonly used in scenarios like data encapsulation, maintaining state, and in functions like debounce or event handlers where we need to preserve values between executions.
+
+Small Example (optional if asked):
+function counter() {
+  let count = 0;
+  return function () {
+    count++;
+    return count;
+  };
+}
+
+
+      </pre>
+      <h3>“What is the difference between == and === in JavaScript?”</h3>
+      <pre>
+== compares values after performing type coercion, which can lead to unexpected results.
+=== compares both value and type, so it is safer and recommended for comparisons in JavaScript.
+
+</pre
+      >
+      <h3>
+        “Explain this keyword in JavaScript. How is it different in arrow
+        functions?”
+      </h3>
+      <pre>
+The this keyword refers to the object that is executing the current function.
+In regular functions, this depends on how the function is called.
+Arrow functions do not have their own this; instead, they inherit this from their surrounding lexical scope.
+
+📌 Optional example (only if asked):
+
+const obj = {
+  name: "JS",
+  normal() {
+    console.log(this.name);
+  },
+  arrow: () => {
+    console.log(this.name);
+  }
+};
+obj.normal(); // "JS"
+obj.arrow(); // undefined (or window.name in non-strict mode)
+
+      </pre>
+      <h3>“What are map, filter, and reduce? When do you use them?”</h3>
+      <pre>
+map, filter, and reduce are array methods in JavaScript used to work with data in an immutable way.
+map is used to transform each element of an array,
+filter is used to select elements based on a condition,
+and reduce is used to combine all elements into a single value like a sum or object.
+They help in writing clean, readable, and functional-style code, which is especially useful in React.
+
+      </pre>
+      <h3>“What will be the output of this code?”</h3>
+      <pre>
+const arr = [1, 2, 3];
+const newArr = arr.map(x => {
+  x * 2;
+});
+console.log(newArr);
+
+
+Inside map, you used curly braces {} but did not return anything.
+const newArr = arr.map(x => {
+  x * 2;   // ❌ no return
+});
+So each callback returns undefined.
+
+The output will be [undefined, undefined, undefined].
+
+Corrected Code:
+
+const newArr = arr.map(x => x * 2);
+// OR
+const newArr = arr.map(x => {
+  return x * 2;
+});
+
+When using curly braces in arrow functions, we must explicitly use return.
+
+      </pre>
+      <h3>“Explain the event loop in JavaScript.”</h3>
+      <pre>
+JavaScript is single-threaded, meaning it executes one task at a time.
+The event loop allows JavaScript to handle asynchronous operations without blocking the main thread.
+It continuously checks the call stack, and when the stack is empty, it pushes callbacks from the task queue or microtask queue onto the call stack for execution.
+
+      </pre>
+      <h3>
+        “How do you handle API calls in React, and why do you prefer React Query
+        over useEffect?”
+      </h3>
+      <pre>
+In React, we can handle API calls using the useEffect hook with fetch or axios.
+However, I prefer using React Query because it automatically manages server state such as loading, error, and caching.
+React Query also handles background refetching and avoids manual state management, which results in cleaner and more maintainable code.
+
+      </pre>
+      <h3>
+        “What is immutability in JavaScript, and why is it important in React?”
+      </h3>
+      <pre>
+Immutability means we do not modify existing data directly; instead, we create a new copy with the required changes.
+In React, immutability is important because React detects changes using reference comparison.
+If we mutate the existing object or array, React may not re-render the component correctly.
+By creating a new copy, we ensure predictable state updates and better performance.
+
+
+Small Example (only if asked):
+
+// ❌ Mutating state
+state.items.push(newItem);
+
+// ✅ Immutable update
+setItems([...items, newItem]);
+
+“React relies on reference changes to trigger re-rendering.”
+      </pre>
+      <h3>“Why should we avoid using array index as a key in React lists?”</h3>
+      <pre>
+We should avoid using array index as a key because when the list is reordered, added to, or removed from, React cannot correctly track item changes.
+This can lead to incorrect re-rendering and unexpected UI bugs.
+Using a stable and unique key helps React efficiently update the DOM.
+
+Interview Tips:
+If the list is static and never changes, index can be used — but avoid it for dynamic lists.
+
+      </pre>
+      <h3>“What is the difference between useState and useEffect?”</h3>
+      <pre>
+Both useState and useEffect are hooks in React.
+useState is used to manage dynamic state inside a component, while useEffect is used to perform side effects such as API calls, subscriptions, or manually manipulating the DOM.
+useEffect runs after the component renders, and depending on the dependency array, it can run once (empty array), on every render (no array), or when specific values change.
+
+Optional Example
+
+const [data, setData] = useState([]);
+
+useEffect(() => {
+  fetch("https://api.example.com")
+    .then(res => res.json())
+    .then(data => setData(data));
+}, []); // runs only once
+
+      </pre>
+      <h3>“How do you optimize performance in React applications?”</h3>
+      <pre>
+In React, performance can be optimized in several ways:
+
+Lazy loading components using React.lazy and Suspense to reduce initial bundle size.
+
+Avoiding unnecessary re-renders by using React.memo for functional components and useCallback/useMemo for functions and computed values.
+
+Efficient state management to ensure only the necessary components re-render when state changes.
+
+Code splitting and optimizing assets to reduce loading time.
+
+📌 Key points interviewers like
+
+Mentions multiple strategies, not just one
+
+Shows practical knowledge with hooks and React features
+
+</pre
+      >
+      <h3>
+        “What is the difference between controlled and uncontrolled components
+        in React?”
+      </h3>
+      <pre>
+In React, controlled components are form elements whose value is controlled by React state. The value of the input is set via state, and changes are handled via onChange.
+Uncontrolled components manage their own internal state; you access their value using refs (useRef).
+      
+Example:
+Controlled Component
+
+const [name, setName] = useState("");
+&lt;input value={name} onChange={e =&gt; setName(e.target.value)} /&gt;
+
+
+Uncontrolled Component
+const nameRef = useRef();
+&lt;input ref={nameRef} /&gt;
+
+
+Key Interview Points
+
+Controlled: React manages state → predictable
+
+Uncontrolled: DOM manages state → less code but less control
+</pre
+      >
+      <h3>
+        “What happens if the dependency array of useEffect is empty? And what if
+        it is omitted?”
+      </h3>
+      <pre>
+When the dependency array of useEffect is empty, the effect runs only once after the initial render, similar to componentDidMount.
+If the dependency array is omitted, the effect runs after every render of the component.
+
+📌 Optional add-on (if interviewer pushes):
+
+If specific dependencies are provided, the effect runs only when those values change. 
+
+      </pre>
+      <h3>
+        “Do you have experience with testing in React (Jest, React Testing
+        Library, or Cypress)?”
+      </h3>
+      <pre>
+I have basic experience with testing and a clear understanding of the concepts behind it.
+I’ve worked with Jest and React Testing Library to write simple unit tests, and I’m actively improving my testing skills.
+I’m comfortable learning and applying testing as part of development to improve code quality and reliability.
+
+      </pre>
+    </section>
+    <section>
+      <h2>HR ROUND – PRACTICE QUESTIONS & PERFECT ANSWERS</h2>
+      <h3>1️⃣ Tell me about yourself (HR Version)</h3>
+      <pre>
+I’m Bhavesh, a front-end developer with a strong interest in building clean and user-friendly web applications.
+I mainly work with JavaScript and React, using functional components and modern hooks.
+I enjoy learning new technologies and improving code quality, and I’m currently focusing on performance optimization and best practices in React.
+I’m looking for a role where I can grow technically and contribute to real-world products.
+
+❌ Avoid:
+
+Personal life stories
+
+Too much technical detail
+
+“I don’t have much experience”
+      </pre>
+      <h3>2️⃣ Why do you want to join Codewinglet?</h3>
+      <pre>
+Codewinglet works on modern web technologies, and the role aligns well with my skills in React and JavaScript.
+I like the company’s focus on clean development practices and collaboration.
+I believe this environment will help me grow as a developer while allowing me to add value to the team.
+
+</pre
+      >
+      <h3>Why should we hire you?</h3>
+      <pre>
+I have strong JavaScript fundamentals and a solid understanding of React concepts.
+I write clean, maintainable code and I’m comfortable learning new tools quickly.
+I’m proactive, adaptable, and I take ownership of my work, which I believe makes me a good fit for this role.
+
+</pre
+      >
+      <h3>What are your strengths?</h3>
+      <pre>
+My strengths are problem-solving, consistency, and a strong willingness to learn.
+I adapt quickly to new technologies and I focus on writing structured, readable code.
+
+❌ Avoid:
+
+“I’m perfect”
+Only soft skills
+
+      </pre>
+      <h3>5️⃣ What are your weaknesses? (VERY IMPORTANT)</h3>
+      <pre>
+Earlier, I used to spend too much time trying to perfect small details.
+Now, I focus on delivering working solutions first and improving them iteratively.
+
+❌ Never say:
+
+“I’m bad at deadlines”
+
+“I get angry”
+
+“I don’t know much React”
+
+      </pre>
+      <h3>How do you handle pressure or tight deadlines?</h3>
+      <pre>
+I prioritize tasks, break work into smaller parts, and focus on delivering the most important features first.
+If needed, I communicate early with the team to ensure expectations are clear.
+
+      </pre>
+      <h3>Have you ever faced a conflict with a teammate?</h3>
+      <pre>
+Yes, but I handle conflicts professionally by discussing the issue calmly and focusing on the solution rather than personal opinions.
+Collaboration and communication are important to me.
+
+      </pre>
+      <h3>8️⃣ Are you comfortable with learning new technologies?</h3>
+      <pre>
+Yes, absolutely. Technology evolves quickly, and I actively enjoy learning new tools and frameworks to stay updated.
+
+      </pre>
+      <h3>What are your career goals?</h3>
+      <pre>
+In the short term, I want to strengthen my skills as a React and JavaScript developer.
+In the long term, I aim to grow into a senior developer role where I can mentor others and contribute to architecture decisions.
+
+      </pre>
+      <h3>Why are you leaving your previous job?</h3>
+      <pre>
+I’m looking for better learning opportunities and growth in modern front-end technologies.
+
+        ❌ Never criticize your previous company.
+      </pre>
+      <h3>Salary Expectations (TRAP)</h3>
+      <pre>
+I’m open to discussion and looking for a fair compensation based on my skills and the role’s responsibilities.
+
+If pressed:
+
+As per market standards and my experience.
+      </pre>
+      <h3>Do you have any questions for us? (MUST ASK)</h3>
+      <pre>
+Ask 1–2 of these:
+
+“What does success look like for this role in the first 6 months?”
+
+“What technologies does the team currently focus on?”
+
+“How does Codewinglet support learning and growth?”
+
+❌ Never say:
+
+“No questions”
+
+      </pre>
+      <h3>4️⃣ Why should we hire you?</h3>
+      <pre>
+        I have strong fundamentals in JavaScript and React, and I focus on understanding concepts rather than memorizing answers.
+I’m motivated, adaptable, and eager to grow with the company.
+I may not know everything today, but I learn fast and deliver consistently.
+      </pre>
+      <h3>Why do you want to join our company?</h3>
+      <pre>
+I’m looking for an environment where I can grow as a frontend developer and work on real-world problems.
+Your company focuses on modern technologies, and I believe my skills and learning mindset align well with your team.
+
+📌 If company is product-based:
+
+I’m interested in building scalable and user-focused applications.
+
+
+      </pre>
+      <h3>Are you comfortable learning new technologies?</h3>
+      <pre>
+Yes, absolutely.
+In fact, I’m actively learning every day. I may not have used every tool extensively, but I understand concepts well and I’m comfortable picking up new technologies quickly.
+
+      </pre>
+      <h3>Do you prefer working alone or in a team?</h3>
+      <pre>
+I’m comfortable with both.
+I can work independently on assigned tasks, and I also enjoy collaborating with team members to learn and improve the final output.
+</pre
+      >
+      <h3>Where do you see yourself in 2–3 years?</h3>
+      <pre>
+I see myself as a confident frontend developer with strong expertise in JavaScript, React, and performance optimization, contributing to important features and helping junior developers.
+
+</pre
+      >
+      <h3>Do you have any questions for us?</h3>
+      <pre>
+Never say NO
+
+✅ Ask This
+
+What does success look like for this role in the first 6 months?
+OR
+What technologies and practices does your frontend team currently follow?
+
+      </pre>
+    </section>
+    <section>
+      <h3>INTERVIEW TRAP QUESTIONS (VERY COMMON)</h3>
+      <pre>
+❓ Is React a framework?
+
+❌ No, React is a library.
+
+❓ Does setState update immediately?
+
+❌ No, it is asynchronous.
+
+❓ Can we mutate state directly?
+
+❌ No, state should be treated as immutable.
+
+      </pre>
+    </section>
+    <section>
+      <h3>What is scope in JavaScript?</h3>
+      <p>Scope defines where variables are accessible in the code.</p>
+      <p>JavaScript has global scope, function scope, and block scope.</p>
+
+      <h3>
+        <pre>
+if (true) {
+  var a = 10;
+  let b = 20;
+}
+console.log(a);
+console.log(b);
+
+Answer
+10
+ReferenceError
+
+✔ var is function-scoped
+❌ let is block-scoped
+
+</pre
+        >
+      </h3>
+      <h3>5️⃣ Equality Operators</h3>
+      <pre>
+console.log(0 == false);
+console.log(0 === false);
+
+Answer
+true
+false
+        </pre
+      >
+      <pre>
+        ❓ Coding: Sum of array
+        [1,2,3,4].reduce((a,b) => a+b, 0);
+
+      </pre>
+    </section>
+    <section>
+      <h3>Is JS single-threaded?</h3>
+      <p>Yes, JavaScript is single-threaded but uses the event loop to handle asynchronous operations.</p>
+      <pre>
+Output?
+console.log("A");
+setTimeout(() => console.log("B"), 0);
+console.log("C");
+
+Answer:
+ A
+C
+B
+
+
+      </pre>
+      <h3>1️⃣4️⃣ Output-Based TRAP</h3>
+      <pre>
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+
+Answer:
+3
+3
+3
+
+✔ var shared scope
+
+Fix:
+for (let i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 0);
+}
+
+0 1 2
+
+        </pre>
+      <h3>Promise States?</h3>
+      <pre>
+        Pending
+
+Fulfilled
+
+Rejected
+      </pre>
+      <pre>
+        Debounce vs Throttle
+        Debounce → executes after delay
+
+Throttle → executes at fixed intervals
+      </pre>
+    <!-- ====================== FINAL CHECKLIST ====================== -->
+    <section>
+      <h2>Final Interview Checklist</h2>
+      <ul>
+        <li>JavaScript fundamentals clear</li>
+        <li>React hooks confident</li>
+        <li>Explain concepts clearly</li>
+        <li>Honest + confident answers</li>
+      </ul>
+    </section>
+  </body>
+</html>
