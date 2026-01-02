@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Advanced JavaScript Machine Coding</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .task {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    pre {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    .note {
+      background: #e8f5e9;
+      padding: 10px;
+      border-left: 5px solid #4caf50;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Advanced JavaScript Machine Coding Tasks</h1>
+<p>Real interview-level machine coding problems with solutions.</p>
+
+<hr />
+
+<!-- CART -->
+<div class="task">
+  <h2>Machine Coding 1: Shopping Cart</h2>
+
+  <h3>Problem</h3>
+  <p>Create a shopping cart where users can add/remove items and calculate total price.</p>
+
+  <h3>Solution</h3>
+  <pre><code>
+const cart = [];
+
+function addToCart(product) {
+  const existing = cart.find(item => item.id === product.id);
+  if (existing) {
+    existing.qty++;
+  } else {
+    cart.push({ ...product, qty: 1 });
+  }
+}
+
+function removeFromCart(id) {
+  const index = cart.findIndex(item => item.id === id);
+  if (index !== -1) {
+    cart[index].qty--;
+    if (cart[index].qty === 0) cart.splice(index, 1);
+  }
+}
+
+function getTotal() {
+  return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+}
+
+// Example
+addToCart({ id: 1, name: "Phone", price: 20000 });
+addToCart({ id: 1, name: "Phone", price: 20000 });
+removeFromCart(1);
+
+console.log(cart);
+console.log("Total:", getTotal());
+  </code></pre>
+
+  <div class="note">
+    Interviewer checks: state handling, immutability discussion, edge cases.
+  </div>
+</div>
+
+<!-- INFINITE SCROLL -->
+<div class="task">
+  <h2>Machine Coding 2: Infinite Scroll</h2>
+
+  <h3>Problem</h3>
+  <p>Load data when user reaches bottom of page.</p>
+
+  <h3>Solution</h3>
+  <pre><code>
+let page = 1;
+let loading = false;
+
+async function loadData() {
+  if (loading) return;
+  loading = true;
+
+  const res = await fetch(
+    'https://jsonplaceholder.typicode.com/posts?_limit=10&_page=' + page
+  );
+  const data = await res.json();
+
+  const container = document.getElementById("list");
+  data.forEach(item => {
+    const div = document.createElement("div");
+    div.textContent = item.title;
+    container.appendChild(div);
+  });
+
+  page++;
+  loading = false;
+}
+
+window.addEventListener("scroll", () => {
+  if (
+    window.innerHeight + window.scrollY >=
+    document.body.offsetHeight - 100
+  ) {
+    loadData();
+  }
+});
+
+loadData();
+  </code></pre>
+
+  <div class="note">
+    Interviewer checks: performance, debounce/throttle, API pagination.
+  </div>
+</div>
+
+<!-- AUTH FLOW -->
+<div class="task">
+  <h2>Machine Coding 3: Authentication Flow</h2>
+
+  <h3>Problem</h3>
+  <p>Implement login, token storage, protected route logic.</p>
+
+  <h3>Solution</h3>
+  <pre><code>
+// Fake API
+function login(username, password) {
+  return new Promise((resolve, reject) => {
+    if (username === "admin" && password === "1234") {
+      resolve({ token: "fake-jwt-token" });
+    } else {
+      reject("Invalid credentials");
+    }
+  });
+}
+
+// Login handler
+async function handleLogin() {
+  try {
+    const res = await login("admin", "1234");
+    localStorage.setItem("token", res.token);
+    console.log("Login success");
+  } catch (err) {
+    console.error(err);
+  }
+}
+
+// Protected route
+function isAuthenticated() {
+  return !!localStorage.getItem("token");
+}
+
+function accessDashboard() {
+  if (isAuthenticated()) {
+    console.log("Welcome to Dashboard");
+  } else {
+    console.log("Redirect to Login");
+  }
+}
+
+handleLogin();
+accessDashboard();
+  </code></pre>
+
+  <div class="note">
+    Interviewer checks: auth concept, token storage, security discussion.
+  </div>
+</div>
+
+<hr />
+
+<div class="note">
+  <strong>Final Interview Tip:</strong><br />
+  While coding, always explain:
+  <ul>
+    <li>Time complexity</li>
+    <li>Edge cases</li>
+    <li>How you would improve it in React / Production</li>
+  </ul>
+</div>
+
+</body>
+</html>
