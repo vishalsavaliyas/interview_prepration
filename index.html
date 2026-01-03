@@ -1001,6 +1001,7 @@ function add(a = 0, b = 0) {
 
       <h3>6. Rest Parameters</h3>
       <p>Collect remaining arguments into an array.</p>
+      <p>The function defines a parameter named args preceded by three dots (the spread/rest operator). This syntax tells the engine to collect all individual arguments passed into the function and wrap them into a single array [2, 3]</p>
       <pre>
 function sum(...args) {
   return args.reduce((acc, num) => acc + num, 0);
@@ -2290,3 +2291,4 @@ Throttle → executes at fixed intervals
     </section>
   </body>
 </html>
+
