@@ -1120,6 +1120,35 @@ import { add } from "./module.js";
       <h3>11. Generators</h3>
       <p>Create iterators using the <code>yield</code> keyword.</p>
       <pre>
+        In JavaScript, generators are special functions that can pause and resume execution, allowing them to return multiple values over time on demand, rather than a single value all at once. They are a powerful feature for creating iterators and handling asynchronous operations efficiently.
+
+        Key Concepts
+        Generator Function: Defined using the function* syntax (note the asterisk). When called, it does not run the code inside immediately; instead, it returns a Generator Object that manages its execution.
+
+        yield Keyword: Used inside a generator function to pause its execution and return a value to the caller. The function's state is preserved (variable bindings, position in code) and can be resumed from the exact point of the yield statement later.
+
+        next() Method: This is the primary method of the generator object. Calling next() resumes the generator function's execution until the next yield statement (or return/end of function) is encountered.
+
+        How They Work
+        Each call to the generator's next() method returns an object with two properties: 
+            value: The value provided by the yield statement.
+            done: A boolean flag that is false if the generator can yield more values, and true when the function has finished executing. 
+
+        javascript
+function* simpleGenerator() { // Function* syntax
+  yield 1; // Pauses here
+  yield 2; // Pauses here
+  return 3; // Ends here, but the value can be accessed
+}
+
+const gen = simpleGenerator(); // Returns a generator object
+
+console.log(gen.next()); // { value: 1, done: false }
+console.log(gen.next()); // { value: 2, done: false }
+console.log(gen.next()); // { value: 3, done: true }
+console.log(gen.next()); // { value: undefined, done: true }
+      </pre>
+      <pre>
 function* generateNumbers() {
   yield 1;
   yield 2;
@@ -2363,5 +2392,6 @@ Throttle → executes at fixed intervals
     </section>
   </body>
 </html>
+
 
 
