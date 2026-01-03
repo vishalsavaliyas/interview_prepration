@@ -1014,7 +1014,79 @@ function sum(...args) {
 const person = { name: "John", age: 30 };    
         </pre
       >
+<pre>
+  1. Object Initializer (Literal)
+The most common way to create properties is during object declaration. 
 
+  javascript
+const user = {
+  name: "John", // Initial property
+  age: 30
+};
+
+  2. Dot Notation
+  You can add a property to an existing object by using a dot followed by the property name
+  javascript
+const car = {};
+car.model = "Tesla"; // Creates property 'model'
+
+  3. Bracket Notation
+  This is useful when the property name is stored in a variable or contains special characters (like spaces or hyphens) that dot notation cannot handle
+
+  javascript
+const person = {};
+const key = "isStudent";
+
+person[key] = true;             // Uses variable 'key' to create 'isStudent'
+person["favorite color"] = "blue"; // Allows spaces in property names
+
+ 4. Computed Property Names (ES6+)
+  You can use square brackets within the object literal to define properties dynamically at the time of creation
+  javascript
+const dynamicKey = "id";
+const student = {
+  name: "Alice",
+  [dynamicKey]: 101 // Property name will be 'id'
+};
+
+  Advanced Methods
+  For specialized use cases, JavaScript provides built-in methods: 
+Object.defineProperty(): Used when you need fine-grained control over property behavior (e.g., making it read-only).
+Object.assign(): Merges properties from one or more source objects into a target object.
+Spread Operator (...): Creates a new object by copying properties from an existing one and adding new ones
+
+  1. Object.assign()
+  This method copies all enumerable properties from one or more source objects to a target object.
+Syntax: Object.assign(target, ...sources)
+Key Behavior: It mutates (changes) the target object and returns it
+
+  javascript
+const target = { a: 1 };
+const source = { b: 2, c: 3 };
+
+// Merges source into target
+Object.assign(target, source);
+
+console.log(target); // { a: 1, b: 2, c: 3 }
+
+
+  2. Spread Operator (...)
+  The spread operator allows you to expand the properties of an object inside a new object literal.
+Syntax: { ...source, newProp: value }
+Key Behavior: It creates a new object without mutating the original one, making it ideal for immutable programming.
+
+  javascript
+const original = { name: "Alice", age: 25 };
+
+// Creates a NEW object with all properties of 'original' plus a new one
+const updated = { ...original, role: "Admin" };
+
+console.log(updated); // { name: "Alice", age: 25, role: "Admin" }
+console.log(original); // { name: "Alice", age: 25 } (Unchanged)
+
+  
+</pre>
+      
       <h3>8. Class Syntax</h3>
       <p>Define classes using the <code>class</code> keyword.</p>
       <pre>
@@ -2291,4 +2363,5 @@ Throttle → executes at fixed intervals
     </section>
   </body>
 </html>
+
 
