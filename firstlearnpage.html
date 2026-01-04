@@ -1,0 +1,755 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Learning Guide</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        padding: 20px;
+        max-width: 900px;
+        margin: auto;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #333;
+      }
+      code {
+        background: #f4f4f4;
+        padding: 2px 5px;
+        border-radius: 4px;
+      }
+      pre {
+        background: #f4f4f4;
+        padding: 10px;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+      ul,
+      ol {
+        margin-bottom: 20px;
+      }
+      .example-box {
+        background: #e8f6ff;
+        padding: 15px;
+        border-radius: 6px;
+        margin: 15px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h3>This page is not part of React app</h3>
+    <h1>React Basics — What is React? + Setup</h1>
+
+    <h2>What is React?</h2>
+    <p>
+      React is a JavaScript library used for building user interfaces. It was
+      developed by Facebook and is widely used for creating:
+    </p>
+    <ul>
+      <li>Web applications</li>
+      <li>Reusable UI components (buttons, cards, forms)</li>
+      <li>Single Page Applications (SPAs)</li>
+      <li>Mobile apps using React Native</li>
+    </ul>
+    <p><strong>Why React is popular?</strong></p>
+    <ul>
+      <li>⚡ Fast performance</li>
+      <li>🧩 Component-based</li>
+      <li>🔄 Virtual DOM</li>
+      <li>🌎 Huge community</li>
+      <li>📦 Reusable components</li>
+    </ul>
+
+    <div class="example-box">
+      <h3>Example: A simple React component</h3>
+      <pre><code>function Welcome() {
+  return <h1>Hello React!</h1>;
+}
+export default Welcome;</code></pre>
+    </div>
+
+    <h2>Setting Up a React Application (Using Vite)</h2>
+    <ol>
+      <li>Install Node.js from the official site.</li>
+      <li>Open Terminal or VS Code Terminal.</li>
+      <li>
+        Create React app using Vite:<br /><code
+          >npm create vite@latest my-react-app --template react</code
+        >
+      </li>
+      <li>Navigate into folder:<br /><code>cd my-react-app</code></li>
+      <li>Install dependencies:<br /><code>npm install</code></li>
+      <li>Start server:<br /><code>npm run dev</code></li>
+      <li>Visit your app at <code>http://localhost:5173</code></li>
+      <li>Stop server anytime by pressing <code>Ctrl + C</code></li>
+      <li>Edit main file at: <code>src/App.jsx</code></li>
+    </ol>
+
+    <div class="example-box">
+      <h3>Example: Editing App.jsx</h3>
+      <pre><code>export default function App() {
+  return (
+    <div>
+      &lt;h1&gt;My First React Page&lt;/h1&gt;
+      &lt;p&gt;Learning React is fun!&lt;/p&gt;
+    </div>
+  );
+}</code></pre>
+    </div>
+
+    <h2>Vite vs Create React App (CRA)</h2>
+    <p>
+      Both are tools to create React apps, but Vite is the newer, faster
+      alternative.
+    </p>
+
+    <h2>Vite</h2>
+    <ul>
+      <li>Very fast startup</li>
+      <li>Uses native ES modules</li>
+      <li>Instant Hot Module Reload (HMR)</li>
+      <li>Lightweight & modern</li>
+    </ul>
+
+    <h2>Create React App (CRA)</h2>
+    <ul>
+      <li>Based on Webpack</li>
+      <li>Slower startup</li>
+      <li>Good for older tutorials</li>
+      <li>No longer recommended officially</li>
+    </ul>
+
+    <h2>Key Differences</h2>
+    <ul>
+      <li><strong>Speed:</strong> Vite is much faster.</li>
+      <li>
+        <strong>Build system:</strong> Vite uses modern Rollup; CRA uses
+        Webpack.
+      </li>
+      <li>
+        <strong>Community:</strong> CRA has older content; Vite is the current
+        standard.
+      </li>
+    </ul>
+
+    <h1>What is JSX?</h1>
+    <p>
+      JSX (JavaScript XML) lets you write HTML-like syntax inside JavaScript.
+      Browsers can't read JSX, so it is compiled into JavaScript.
+    </p>
+
+    <div class="example-box">
+      <h3>Example: JSX vs JavaScript</h3>
+      <pre><code>// Using JSX
+const element = &lt;h1&gt;Hello JSX!&lt;/h1&gt;;
+
+// Without JSX
+const element = React.createElement("h1", null, "Hello JSX!");</code></pre>
+    </div>
+
+    <h1>What is the React Compiler?</h1>
+    <p>
+      The React Compiler (formerly Babel + React tooling) converts JSX into
+      plain JavaScript so browsers can run it.
+    </p>
+
+    <ul>
+      <li>Converts JSX → JavaScript</li>
+      <li>Optimizes React code</li>
+      <li>Improves performance</li>
+    </ul>
+
+    <h1>What is React Router?</h1>
+    <p>
+      React Router lets you create multi-page navigation inside a single-page
+      application.
+    </p>
+
+    <ul>
+      <li>Handles page navigation</li>
+      <li>Supports dynamic routing</li>
+      <li>Changes URL without reloading page</li>
+    </ul>
+
+    <div class="example-box">
+      <h3>Example: Basic React Router Setup</h3>
+      <pre><code>import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./Home";
+import About from "./About";
+
+export default function App() {
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Routes&gt;
+        &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+        &lt;Route path="/about" element={&lt;About /&gt;} /&gt;
+      &lt;/Routes&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}</code></pre>
+    </div>
+
+    <h2>Resources</h2>
+    <ul>
+      <li><a href="https://react.dev/">React Official Docs</a></li>
+      <li><a href="https://vitejs.dev/">Vite Docs</a></li>
+      <li><a href="https://reactrouter.com/">React Router Docs</a></li>
+    </ul>
+
+    <h1>React Components</h1>
+    <p>
+      Components are the building blocks of React applications. They are
+      independent, reusable pieces of UI.
+    </p>
+    <h2>Types of Components</h2>
+    <ul>
+      <li>
+        <strong>Functional Components</strong> – Modern, simple, uses Hooks.
+      </li>
+      <li><strong>Class Components</strong> – Older, use lifecycle methods.</li>
+    </ul>
+
+    <div class="example-box">
+      <h3>Example: Functional Component</h3>
+      <pre><code>function Hello() {
+  return &lt;h2&gt;Hello from Functional Component!&lt;/h2&gt;;
+}
+export default Hello;</code></pre>
+    </div>
+
+    <h1>React Props</h1>
+    <p>
+      Props (short for "properties") are used to pass data from parent to child
+      components.
+    </p>
+
+    <div class="example-box">
+      <h3>Example: Using Props</h3>
+      <pre><code>function Welcome(props) {
+  return &lt;h2&gt;Welcome, {props.name}!&lt;/h2&gt;;
+}
+
+export default function App() {
+  return  &lt;Welcome name="Bhavesh" / &gt;;
+}</code></pre>
+    </div>
+
+    <h1>React State</h1>
+    <p>
+      State is used to store dynamic values inside a component. When state
+      changes, the UI updates automatically.
+    </p>
+
+    <div class="example-box">
+      <h3>Example: useState</h3>
+      <pre><code>import { useState } from "react";
+
+export default function Counter() {
+  const [count, setCount] = useState(0);
+
+return (
+&lt;div&gt;
+&lt;h2&gt;Count: {count}&lt;/h2&gt;
+&lt;button onClick={() => setCount(count + 1)}&gt;Increase&lt;/button&gt;
+&lt;/div&gt;
+);
+
+  <!-- return (
+    <div>
+      <h2>Count: {count}</h2>
+      <button onClick={() => setCount(count + 1)}>Increase</button>
+    </div>
+  );
+ -->
+}
+
+</code></pre>
+    </div>
+
+    <h1>useEffect Hook</h1>
+    <p>
+      <code>useEffect</code> runs side effects such as API calls, timers, and
+      event listeners.
+    </p>
+
+    <div class="example-box">
+      <h3>Example: useEffect</h3>
+      <pre><code>import { useEffect } from "react";
+
+useEffect(() => {
+  console.log("Component Mounted!");
+}, []);</code></pre>
+    </div>
+
+    <h1>Conditional Rendering</h1>
+    <p>Rendering UI conditionally based on some logic.</p>
+
+    <div class="example-box">
+      <h3>Example</h3>
+      <pre><code>export default function App() {
+  const isLoggedIn = true;
+  return isLoggedIn ? <h2>Welcome!</h2> : <h2>Please Login</h2>;
+}</code></pre>
+    </div>
+
+    <h1>Rendering Lists</h1>
+    <p>React uses <code>map()</code> to render lists.</p>
+
+    <div class="example-box">
+      <h3>Example</h3>
+      <pre><code>const items = ["Apple", "Banana", "Orange"];
+
+export default function App() {
+  return (
+    &lt;ul&gt;
+      {items.map((item, index) =&gt; (
+        &lt;li key={index}>{item}&lt;/li&gt;
+      ))}
+    &lt;/ul&gt;
+  );
+}</code></pre>
+    </div>
+
+    <h1>React Folder Structure (Recommended)</h1>
+    <pre><code>my-react-app/
+│── src/
+│   ├── components/
+│   ├── pages/
+│   ├── assets/
+│   ├── App.jsx
+│   └── main.jsx
+│
+└── index.html</code></pre>
+
+    <h1>Best Practices</h1>
+    <ul>
+      <li>Use functional components</li>
+      <li>Keep components small and reusable</li>
+      <li>Name components with PascalCase</li>
+      <li>Use Hooks instead of class components</li>
+      <li>Keep state minimal</li>
+      <li>Avoid deeply nested components</li>
+      <li>Use proper folder structure</li>
+    </ul>
+
+    <h1>React Events</h1>
+    <p>
+      Events in React work similar to HTML events, but they use camelCase and
+      functions.
+    </p>
+    <div class="example-box">
+      <h3>Example</h3>
+      <pre><code>export default function App() {
+  function handleClick() {
+    alert("Button clicked!");
+  }
+  return &lt;button onClick={handleClick}&gt;Click Me&lt;/button&gt;;
+}</code></pre>
+    </div>
+
+    <h1>React Forms & Controlled Components</h1>
+    <p>In React, form inputs are controlled using state.</p>
+    <div class="example-box">
+      <h3>Example</h3>
+      <pre><code>import { useState } from "react";
+
+export default function FormExample() {
+  const [name, setName] = useState("");
+
+  return (
+    &lt;div&gt;
+      &lt;input
+        type="text"
+        value={name}
+        onChange={(e) =&gt; setName(e.target.value)}
+      /&gt;
+      &lt;p>You typed: {name}&lt;/p&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+    </div>
+
+    <h1>useRef Hook</h1>
+    <p>
+      <code>useRef</code> is used to access DOM elements or store values without
+      re-rendering.
+    </p>
+    <div class="example-box">
+      <h3>Example</h3>
+      <pre><code>import { useRef } from "react";
+
+export default function App() {
+  const inputRef = useRef();
+
+  function focusInput() {
+    inputRef.current.focus();
+  }
+
+  return (
+    &lt;div&gt;
+      &lt;input ref={inputRef} type="text" /&gt;
+      &lt;button onClick={focusInput}&gt;Focus Input&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+    </div>
+
+    <h1>React Context API</h1>
+    <p>Context is used for global state management without prop drilling.</p>
+    <div class="example-box">
+      <h3>Example</h3>
+      <pre><code>// Create context
+const ThemeContext = createContext();
+
+export function App() {
+  return (
+    &lt;ThemeContext.Provider value="dark"&gt;
+      &lt;Home /&gt;
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+function Home() {
+  const theme = useContext(ThemeContext);
+  return &lt;h2&gt;Theme: {theme}&lt;/h2&gt;;
+}</code></pre>
+    </div>
+
+    <h1>useReducer Hook</h1>
+    <p><code>useReducer</code> is used for complex state logic.</p>
+    <div class="example-box">
+      <h3>Example</h3>
+      <pre><code>function reducer(state, action) {
+  switch (action.type) {
+    case "increment":
+      return { count: state.count + 1 };
+    default:
+      return state;
+  }
+}
+
+export default function Counter() {
+  const [state, dispatch] = useReducer(reducer, { count: 0 });
+
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Count: {state.count}&lt;/h2&gt;
+      &lt;button onClick={() =&gt; dispatch({ type: "increment" })}&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}
+
+</code></pre>
+    </div>
+
+    <h1>Custom Hooks</h1>
+    <p>You can create your own hooks for reusable logic.</p>
+    <div class="example-box">
+      <h3>Example</h3>
+      <pre><code>function useCounter() {
+  const [count, setCount] = useState(0);
+  return { count, increment: () => setCount(count + 1) };
+}
+
+export default function App() {
+  const { count, increment } = useCounter();
+  return (
+    &lt;div&gt;
+      &lt;h2&gt;Count: {count}&lt;/h2&gt;
+      &lt;button onClick={increment}&gt;+&lt;/button&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+    </div>
+
+    <h1>API Calling (fetch & axios)</h1>
+    <p>
+      React commonly uses <code>fetch</code> or <code>axios</code> to call APIs.
+    </p>
+    <div class="example-box">
+      <h3>Example using fetch()</h3>
+      <pre><code>useEffect(() => {
+  fetch("https://jsonplaceholder.typicode.com/users")
+    .then(res => res.json())
+    .then(data => console.log(data));
+}, []);</code></pre>
+    </div>
+
+    <h1>Performance Optimization</h1>
+    <ul>
+      <li>Use <code>React.memo()</code></li>
+      <li>Use <code>useCallback</code> for functions</li>
+      <li>Use <code>useMemo</code> for expensive calculations</li>
+      <li>Avoid unnecessary re-renders</li>
+      <li>Split code using lazy() and Suspense</li>
+    </ul>
+
+    <h1>React Project Ideas</h1>
+    <ul>
+      <li>To-do App</li>
+      <li>Weather App (API)</li>
+      <li>Expense Tracker</li>
+      <li>Movie Search App</li>
+      <li>Shopping Cart (Context API)</li>
+      <li>Portfolio Website</li>
+    </ul>
+
+    <h1>React Interview Questions</h1>
+    <ul>
+      <li>What is JSX?</li>
+      <li>Difference between props and state?</li>
+      <li>Explain Virtual DOM.</li>
+      <li>What are Hooks?</li>
+      <li>How does useEffect work?</li>
+      <li>What is prop drilling?</li>
+      <li>Difference between useState and useReducer?</li>
+      <li>What is React.memo()?</li>
+    </ul>
+
+    <h1>Redux Toolkit (Quick Guide)</h1>
+    <p>
+      Redux Toolkit (RTK) is the recommended way to write Redux logic. It
+      simplifies store setup, reducers, and async logic.
+    </p>
+    <div class="example-box">
+      <h3>Example: Basic RTK setup</h3>
+      <pre><code>// store.js
+import { configureStore } from "@reduxjs/toolkit";
+import counterReducer from "./counterSlice";
+
+export const store = configureStore({
+  reducer: { counter: counterReducer }
+});
+
+// counterSlice.js
+import { createSlice } from "@reduxjs/toolkit";
+
+const counterSlice = createSlice({
+  name: "counter",
+  initialState: { value: 0 },
+  reducers: {
+    increment: state => { state.value += 1 },
+    decrement: state => { state.value -= 1 }
+  }
+});
+
+export const { increment, decrement } = counterSlice.actions;
+export default counterSlice.reducer;
+
+// App.jsx
+import { Provider } from "react-redux";
+import { store } from "./store";
+import Counter from "./Counter";
+
+export default function App() {
+  return (
+    <Provider store={store}>
+      <Counter />
+    </Provider>
+  );
+}
+</code></pre>
+    </div>
+
+    <h1>React Router — Full Tutorial (extra features)</h1>
+    <p>
+      Extended topics: nested routes, route parameters, protected routes, lazy
+      loading routes.
+    </p>
+    <div class="example-box">
+      <h3>Example: Protected Route & Lazy loading</h3>
+      <pre><code>import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { lazy, Suspense } from "react";
+
+const Home = lazy(() => import("./pages/Home"));
+const Dashboard = lazy(() => import("./pages/Dashboard"));
+
+function Protected({ children, isAuth }) {
+  return isAuth ? children : &lt;Navigate to="/login" /&gt;;
+}
+
+export default function App() {
+  const isAuth = false; // replace with real auth state
+  return (
+    &lt;BrowserRouter&gt;
+      &lt;Suspense fallback={&lt;div&gt;Loading...&lt;/div&gt;}&gt;
+        &lt;Routes&gt;
+          &lt;Route path="/" element={&lt;Home /&gt;} /&gt;
+          &lt;Route path="/dashboard" element={&lt;Protected isAuth={isAuth}&gt;&lt;Dashboard /&gt;&lt;/Protected&gt;} /&gt;
+        &lt;/Routes&gt;
+      &lt;/Suspense&gt;
+    &lt;/BrowserRouter&gt;
+  );
+}
+</code></pre>
+    </div>
+
+    <h1>Authentication (JWT & Firebase)</h1>
+    <h2>JWT (JSON Web Token)</h2>
+    <p>
+      Common for custom backend auth: server issues token, client stores
+      (httpOnly cookie preferred), include token in Authorization header for
+      protected API calls.
+    </p>
+    <div class="example-box">
+      <h3>Client-side: send token</h3>
+      <pre><code>fetch('/api/protected', {
+  headers: { 'Authorization': 'Bearer ' + token }
+});</code></pre>
+    </div>
+
+    <h2>Firebase Authentication</h2>
+    <p>
+      Firebase provides email/password, Google, GitHub and more with easy SDKs.
+    </p>
+    <div class="example-box">
+      <h3>Example: Firebase email signup</h3>
+      <pre><code>import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
+const auth = getAuth(app);
+createUserWithEmailAndPassword(auth, email, password)
+  .then(userCredential =&gt; console.log(userCredential.user))
+  .catch(err =&gt; console.error(err));</code></pre>
+    </div>
+
+    <h1>Deployment (Vercel & Netlify)</h1>
+    <p>
+      Both platforms provide simple CI/CD for React apps. For Vite apps, build
+      with <code>npm run build</code> and deploy the <code>dist</code> folder.
+    </p>
+    <ul>
+      <li>
+        <strong>Vercel:</strong> Connect GitHub repo, automatic builds, easy
+        environment variables.
+      </li>
+      <li>
+        <strong>Netlify:</strong> Connect repo, set build command
+        <code>npm run build</code>, publish directory <code>dist</code>.
+      </li>
+    </ul>
+
+    <h1>Real-world Project Folder Structure</h1>
+    <pre><code>src/
+│── api/           # fetch/axios wrappers
+│── assets/        # images/fonts
+│── components/    # small reusable components
+│── features/      # feature folders (RTK slice + UI)
+│── hooks/         # custom hooks
+│── layouts/       # layout components
+│── pages/         # route-level components
+│── services/      # auth, storage, analytics
+│── store/         # redux store files
+│── App.jsx
+│── main.jsx
+</code></pre>
+
+    <h1>End-to-End Mini Project (Todo App) — Overview + Code</h1>
+    <p>
+      Build a Todo App with React, RTK, and a simple Node.js + Express backend
+      (JWT auth optional).
+    </p>
+    <h3>Frontend highlights</h3>
+    <ul>
+      <li>React + Vite</li>
+      <li>RTK Query or axios for API calls</li>
+      <li>React Router for navigation</li>
+    </ul>
+    <h3>Backend highlights (Node.js + Express)</h3>
+    <pre><code>// server.js (very minimal)
+const express = require('express');
+const app = express();
+app.use(express.json());
+let todos = [];
+app.get('/todos', (req, res) =&gt; res.json(todos));
+app.post('/todos', (req, res) =&gt; { todos.push(req.body); res.status(201).json(req.body); });
+app.listen(4000, () =&gt; console.log('Server running on 4000'));
+</code></pre>
+    <h3>Frontend: fetch todos</h3>
+    <pre><code>useEffect(() =&gt; {
+  fetch('http://localhost:4000/todos')
+    .then(res =&gt; res.json())
+    .then(setTodos);
+}, []);
+</code></pre>
+
+    <h1>Animations with Framer Motion</h1>
+    <p>Framer Motion is an easy-to-use animation library for React.</p>
+    <div class="example-box">
+      <h3>Example: Simple fade in</h3>
+      <pre><code>import { motion } from 'framer-motion';
+
+export default function Card() {
+  return (
+    &lt;motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}&gt;
+      &lt;h3&gt;Animated Card&lt;/h3&gt;
+    &lt;/motion.div&gt;
+  );
+}
+</code></pre>
+    </div>
+
+    <h1>TypeScript with React (Intro)</h1>
+    <p>
+      TypeScript adds static types to catch errors early. Use
+      <code>--template react-ts</code> with Vite.
+    </p>
+    <div class="example-box">
+      <h3>Example: Typing props</h3>
+      <pre><code>type WelcomeProps = { name: string };
+
+export default function Welcome({ name }: WelcomeProps) {
+  return &lt;h2&gt;Hello {name}&lt;/h2&gt;;
+}
+</code></pre>
+    </div>
+
+    <h1>React + Node.js — Full-stack Overview</h1>
+    <p>
+      Typical architecture: React frontend (Vite) communicates with Node/Express
+      backend via REST or GraphQL. Use CORS, env variables, and authentication.
+    </p>
+    <h3>Tips</h3>
+    <ul>
+      <li>
+        Use environment variables (VITE_ prefix for client) and keep secrets
+        server-side.
+      </li>
+      <li>Use HTTPS in production and secure cookies for auth tokens.</li>
+      <li>
+        Use proxy during dev (<code>vite.config.js</code> server.proxy) to avoid
+        CORS issues.
+      </li>
+    </ul>
+
+    <h1>Next Steps & Learning Path (30 days plan)</h1>
+    <ol>
+      <li>Week 1: JavaScript refresher, JSX, Components, Props, State</li>
+      <li>Week 2: Hooks (useEffect, useRef), Forms, Events, Routing</li>
+      <li>Week 3: State management (Context, Redux Toolkit), API calls</li>
+      <li>
+        Week 4: TypeScript, Testing (Jest + React Testing Library), Deployment
+      </li>
+    </ol>
+
+    <h1>Checklist to Master React</h1>
+    <ul>
+      <li>Understand component lifecycle and hooks</li>
+      <li>Build and deploy small projects</li>
+      <li>Learn TypeScript basics</li>
+      <li>Practice state management (RTK & Context)</li>
+      <li>Learn testing and performance optimization</li>
+    </ul>
+
+    <h2>Useful Resources</h2>
+    <ul>
+      <li>Official React docs: react.dev</li>
+      <li>Vite docs: vitejs.dev</li>
+      <li>Redux Toolkit docs: redux-toolkit.js.org</li>
+      <li>Framer Motion: framer.com/motion</li>
+    </ul>
+  </body>
+</html>

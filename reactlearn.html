@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>React Learning</title>
+  </head>
+  <body>
+    <h3>this page is not part of react app</h3>
+    <h1>React Basics — What is React? + Setup</h1>
+    <br />
+    <h2>What is React?</h2>
+    <p>
+      React is a JavaScript library for building user interfaces. It was
+      developed by Facebook and is widely used for creating single-page
+      applications and mobile applications. React allows developers to create
+      reusable UI components, manage the state of their applications, and
+      efficiently update the DOM (Document Object Model) when the state changes.
+    </p>
+
+    <p>
+      React is a JavaScript library used to build:<br />
+
+      Web apps<br />
+
+      UI components (button, navbar, cards)<br />
+
+      Single Page Applications (SPA)<br /><br />
+      Why React is so popular?<br />
+
+      ✅ Fast<br />
+      ✅ Easy to use<br />
+      ✅ Component-based<br />
+      ✅ Huge community<br />
+      <br />
+      React is for:<br />
+
+      ✔ Frontend<br />
+      ✔ UI<br />
+      ✔ Making screens<br /><br />
+      React is not a framework. It is a library that focuses on building UI. It
+      can be used with other libraries or frameworks like Redux, React Router,
+      etc.
+    </p>
+
+    <h2>Setting Up a React Application</h2>
+    <p>To set up a React application, you can follow these steps:</p>
+    <ol>
+      <li>
+        Install Node.js and npm (Node Package Manager) on your development
+        environment.
+      </li>
+      <li>
+        Create a new directory for your React application and navigate to it in
+        your terminal.
+      </li>
+      <li>
+        Run the following command in your terminal or in vs code terminal to
+        create a new React app:
+        <br />
+        <code>npm create vite@latest my-react-app --template react</code>
+      </li>
+      <li>
+        Navigate to the newly created directory and run the following command to
+        install the dependencies:
+        <br />
+        <code>npm install</code>
+      </li>
+      <li>
+        Run the following command to start the development server:
+        <br />
+        <code>npm run dev</code>
+      </li>
+      <li>
+        to exit the development server, press <code>Ctrl + C</code> in the
+        terminal
+      </li>
+      <li>
+        Open your web browser and go to
+        <code>http://localhost:5173</code> to view your React application.
+      </li>
+      <li>
+        You can now start building your React application by editing the files
+        in the <code>src</code> directory.
+      </li>
+      <li>Open: src/App.jsx</li>
+    </ol>
+    <p>
+      This will start a local development server, and you can view your React
+      application in your web browser at <code>http://localhost:5173</code>.
+    </p>
+    <h2>Conclusion</h2>
+    <p>
+      React is a powerful JavaScript library for building user interfaces, and
+      setting up a React application is a simple process. By following these
+      steps, you can create a basic React application and start building your
+      user interface.
+    </p>
+
+    <h2>Resources</h2>
+    <ul>
+      <li>
+        <a href="https://react.dev/" target="_blank" rel="noopener noreferrer"
+          >Official React documentation</a
+        >
+      </li>
+      <li>
+        <a href="https://vitejs.dev/" target="_blank" rel="noopener noreferrer"
+          >Vite documentation</a
+        >
+      </li>
+    </ul>
+
+    <h1>what is vite vs CRA (Create React App)</h1>
+    <p>
+      Vite and Create React App (CRA) are both tools used to set up and develop
+      React applications, but they have some key differences in terms of their
+      architecture, performance, and features.
+    </p>
+    <h2>Vite</h2>
+    <p>
+      Vite is a modern build tool that leverages native ES modules in the
+      browser for faster development and build times. It uses a dev server that
+      serves files over native ES modules, allowing for instant module loading
+      and hot module replacement (HMR) without the need for bundling during
+      development. Vite also supports features like TypeScript, JSX, and CSS
+      modules out of the box.
+    </p>
+    <p>
+      Vite is a modern frontend development build tool created by Evan You
+      (creator of Vue.js). It is designed to be faster, lightweight, and more
+      efficient than older tools.
+    </p>
+    <br />
+    <p>
+      Where is Vite used?<br /><br />
+
+      For creating modern JavaScript web applications<br />
+
+      For frameworks like React, Vue, Svelte, Preact, SolidJS, Vanilla JS<br />
+
+      Ideal for projects needing fast startup, hot reload, and optimized
+      builds<br />
+      <br />
+      Why developers use Vite?<br /><br />
+      Extremely fast dev server<br />
+
+      Uses native ES modules in the browser<br />
+
+      Lightning-fast Hot Module Replacement (HMR)<br />
+
+      Optimized production builds using Rollup<br />
+    </p>
+
+    <h2>Create React App (CRA)</h2>
+    <p>
+      Create React App is a popular tool for setting up React applications that
+      provides a pre-configured build setup using Webpack and Babel. CRA
+      abstracts away the configuration details, allowing developers to focus on
+      writing code without worrying about the underlying build process. CRA
+      includes features like hot module replacement, code splitting, and
+      optimized production builds.
+    </p>
+    <p>
+      Create React App (CRA) is an older tool created by Facebook to quickly set
+      up a React project without manual configuration.
+    </p>
+    <h2>Key Differences</h2>
+    <ul>
+      <li>
+        Performance: Vite is generally faster than CRA during development due to
+        its use of native ES modules and on-demand module loading.
+      </li>
+      <li>
+        Configuration: CRA abstracts away configuration details, while Vite
+        allows for more customization and flexibility in the build process.
+      </li>
+      <li>
+        Ecosystem: CRA has a larger ecosystem and community support, while Vite
+        is relatively newer but gaining popularity quickly.
+      </li>
+      <li>
+        Features: Vite provides features like hot module replacement, CSS
+        modules, and TypeScript support, while CRA has features like code
+        splitting and optimized production builds.
+      </li>
+    </ul>
+    <h2>Conclusion</h2>
+    <p>
+      Both Vite and Create React App are excellent tools for setting up and
+      developing React applications. The choice between the two ultimately
+      depends on your specific needs and preferences as a developer. If you
+      prioritize speed and flexibility, Vite may be the better choice. If you
+      prefer a more opinionated setup with a larger ecosystem, CRA may be the
+      way to go.
+    </p>
+    <br /><br />
+
+    <h1>what is JSX?</h1>
+    <p>
+      JSX (JavaScript XML) is a syntax extension for JavaScript that allows you
+      to write HTML-like code within your JavaScript code. It is commonly used
+      in React applications to define the structure and appearance of user
+      interfaces.
+    </p>
+    <p>
+      JSX allows you to write code that looks similar to HTML, but it is
+      actually JavaScript. This makes it easier to create and manage complex
+      user interfaces by allowing you to define the structure and behavior of
+      your components in a single file.
+    </p>
+    <h2>Key Features of JSX</h2>
+    <ul>
+      <li>
+        JSX is a syntax extension for JavaScript that allows you to write
+        HTML-like code within your JavaScript code.
+      </li>
+      <li>
+        JSX provides a way to write HTML-like code within JavaScript, allowing
+        you to create and manage complex user interfaces more easily.
+      </li>
+      <li>
+        JSX allows you to write code that looks similar to HTML, but it is
+        actually JavaScript.
+      </li>
+      <li>
+        JSX makes it easier to create and manage complex user interfaces by
+        allowing you to define the structure and behavior of your components in
+        a single file.
+      </li>
+    </ul>
+    <h2>Conclusion</h2>
+    <p>
+      JSX is a syntax extension for JavaScript that allows you to write
+      HTML-like code within your JavaScript code. It provides a way to create
+      and manage complex user interfaces more easily by allowing you to define
+      the structure and behavior of your components in a single file.
+    </p>
+    <br /><br />
+    <h1>what is react compiler</h1>
+    <p>
+      A React compiler is a tool that transforms JSX (JavaScript XML) code into
+      standard JavaScript code that can be executed by web browsers. JSX is a
+      syntax extension for JavaScript that allows developers to write HTML-like
+      code within their JavaScript code, making it easier to create and manage
+      complex user interfaces.
+    </p>
+    <p>
+      The React compiler takes the JSX code and converts it into standard
+      JavaScript code that can be understood by web browsers. This process is
+      necessary because web browsers do not natively understand JSX syntax.
+    </p>
+    <h2>Key Features of React Compiler</h2>
+    <ul>
+      <li>
+        Transforms JSX code into standard JavaScript code that can be executed
+        by web browsers.
+      </li>
+      <li>
+        Optimizes the generated JavaScript code for performance and efficiency.
+      </li>
+      <li>
+        Supports features like hot module replacement (HMR) for faster
+        development.
+      </li>
+      <li>
+        Integrates with build tools like Webpack and Babel for a seamless
+        development experience.
+      </li>
+    </ul>
+    <h2>Conclusion</h2>
+    <p>
+      A React compiler is a tool that transforms JSX code into standard
+      JavaScript code that can be executed by web browsers. It optimizes the
+      generated JavaScript code for performance and efficiency, and supports
+      features like hot module replacement for faster development. Integrating
+      with build tools like Webpack and Babel for a seamless development
+      experience.
+    </p>  
+
+    <h1>what is react router</h1>
+    <p>
+      React Router is a popular library for building single-page applications
+      with React. It provides a way to manage navigation and routing within a
+      React application, allowing developers to create dynamic and interactive
+      user interfaces.
+    </p>
+    <p>
+      React Router allows developers to define routes for different pages or
+      components within the application. When a user navigates to a specific
+      route, React Router will render the corresponding component and update the
+      URL in the browser's address bar.
+    </p>
+    <h2>Key Features of React Router</h2>
+    <ul>
+      <li>
+        Provides a way to manage navigation and routing within a React
+        application.
+      </li>
+      <li>
+        Allows developers to define routes for different pages or components
+        within the application.
+      </li>
+      <li>
+        Supports dynamic routing, allowing developers to create routes that
+        change based on user input or other factors.
+      </li>
+      <li>
+        Integrates with React's component-based architecture, making it easy to
+        create reusable and modular components.
+      </li>    
+    </ul>
+    <h2>Conclusion</h2>
+    <p>
+      React Router is a powerful library for building single-page applications
+      with React. It provides a way to manage navigation and routing within a
+      React application, allowing developers to create dynamic and interactive
+      user interfaces. With its support for dynamic routing and integration
+      with React's component-based architecture, React Router is an essential
+      tool for any React developer. 
+    </p>
+    
+  </body>
+</html>
