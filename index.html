@@ -499,7 +499,10 @@ SSR: Rendered on server (better SEO)
           I’m comfortable learning it quickly.
         </p>
         <h3>If stuck:</h3>
-        <p>“I understand the concept, let me think through the output step by step.”</p>
+        <p>
+          “I understand the concept, let me think through the output step by
+          step.”
+        </p>
         <h3>Must-Say Interview Lines:</h3>
         <ul>
           <li>
@@ -1001,7 +1004,12 @@ function add(a = 0, b = 0) {
 
       <h3>6. Rest Parameters</h3>
       <p>Collect remaining arguments into an array.</p>
-      <p>The function defines a parameter named args preceded by three dots (the spread/rest operator). This syntax tells the engine to collect all individual arguments passed into the function and wrap them into a single array [2, 3]</p>
+      <p>
+        The function defines a parameter named args preceded by three dots (the
+        spread/rest operator). This syntax tells the engine to collect all
+        individual arguments passed into the function and wrap them into a
+        single array [2, 3]
+      </p>
       <pre>
 function sum(...args) {
   return args.reduce((acc, num) => acc + num, 0);
@@ -1014,7 +1022,7 @@ function sum(...args) {
 const person = { name: "John", age: 30 };    
         </pre
       >
-<pre>
+      <pre>
   1. Object Initializer (Literal)
 The most common way to create properties is during object declaration. 
 
@@ -1085,8 +1093,9 @@ console.log(updated); // { name: "Alice", age: 25, role: "Admin" }
 console.log(original); // { name: "Alice", age: 25 } (Unchanged)
 
   
-</pre>
-      
+</pre
+      >
+
       <h3>8. Class Syntax</h3>
       <p>Define classes using the <code>class</code> keyword.</p>
       <pre>
@@ -2331,7 +2340,10 @@ false
     </section>
     <section>
       <h3>Is JS single-threaded?</h3>
-      <p>Yes, JavaScript is single-threaded but uses the event loop to handle asynchronous operations.</p>
+      <p>
+        Yes, JavaScript is single-threaded but uses the event loop to handle
+        asynchronous operations.
+      </p>
       <pre>
 Output?
 console.log("A");
@@ -2365,7 +2377,8 @@ for (let i = 0; i < 3; i++) {
 
 0 1 2
 
-        </pre>
+        </pre
+      >
       <h3>Promise States?</h3>
       <pre>
         Pending
@@ -2380,6 +2393,7 @@ Rejected
 
 Throttle → executes at fixed intervals
       </pre>
+    </section>
     <!-- ====================== FINAL CHECKLIST ====================== -->
     <section>
       <h2>Final Interview Checklist</h2>
@@ -2392,6 +2406,3 @@ Throttle → executes at fixed intervals
     </section>
   </body>
 </html>
-
-
-
