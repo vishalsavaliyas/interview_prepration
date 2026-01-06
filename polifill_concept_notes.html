@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Polyfill – Interview Notes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      padding: 20px;
+      background: #f9f9f9;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    code, pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 10px;
+      display: block;
+      border-radius: 5px;
+      overflow-x: auto;
+    }
+    .box {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-left: 5px solid #4CAF50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #fff;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #4CAF50;
+      color: white;
+    }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Polyfill – Complete Interview Guide</h1>
+
+<div class="box">
+  <h2>What is a Polyfill?</h2>
+  <p>
+    A <strong>polyfill</strong> is JavaScript code that provides modern
+    functionality to older browsers that do not support it natively.
+  </p>
+  <p><strong>In simple words:</strong> Polyfill imitates a missing feature.</p>
+</div>
+
+<div class="box">
+  <h2>Why Do We Need Polyfills?</h2>
+  <ul>
+    <li>Older browsers don’t support modern JS features</li>
+    <li>Prevents application crashes</li>
+    <li>Ensures backward compatibility</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>Example Without Polyfill</h2>
+  <pre>
+const arr = [1, 2, 3];
+arr.includes(2); // ❌ Error in old browsers
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Example With Polyfill</h2>
+  <pre>
+if (!Array.prototype.includes) {
+  Array.prototype.includes = function (value) {
+    for (let i = 0; i < this.length; i++) {
+      if (this[i] === value) return true;
+    }
+    return false;
+  };
+}
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Polyfill for Array.map</h2>
+  <pre>
+Array.prototype.myMap = function (callback) {
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    result.push(callback(this[i], i, this));
+  }
+  return result;
+};
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Polyfill for Array.filter</h2>
+  <pre>
+Array.prototype.myFilter = function (callback) {
+  const result = [];
+  for (let i = 0; i < this.length; i++) {
+    if (callback(this[i], i, this)) {
+      result.push(this[i]);
+    }
+  }
+  return result;
+};
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Polyfill for Array.reduce (Very Important)</h2>
+  <pre>
+Array.prototype.myReduce = function (callback, initialValue) {
+  let accumulator = initialValue !== undefined
+    ? initialValue
+    : this[0];
+
+  let startIndex = initialValue !== undefined ? 0 : 1;
+
+  for (let i = startIndex; i < this.length; i++) {
+    accumulator = callback(accumulator, this[i], i, this);
+  }
+  return accumulator;
+};
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Polyfill for call()</h2>
+  <pre>
+Function.prototype.myCall = function (context, ...args) {
+  context = context || window;
+  context.fn = this;
+  const result = context.fn(...args);
+  delete context.fn;
+  return result;
+};
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Polyfill for apply()</h2>
+  <pre>
+Function.prototype.myApply = function (context, args) {
+  context = context || window;
+  context.fn = this;
+  const result = context.fn(...args);
+  delete context.fn;
+  return result;
+};
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Polyfill for bind()</h2>
+  <pre>
+Function.prototype.myBind = function (context, ...args) {
+  const fn = this;
+  return function (...newArgs) {
+    return fn.apply(context, [...args, ...newArgs]);
+  };
+};
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Polyfill vs Transpiler</h2>
+  <table>
+    <tr>
+      <th>Polyfill</th>
+      <th>Transpiler</th>
+    </tr>
+    <tr>
+      <td>Adds missing features</td>
+      <td>Converts modern syntax</td>
+    </tr>
+    <tr>
+      <td>Example: Array.map</td>
+      <td>Example: let → var</td>
+    </tr>
+    <tr>
+      <td>Uses core-js</td>
+      <td>Uses Babel</td>
+    </tr>
+  </table>
+</div>
+
+<div class="box">
+  <h2>Interview One-Liner</h2>
+  <p>
+    <strong>
+      A polyfill is JavaScript code that adds support for modern features in
+      browsers that don’t support them natively.
+    </strong>
+  </p>
+</div>
+
+<div class="box">
+  <h2>Important Interview Tips</h2>
+  <ul>
+    <li>Always check if feature exists before adding polyfill</li>
+    <li>Never override native implementation</li>
+    <li>Common questions: map, reduce, bind, call</li>
+  </ul>
+</div>
+
+</body>
+</html>
