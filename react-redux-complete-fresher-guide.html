@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React & Redux Complete Guide for Freshers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 30px;
+      line-height: 1.7;
+      color: #222;
+    }
+    h1 {
+      text-align: center;
+      color: #0d6efd;
+      border-bottom: 3px solid #0d6efd;
+      padding-bottom: 10px;
+    }
+    h2 {
+      color: #198754;
+      margin-top: 40px;
+    }
+    h3 {
+      color: #0d6efd;
+      margin-top: 25px;
+    }
+    section {
+      background: #ffffff;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    code {
+      background: #eee;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+    }
+    th {
+      background: #e7f1ff;
+    }
+    .note {
+      background: #fff3cd;
+      padding: 12px;
+      border-left: 5px solid #ffc107;
+      margin: 15px 0;
+    }
+    .remember {
+      background: #d1e7dd;
+      padding: 12px;
+      border-left: 5px solid #198754;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>React & Redux – Complete Guide for Freshers</h1>
+
+<!-- ============================ -->
+<section>
+  <h2>1. What is React?</h2>
+  <p>
+    React is a <b>JavaScript library</b> used to build <b>user interfaces</b>
+    using reusable components.
+  </p>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>2. Components</h2>
+  <p>A component is a function that returns UI.</p>
+
+  <pre>
+function Hello() {
+  return &lt;h1&gt;Hello World&lt;/h1&gt;;
+}
+  </pre>
+
+  <div class="remember">
+    Components are reusable building blocks of UI.
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>3. Props (Properties)</h2>
+
+  <p>
+    Props are <b>data passed from parent to child</b>.
+    They are <b>read-only</b>.
+  </p>
+
+  <pre>
+function Child({ name }) {
+  return &lt;h2&gt;Hello {name}&lt;/h2&gt;;
+}
+
+function Parent() {
+  return &lt;Child name="Nisha" /&gt;;
+}
+  </pre>
+
+  <div class="note">
+    Props flow only one way: Parent → Child
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>4. STATE (Important Concept)</h2>
+
+  <h3>What is State?</h3>
+  <p>
+    <b>State is data that changes over time and controls what appears on the screen.</b>
+  </p>
+
+  <p>Examples of state:</p>
+  <ul>
+    <li>User logged in or not</li>
+    <li>Counter value</li>
+    <li>Form input text</li>
+    <li>Button enabled / disabled</li>
+  </ul>
+
+  <div class="remember">
+    State is just DATA. It is NOT a function.
+  </div>
+
+  <div class="note">
+    Changing state causes the UI to update.
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>5. useState (Hook / Tool)</h2>
+
+  <h3>What is useState?</h3>
+  <p>
+    <b>useState</b> is a <b>React Hook</b> that allows functional components
+    to <b>create and manage state</b>.
+  </p>
+
+  <div class="note">
+    👉 State = WHAT you store  
+    <br>
+    👉 useState = HOW you store and update it
+  </div>
+
+  <pre>
+const [count, setCount] = useState(0);
+  </pre>
+
+  <h3>Breaking it down</h3>
+  <table>
+    <tr>
+      <th>Part</th>
+      <th>Meaning</th>
+    </tr>
+    <tr>
+      <td>count</td>
+      <td>The state value</td>
+    </tr>
+    <tr>
+      <td>setCount</td>
+      <td>Function to update state</td>
+    </tr>
+    <tr>
+      <td>useState(0)</td>
+      <td>Initial value of state</td>
+    </tr>
+  </table>
+
+  <div class="remember">
+    useState tells React: “Please remember this value and re-render when it changes.”
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>6. State vs useState (CONFUSION CLEARED)</h2>
+
+  <table>
+    <tr>
+      <th>State</th>
+      <th>useState</th>
+    </tr>
+    <tr>
+      <td>Data that changes</td>
+      <td>Hook used to create/manage state</td>
+    </tr>
+    <tr>
+      <td>Concept</td>
+      <td>Function</td>
+    </tr>
+    <tr>
+      <td>Controls UI</td>
+      <td>Triggers UI re-render</td>
+    </tr>
+    <tr>
+      <td>Cannot update UI alone</td>
+      <td>Updates state properly</td>
+    </tr>
+  </table>
+
+  <div class="remember">
+    🔑 State is the VALUE, useState is the TOOL.
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>7. Simple Example (Very Important)</h2>
+
+  <pre>
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <>
+      &lt;p&gt;Count: {count}&lt;/p&gt;
+      &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+        Increase
+      &lt;/button&gt;
+    </>
+  );
+}
+  </pre>
+
+  <div class="note">
+    Clicking the button updates state → React re-renders UI
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>8. Interview Memory Lines</h2>
+
+  <div class="remember">
+    State = data that changes UI
+  </div>
+
+  <div class="remember">
+    useState = hook used to create and update state
+  </div>
+
+  <div class="remember">
+    Without useState, React cannot track changes
+  </div>
+</section>
+
+</body>
+</html>
