@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React & Redux Interview Preparation – Master Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 30px;
+      background: #f9f9f9;
+      color: #222;
+    }
+    h1, h2, h3 {
+      color: #0d6efd;
+    }
+    h1 {
+      text-align: center;
+      border-bottom: 3px solid #0d6efd;
+      padding-bottom: 10px;
+    }
+    section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #e9f2ff;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    .highlight {
+      background: #fff3cd;
+      padding: 10px;
+      border-left: 4px solid #ffc107;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>React & Redux – Complete Interview Preparation Guide</h1>
+
+<!-- ===================== -->
+<section>
+  <h2>1. Core React Concepts</h2>
+
+  <h3>Props</h3>
+  <p><b>What:</b> Props are read-only data passed from parent to child.</p>
+  <p><b>Why:</b> Used for component communication.</p>
+  <pre>
+function Child({ name }) {
+  return &lt;h1&gt;Hello {name}&lt;/h1&gt;;
+}
+  </pre>
+
+  <h3>State</h3>
+  <p><b>What:</b> State holds mutable data that affects UI.</p>
+  <p><b>Why:</b> UI re-renders when state changes.</p>
+</section>
+
+<!-- ===================== -->
+<section>
+  <h2>2. React Hooks – Complete Explanation</h2>
+
+  <h3>useState</h3>
+  <p>Manages simple local state.</p>
+  <pre>
+const [count, setCount] = useState(0);
+  </pre>
+
+  <h3>useEffect</h3>
+  <p>Handles side effects like API calls.</p>
+  <pre>
+useEffect(() => {
+  fetchData();
+}, []);
+  </pre>
+
+  <h3>useContext</h3>
+  <p>Shares global data without prop drilling.</p>
+
+  <h3>useRef</h3>
+  <p>Stores mutable value without re-render.</p>
+
+  <h3>useReducer</h3>
+  <p>Manages complex state logic using reducer pattern.</p>
+
+  <h3>useMemo</h3>
+  <p>Memoizes expensive calculations.</p>
+
+  <h3>useCallback</h3>
+  <p>Memoizes functions to avoid re-renders.</p>
+
+  <h3>Other Hooks</h3>
+  <ul>
+    <li>useLayoutEffect</li>
+    <li>useImperativeHandle</li>
+    <li>useId</li>
+    <li>useTransition</li>
+    <li>useDeferredValue</li>
+    <li>Custom Hooks</li>
+  </ul>
+</section>
+
+<!-- ===================== -->
+<section>
+  <h2>3. useContext vs useReducer vs Redux</h2>
+
+  <table>
+    <tr>
+      <th>Feature</th>
+      <th>useContext</th>
+      <th>useReducer</th>
+      <th>Redux</th>
+    </tr>
+    <tr>
+      <td>Scope</td>
+      <td>Global sharing</td>
+      <td>Local</td>
+      <td>Global</td>
+    </tr>
+    <tr>
+      <td>Complexity</td>
+      <td>Low</td>
+      <td>Medium</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Async support</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>DevTools</td>
+      <td>No</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <td>Best for</td>
+      <td>Theme/Auth</td>
+      <td>Complex local logic</td>
+      <td>Large apps</td>
+    </tr>
+  </table>
+
+  <div class="highlight">
+    <b>Interview Tip:</b> useContext + useReducer can replace Redux for medium-sized apps.
+  </div>
+</section>
+
+<!-- ===================== -->
+<section>
+  <h2>4. Redux – In Depth Explanation</h2>
+
+  <h3>What is Redux?</h3>
+  <p>Redux is a predictable state management library for JavaScript applications.</p>
+
+  <h3>Why Redux?</h3>
+  <ul>
+    <li>Single source of truth</li>
+    <li>Predictable updates</li>
+    <li>Easy debugging</li>
+  </ul>
+
+  <h3>Core Principles</h3>
+  <ul>
+    <li>Single source of truth</li>
+    <li>State is read-only</li>
+    <li>Changes via pure functions</li>
+  </ul>
+
+  <h3>Redux Data Flow</h3>
+  <pre>
+UI → dispatch(action)
+        ↓
+     Reducer
+        ↓
+     Store
+        ↓
+     UI updates
+  </pre>
+
+  <h3>Redux Building Blocks</h3>
+  <ul>
+    <li><b>Store</b> – holds state</li>
+    <li><b>Action</b> – describes what happened</li>
+    <li><b>Reducer</b> – updates state</li>
+    <li><b>Dispatch</b> – sends action</li>
+  </ul>
+</section>
+
+<!-- ===================== -->
+<section>
+  <h2>5. Redux Toolkit (Modern Redux)</h2>
+
+  <p>Redux Toolkit is the official, recommended way to use Redux.</p>
+
+  <h3>createSlice</h3>
+  <pre>
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: [],
+  reducers: {
+    addItem(state, action) {
+      state.push(action.payload);
+    }
+  }
+});
+  </pre>
+
+  <h3>createAsyncThunk</h3>
+  <p>Handles async API calls with pending / fulfilled / rejected states.</p>
+</section>
+
+<!-- ===================== -->
+<section>
+  <h2>6. When to Use What?</h2>
+
+  <table>
+    <tr>
+      <th>Scenario</th>
+      <th>Best Choice</th>
+    </tr>
+    <tr>
+      <td>Simple UI state</td>
+      <td>useState</td>
+    </tr>
+    <tr>
+      <td>Complex component logic</td>
+      <td>useReducer</td>
+    </tr>
+    <tr>
+      <td>Theme / Auth</td>
+      <td>useContext</td>
+    </tr>
+    <tr>
+      <td>Large app, shared state</td>
+      <td>Redux Toolkit</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ===================== -->
+<section>
+  <h2>7. Final Interview Statements</h2>
+
+  <div class="highlight">
+    “useContext solves data sharing, useReducer solves state logic, and Redux solves large-scale predictable state management.”
+  </div>
+
+  <div class="highlight">
+    “Redux should be used when debugging, scalability, and predictable state updates matter more than simplicity.”
+  </div>
+</section>
+
+</body>
+</html>
