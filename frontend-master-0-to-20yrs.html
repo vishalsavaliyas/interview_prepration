@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Frontend Master Guide – Fresher to 20+ Years</title>
+<style>
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  padding: 24px;
+  line-height: 1.75;
+}
+h1, h2, h3 {
+  color: #1f2d3d;
+}
+.section {
+  background: #ffffff;
+  padding: 18px;
+  margin-bottom: 22px;
+  border-left: 6px solid #4CAF50;
+}
+pre {
+  background: #1e1e1e;
+  color: #f8f8f2;
+  padding: 14px;
+  border-radius: 6px;
+  overflow-x: auto;
+}
+ul { margin-left: 20px; }
+.level {
+  font-weight: bold;
+  color: #c0392b;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Frontend Engineering MASTER GUIDE  
+(Fresher → 20+ Years Experience)</h1>
+
+<!-- ================= FOUNDATION ================= -->
+
+<div class="section">
+<h2>FOUNDATION (0–2 Years)</h2>
+<p class="level">Goal: Understand how JavaScript actually works</p>
+<ul>
+<li>JavaScript Engine (V8)</li>
+<li>Execution Context</li>
+<li>Call Stack & Memory Heap</li>
+<li>Hoisting</li>
+<li>Scope (Global, Function, Block)</li>
+<li>Primitive vs Reference Types</li>
+<li>Truthy / Falsy</li>
+<li>Type Coercion</li>
+<li>Operators & Precedence</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Functions & Core Concepts</h2>
+<ul>
+<li>Function Declaration vs Expression</li>
+<li>Arrow Functions</li>
+<li>Parameters vs Arguments</li>
+<li>Pure vs Impure Functions</li>
+<li>Idempotency</li>
+</ul>
+</div>
+
+<!-- ================= INTERMEDIATE ================= -->
+
+<div class="section">
+<h2>INTERMEDIATE (2–5 Years)</h2>
+<p class="level">Goal: Write predictable, scalable code</p>
+
+<ul>
+<li><b>Closure</b></li>
+<li><b>this keyword</b> (all cases)</li>
+<li>call / apply / bind</li>
+<li>Deep Clone vs Shallow Clone</li>
+<li>Immutability</li>
+<li>Event Delegation</li>
+<li>Debounce & Throttle</li>
+<li>Currying</li>
+<li>Composition</li>
+<li>Memoization</li>
+</ul>
+
+<pre>
+function debounce(fn, delay) {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => fn(...args), delay);
+  };
+}
+</pre>
+</div>
+
+<div class="section">
+<h2>Async JavaScript</h2>
+<ul>
+<li>Callbacks</li>
+<li>Promises</li>
+<li>Promise.all / race / allSettled</li>
+<li>Async / Await</li>
+<li>Error Handling</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Event Loop ⭐⭐⭐</h2>
+<ul>
+<li>Call Stack</li>
+<li>Microtask Queue (Promises)</li>
+<li>Macrotask Queue (setTimeout)</li>
+<li>Rendering Queue</li>
+</ul>
+</div>
+
+<!-- ================= ADVANCED ================= -->
+
+<div class="section">
+<h2>ADVANCED (5–10 Years)</h2>
+<p class="level">Goal: Performance, architecture, maintainability</p>
+
+<ul>
+<li>Prototype & Prototype Chain</li>
+<li>Garbage Collection (Mark & Sweep)</li>
+<li>Memory Leaks</li>
+<li>WeakMap / WeakSet</li>
+<li>Polyfills</li>
+<li>Transpilers (Babel, SWC)</li>
+<li>Module Systems (CJS, ESM)</li>
+<li>Tree Shaking</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Browser Internals</h2>
+<ul>
+<li>Critical Rendering Path</li>
+<li>Reflow vs Repaint</li>
+<li>Layout Thrashing</li>
+<li>Web APIs</li>
+<li>Service Workers</li>
+</ul>
+</div>
+
+<!-- ================= REACT ================= -->
+
+<div class="section">
+<h2>React – Fundamentals</h2>
+<ul>
+<li>JSX</li>
+<li>Virtual DOM</li>
+<li>Reconciliation</li>
+<li>State vs Props</li>
+<li>Controlled vs Uncontrolled</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>React Hooks – Deep Dive</h2>
+<ul>
+<li>useState batching</li>
+<li>useEffect lifecycle</li>
+<li>Cleanup functions</li>
+<li>useMemo vs useCallback</li>
+<li>useRef (DOM vs mutable storage)</li>
+<li>Custom Hooks</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>State Management</h2>
+<ul>
+<li>Lifting State Up</li>
+<li>Context API</li>
+<li>Redux (core principles)</li>
+<li>Redux Toolkit</li>
+<li>Middleware</li>
+<li>When NOT to use Redux</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>React Performance ⭐⭐⭐</h2>
+<ul>
+<li>React.memo</li>
+<li>useMemo misuse</li>
+<li>Key prop importance</li>
+<li>Lazy loading</li>
+<li>Code splitting</li>
+</ul>
+</div>
+
+<!-- ================= SENIOR ================= -->
+
+<div class="section">
+<h2>SENIOR ENGINEER (10–15 Years)</h2>
+<p class="level">Goal: Design systems, not components</p>
+
+<ul>
+<li>Component Architecture</li>
+<li>Atomic Design</li>
+<li>Container vs Presentational</li>
+<li>State Normalization</li>
+<li>API Layer Design</li>
+<li>Error Boundaries</li>
+<li>Auth Flow (JWT, Refresh Token)</li>
+<li>Feature Flags</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Frontend System Design ⭐⭐⭐</h2>
+<ul>
+<li>Designing large dashboards</li>
+<li>Infinite scroll</li>
+<li>Search + debounce</li>
+<li>Caching strategy</li>
+<li>Offline-first apps</li>
+</ul>
+</div>
+
+<!-- ================= PRINCIPAL ================= -->
+
+<div class="section">
+<h2>PRINCIPAL / STAFF ENGINEER (15–20+ Years)</h2>
+<p class="level">Goal: Organization-wide impact</p>
+
+<ul>
+<li>Micro-Frontend Architecture</li>
+<li>Module Federation</li>
+<li>Monorepos</li>
+<li>Design Systems</li>
+<li>Cross-team contracts</li>
+<li>Backward compatibility</li>
+<li>Migration strategies</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Security ⭐⭐⭐</h2>
+<ul>
+<li>XSS</li>
+<li>CSRF</li>
+<li>CORS</li>
+<li>Content Security Policy</li>
+<li>Secure storage</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Testing Strategy</h2>
+<ul>
+<li>Unit tests</li>
+<li>Integration tests</li>
+<li>E2E tests</li>
+<li>Test pyramid</li>
+<li>Flaky test handling</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>CI/CD & Tooling</h2>
+<ul>
+<li>Build pipelines</li>
+<li>Environment configs</li>
+<li>Monitoring & logging</li>
+<li>Performance budgets</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>Leadership & Engineering Mindset ⭐⭐⭐</h2>
+<ul>
+<li>Code reviews</li>
+<li>Mentoring</li>
+<li>Tech debt management</li>
+<li>Trade-off decisions</li>
+<li>Business vs tech balance</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>FINAL TRUTH</h2>
+<p class="level">
+A 20-year developer is evaluated on  
+<b>clarity of thought, architecture, risk management, and leadership</b>  
+—not syntax.
+</p>
+</div>
+
+</body>
+</html>
