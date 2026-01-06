@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Transpiler – Interview Notes</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      padding: 20px;
+      background: #f4f6f8;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    pre, code {
+      background: #1e1e1e;
+      color: #f8f8f2;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .box {
+      background: #ffffff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-left: 5px solid #4CAF50;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #4CAF50;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript Transpiler – Complete Interview Guide</h1>
+
+<div class="box">
+  <h2>What is a Transpiler?</h2>
+  <p>
+    A <strong>transpiler</strong> converts modern JavaScript code
+    into older JavaScript syntax so that it can run in older browsers.
+  </p>
+  <p>
+    <strong>In simple words:</strong> Transpiler converts <b>new JS syntax</b> into <b>old JS syntax</b>.
+  </p>
+</div>
+
+<div class="box">
+  <h2>Why Do We Need a Transpiler?</h2>
+  <ul>
+    <li>Older browsers don’t understand modern JavaScript</li>
+    <li>Allows developers to write clean, modern code</li>
+    <li>Makes apps browser-compatible</li>
+    <li>Essential for React applications</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>Example Without Transpiler ❌</h2>
+  <pre>
+const add = (a, b) => a + b;
+  </pre>
+  <p>❌ Arrow functions may fail in old browsers like IE</p>
+</div>
+
+<div class="box">
+  <h2>Example With Transpiler (Babel) ✅</h2>
+  <pre>
+var add = function (a, b) {
+  return a + b;
+};
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Common Syntax Handled by Transpilers</h2>
+  <ul>
+    <li>let / const → var</li>
+    <li>Arrow functions → normal functions</li>
+    <li>Optional chaining (?.)</li>
+    <li>Nullish coalescing (??)</li>
+    <li>JSX (React)</li>
+    <li>Async / Await</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>React JSX Transpiling Example</h2>
+  <h3>JSX Code (Developer Writes)</h3>
+  <pre>
+const App = () => <h1>Hello World</h1>;
+  </pre>
+
+  <h3>After Transpiling (Browser Understands)</h3>
+  <pre>
+const App = function () {
+  return React.createElement("h1", null, "Hello World");
+};
+  </pre>
+</div>
+
+<div class="box">
+  <h2>Popular Transpilers</h2>
+  <ul>
+    <li><strong>Babel</strong> (Most popular)</li>
+    <li>TypeScript Compiler (tsc)</li>
+    <li>SWC</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>Transpiler vs Polyfill (Very Important)</h2>
+  <table>
+    <tr>
+      <th>Transpiler</th>
+      <th>Polyfill</th>
+    </tr>
+    <tr>
+      <td>Converts syntax</td>
+      <td>Adds missing features</td>
+    </tr>
+    <tr>
+      <td>Example: let → var</td>
+      <td>Example: Array.map</td>
+    </tr>
+    <tr>
+      <td>Runs at build time</td>
+      <td>Runs at runtime</td>
+    </tr>
+    <tr>
+      <td>Tool: Babel</td>
+      <td>Tool: core-js</td>
+    </tr>
+  </table>
+</div>
+
+<div class="box">
+  <h2>Transpiler in React Projects</h2>
+  <p>
+    React apps use <strong>Babel</strong> automatically.
+  </p>
+  <ul>
+    <li>JSX → JavaScript</li>
+    <li>Modern JS → Browser-compatible JS</li>
+    <li>Configured internally by CRA / Vite / Next.js</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>Interview One-Liner ⭐</h2>
+  <p>
+    <strong>
+      A transpiler converts modern JavaScript syntax into older JavaScript
+      so that the code can run in all browsers.
+    </strong>
+  </p>
+</div>
+
+<div class="box">
+  <h2>Key Interview Tips</h2>
+  <ul>
+    <li>Transpiler handles syntax, not APIs</li>
+    <li>Polyfill is still required for missing features</li>
+    <li>Babel is the most common transpiler</li>
+    <li>React JSX always needs transpiling</li>
+  </ul>
+</div>
+
+</body>
+</html>
