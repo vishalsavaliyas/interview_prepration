@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript & React – Must Know Concepts</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      background: #f5f7fa;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    .box {
+      background: #ffffff;
+      padding: 16px;
+      margin-bottom: 18px;
+      border-left: 5px solid #4CAF50;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #f8f8f2;
+      padding: 12px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    ul {
+      margin-left: 18px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript & React – Must Know Interview Concepts</h1>
+
+<!-- ================= JS CORE ================= -->
+
+<div class="box">
+  <h2>1. Closure ⭐</h2>
+  <p>A closure allows a function to access variables from its outer scope even after the outer function has finished executing.</p>
+  <pre>
+function outer() {
+  let count = 0;
+  return function inner() {
+    count++;
+    return count;
+  }
+}
+const counter = outer();
+counter(); // 1
+counter(); // 2
+  </pre>
+</div>
+
+<div class="box">
+  <h2>2. Hoisting</h2>
+  <p>JavaScript moves variable and function declarations to the top of their scope.</p>
+  <pre>
+console.log(a); // undefined
+var a = 10;
+  </pre>
+</div>
+
+<div class="box">
+  <h2>3. Event Loop ⭐</h2>
+  <p>The event loop handles asynchronous operations like setTimeout, promises, and API calls.</p>
+  <pre>
+console.log("A");
+setTimeout(() => console.log("B"), 0);
+console.log("C");
+// Output: A C B
+  </pre>
+</div>
+
+<div class="box">
+  <h2>4. Call Stack & Memory Heap</h2>
+  <p>
+    Call Stack → Executes functions<br/>
+    Heap → Stores objects & variables
+  </p>
+</div>
+
+<div class="box">
+  <h2>5. Synchronous vs Asynchronous</h2>
+  <p>
+    Sync → Blocks execution<br/>
+    Async → Non-blocking (API calls, timers)
+  </p>
+</div>
+
+<div class="box">
+  <h2>6. Debouncing ⭐</h2>
+  <p>Limits function execution after a delay.</p>
+  <pre>
+function debounce(fn, delay) {
+  let timer;
+  return function () {
+    clearTimeout(timer);
+    timer = setTimeout(fn, delay);
+  }
+}
+  </pre>
+</div>
+
+<div class="box">
+  <h2>7. Throttling ⭐</h2>
+  <p>Executes function at fixed intervals.</p>
+  <pre>
+function throttle(fn, limit) {
+  let flag = true;
+  return function () {
+    if (flag) {
+      fn();
+      flag = false;
+      setTimeout(() => flag = true, limit);
+    }
+  }
+}
+  </pre>
+</div>
+
+<div class="box">
+  <h2>8. Currying</h2>
+  <p>Breaking a function with multiple arguments into single-argument functions.</p>
+  <pre>
+const add = a => b => c => a + b + c;
+add(1)(2)(3); // 6
+  </pre>
+</div>
+
+<div class="box">
+  <h2>9. Memoization</h2>
+  <p>Optimizes performance by caching results.</p>
+</div>
+
+<div class="box">
+  <h2>10. Prototype & Prototype Chain ⭐</h2>
+  <p>JavaScript objects inherit properties using prototypes.</p>
+</div>
+
+<!-- ================= REACT ================= -->
+
+<div class="box">
+  <h2>11. Virtual DOM ⭐</h2>
+  <p>React updates only changed parts of the UI instead of re-rendering everything.</p>
+</div>
+
+<div class="box">
+  <h2>12. State vs Props ⭐</h2>
+  <p>
+    State → Component-owned, mutable<br/>
+    Props → Passed from parent, immutable
+  </p>
+</div>
+
+<div class="box">
+  <h2>13. useEffect ⭐</h2>
+  <pre>
+useEffect(() => {
+  // side effect
+}, []);
+  </pre>
+  <p>Empty dependency → runs once</p>
+</div>
+
+<div class="box">
+  <h2>14. Controlled vs Uncontrolled Components</h2>
+  <p>
+    Controlled → React controls input<br/>
+    Uncontrolled → DOM controls input
+  </p>
+</div>
+
+<div class="box">
+  <h2>15. useMemo vs useCallback ⭐</h2>
+  <p>
+    useMemo → memoizes value<br/>
+    useCallback → memoizes function
+  </p>
+</div>
+
+<div class="box">
+  <h2>16. Lifting State Up</h2>
+  <p>Sharing state between components by moving it to the parent.</p>
+</div>
+
+<div class="box">
+  <h2>17. Context API</h2>
+  <p>Avoids prop drilling by sharing global data.</p>
+</div>
+
+<div class="box">
+  <h2>18. Redux Basics ⭐</h2>
+  <p>
+    Store → Global state<br/>
+    Action → What happened<br/>
+    Reducer → How state changes
+  </p>
+</div>
+
+<div class="box">
+  <h2>19. Authentication Flow</h2>
+  <p>
+    Login → Token → Store → Protected Routes
+  </p>
+</div>
+
+<div class="box">
+  <h2>20. Error Boundaries</h2>
+  <p>Catch runtime errors in React components.</p>
+</div>
+
+<!-- ================= INTERVIEW ================= -->
+
+<div class="box">
+  <h2>🔥 MOST IMPORTANT FOR INTERVIEW</h2>
+  <ul>
+    <li>Closure</li>
+    <li>Event Loop</li>
+    <li>Debounce & Throttle</li>
+    <li>Polyfill & Transpiler</li>
+    <li>State vs Props</li>
+    <li>useEffect behavior</li>
+    <li>Redux flow</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>⭐ Interview One-Line Tip</h2>
+  <p>
+    <strong>
+      Focus on WHY a concept exists, not just HOW it works.
+    </strong>
+  </p>
+</div>
+
+</body>
+</html>
