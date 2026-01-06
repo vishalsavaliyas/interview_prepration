@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>React & Redux Complete Guide for Freshers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 30px;
+      line-height: 1.7;
+      color: #222;
+    }
+    h1 {
+      text-align: center;
+      color: #0d6efd;
+      border-bottom: 3px solid #0d6efd;
+      padding-bottom: 10px;
+    }
+    h2 {
+      color: #198754;
+      margin-top: 40px;
+    }
+    h3 {
+      color: #0d6efd;
+      margin-top: 25px;
+    }
+    section {
+      background: #ffffff;
+      padding: 25px;
+      margin-bottom: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    }
+    code {
+      background: #eee;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-size: 0.95em;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+    }
+    th {
+      background: #e7f1ff;
+    }
+    .note {
+      background: #fff3cd;
+      padding: 12px;
+      border-left: 5px solid #ffc107;
+      margin: 15px 0;
+    }
+    .remember {
+      background: #d1e7dd;
+      padding: 12px;
+      border-left: 5px solid #198754;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>React & Redux – Complete Guide for Freshers</h1>
+
+<!-- ============================ -->
+<section>
+  <h2>1. What is React?</h2>
+  <p>
+    React is a <b>JavaScript library</b> used to build <b>user interfaces</b>.
+    It allows us to create UI using <b>components</b>.
+  </p>
+
+  <h3>Why React?</h3>
+  <ul>
+    <li>Reusable components</li>
+    <li>Fast UI updates (Virtual DOM)</li>
+    <li>Easy to manage UI state</li>
+  </ul>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>2. Components</h2>
+
+  <p>
+    A component is a <b>function</b> that returns UI.
+  </p>
+
+  <pre>
+function Hello() {
+  return &lt;h1&gt;Hello World&lt;/h1&gt;;
+}
+  </pre>
+
+  <div class="remember">
+    Components are like LEGO blocks – small, reusable pieces.
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>3. Props (Properties)</h2>
+
+  <h3>What are Props?</h3>
+  <p>
+    Props are <b>data passed from parent to child</b>.
+    Props are <b>read-only</b>.
+  </p>
+
+  <pre>
+function Child(props) {
+  return &lt;h2&gt;Hello {props.name}&lt;/h2&gt;;
+}
+
+function Parent() {
+  return &lt;Child name="Nisha" /&gt;;
+}
+  </pre>
+
+  <div class="note">
+    Props flow only one way: Parent → Child
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>4. State</h2>
+
+  <h3>What is State?</h3>
+  <p>
+    State is data that <b>changes over time</b> and affects UI.
+  </p>
+
+  <pre>
+const [count, setCount] = useState(0);
+  </pre>
+
+  <p>
+    When state changes → React <b>re-renders</b> the component.
+  </p>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>5. React Hooks (Basics)</h2>
+
+  <p>
+    Hooks are functions that allow us to use React features
+    like state and lifecycle in functional components.
+  </p>
+
+  <h3>Why Hooks?</h3>
+  <ul>
+    <li>No class components needed</li>
+    <li>Cleaner code</li>
+    <li>Reusable logic</li>
+  </ul>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>6. useState</h2>
+
+  <p>
+    <b>useState</b> is used to store and update local state.
+  </p>
+
+  <pre>
+const [name, setName] = useState("John");
+
+setName("Alex");
+  </pre>
+
+  <div class="remember">
+    Use useState for simple values: input, toggle, counter
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>7. useEffect</h2>
+
+  <p>
+    <b>useEffect</b> is used for <b>side effects</b>.
+  </p>
+
+  <h3>Examples</h3>
+  <ul>
+    <li>API calls</li>
+    <li>Timers</li>
+    <li>Event listeners</li>
+  </ul>
+
+  <pre>
+useEffect(() => {
+  console.log("Component mounted");
+}, []);
+  </pre>
+
+  <div class="note">
+    Empty dependency array → runs only once
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>8. useRef</h2>
+
+  <p>
+    <b>useRef</b> stores a value that <b>does NOT cause re-render</b>.
+  </p>
+
+  <pre>
+const inputRef = useRef();
+
+&lt;input ref={inputRef} /&gt;
+  </pre>
+
+  <div class="remember">
+    useRef is mainly used for DOM access
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>9. useContext</h2>
+
+  <p>
+    <b>useContext</b> is used to share data globally without prop drilling.
+  </p>
+
+  <pre>
+const ThemeContext = createContext();
+
+&lt;ThemeContext.Provider value="dark"&gt;
+  &lt;App /&gt;
+&lt;/ThemeContext.Provider&gt;
+  </pre>
+
+  <pre>
+const theme = useContext(ThemeContext);
+  </pre>
+
+  <div class="note">
+    Best for theme, auth user, language
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>10. useReducer</h2>
+
+  <p>
+    <b>useReducer</b> is used when state logic is complex.
+  </p>
+
+  <pre>
+function reducer(state, action) {
+  switch(action.type) {
+    case "INC":
+      return { count: state.count + 1 };
+    default:
+      return state;
+  }
+}
+
+const [state, dispatch] = useReducer(reducer, { count: 0 });
+  </pre>
+
+  <div class="remember">
+    useReducer is like small Redux inside component
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>11. Redux (In Simple Words)</h2>
+
+  <p>
+    Redux is used to manage <b>global application state</b>.
+  </p>
+
+  <h3>Why Redux?</h3>
+  <ul>
+    <li>Large applications</li>
+    <li>Same data used in many components</li>
+    <li>Better debugging</li>
+  </ul>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>12. Redux Core Concepts</h2>
+
+  <h3>Store</h3>
+  <p>Holds the entire app state.</p>
+
+  <h3>Action</h3>
+  <p>Plain object that describes what happened.</p>
+
+  <pre>
+{ type: "ADD_TO_CART", payload: item }
+  </pre>
+
+  <h3>Reducer</h3>
+  <p>Pure function that returns new state.</p>
+
+  <h3>Dispatch</h3>
+  <p>Sends action to reducer.</p>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>13. Redux Data Flow</h2>
+
+  <pre>
+User Action
+   ↓
+dispatch(action)
+   ↓
+reducer
+   ↓
+store updated
+   ↓
+UI re-render
+  </pre>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>14. Redux Toolkit</h2>
+
+  <p>
+    Redux Toolkit is the <b>modern and recommended</b> way to use Redux.
+  </p>
+
+  <pre>
+const cartSlice = createSlice({
+  name: "cart",
+  initialState: [],
+  reducers: {
+    addItem(state, action) {
+      state.push(action.payload);
+    }
+  }
+});
+  </pre>
+
+  <div class="remember">
+    Redux Toolkit uses Immer internally (safe mutation)
+  </div>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>15. useContext vs useReducer vs Redux</h2>
+
+  <table>
+    <tr>
+      <th>Feature</th>
+      <th>useContext</th>
+      <th>useReducer</th>
+      <th>Redux</th>
+    </tr>
+    <tr>
+      <td>Scope</td>
+      <td>Global sharing</td>
+      <td>Local</td>
+      <td>Global</td>
+    </tr>
+    <tr>
+      <td>Complexity</td>
+      <td>Low</td>
+      <td>Medium</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Best for</td>
+      <td>Theme/Auth</td>
+      <td>Complex logic</td>
+      <td>Large apps</td>
+    </tr>
+  </table>
+</section>
+
+<!-- ============================ -->
+<section>
+  <h2>16. Final Interview Memory Lines</h2>
+
+  <div class="remember">
+    useState → simple local state
+  </div>
+
+  <div class="remember">
+    useContext → avoid prop drilling
+  </div>
+
+  <div class="remember">
+    useReducer → complex state logic
+  </div>
+
+  <div class="remember">
+    Redux → large app global state
+  </div>
+</section>
+
+</body>
+</html>
