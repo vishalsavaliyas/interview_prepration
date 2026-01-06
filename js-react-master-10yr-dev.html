@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript & React – Master Guide (10+ Years Developer)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+      line-height: 1.7;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    .box {
+      background: #fff;
+      padding: 18px;
+      margin-bottom: 20px;
+      border-left: 6px solid #4CAF50;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #f8f8f2;
+      padding: 14px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    .important {
+      color: #c0392b;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+
+<h1>JavaScript & React – MASTER FILE (10+ Years Developer)</h1>
+
+<!-- ===================== JS CORE ===================== -->
+
+<div class="box">
+  <h2>1. Execution Context & Call Stack ⭐⭐⭐</h2>
+  <p>Every JS code runs inside an execution context.</p>
+  <ul>
+    <li>Global Execution Context</li>
+    <li>Function Execution Context</li>
+    <li>Memory Phase + Execution Phase</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>2. Hoisting</h2>
+  <pre>
+console.log(a); // undefined
+var a = 10;
+  </pre>
+  <p><span class="important">let & const are hoisted but in Temporal Dead Zone</span></p>
+</div>
+
+<div class="box">
+  <h2>3. Scope (Block, Function, Lexical)</h2>
+  <p>Lexical scope decides variable access based on where code is written.</p>
+</div>
+
+<div class="box">
+  <h2>4. Closure ⭐⭐⭐</h2>
+  <p>A closure remembers its lexical scope even after execution.</p>
+  <pre>
+function counter() {
+  let count = 0;
+  return () => ++count;
+}
+const c = counter();
+c(); // 1
+c(); // 2
+  </pre>
+</div>
+
+<div class="box">
+  <h2>5. this Keyword (All Cases)</h2>
+  <ul>
+    <li>Global</li>
+    <li>Object Method</li>
+    <li>Arrow Function</li>
+    <li>call / apply / bind</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>6. call / apply / bind (Polyfill Level)</h2>
+  <pre>
+Function.prototype.myBind = function(ctx,...args){
+  const fn = this;
+  return function(...newArgs){
+    return fn.apply(ctx,[...args,...newArgs]);
+  }
+}
+  </pre>
+</div>
+
+<div class="box">
+  <h2>7. Deep Clone vs Shallow Clone ⭐⭐⭐</h2>
+  <pre>
+const deep = structuredClone(obj);
+  </pre>
+  <p>Used heavily in React & Redux to avoid mutation.</p>
+</div>
+
+<div class="box">
+  <h2>8. Event Loop ⭐⭐⭐</h2>
+  <ul>
+    <li>Call Stack</li>
+    <li>Microtask Queue (Promises)</li>
+    <li>Macrotask Queue (setTimeout)</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>9. Promise, Async/Await</h2>
+  <pre>
+async function load(){
+  const res = await fetch("/api");
+}
+  </pre>
+</div>
+
+<div class="box">
+  <h2>10. Debounce & Throttle ⭐⭐⭐</h2>
+  <pre>
+function debounce(fn, delay){
+  let t;
+  return (...args)=>{
+    clearTimeout(t);
+    t=setTimeout(()=>fn(...args),delay);
+  }
+}
+  </pre>
+</div>
+
+<div class="box">
+  <h2>11. Currying & Composition</h2>
+  <pre>
+const add = a => b => c => a+b+c;
+  </pre>
+</div>
+
+<div class="box">
+  <h2>12. Memoization</h2>
+  <p>Caching function results to improve performance.</p>
+</div>
+
+<div class="box">
+  <h2>13. Prototype & Inheritance ⭐⭐⭐</h2>
+  <p>JS uses prototype chain, not classical inheritance.</p>
+</div>
+
+<div class="box">
+  <h2>14. Garbage Collection</h2>
+  <p>Mark & Sweep algorithm</p>
+</div>
+
+<div class="box">
+  <h2>15. Polyfill ⭐⭐⭐</h2>
+  <p>Adds missing browser features.</p>
+</div>
+
+<div class="box">
+  <h2>16. Transpiler ⭐⭐⭐</h2>
+  <p>Converts modern JS to old JS (Babel).</p>
+</div>
+
+<!-- ===================== REACT ===================== -->
+
+<div class="box">
+  <h2>17. React Rendering & Virtual DOM ⭐⭐⭐</h2>
+  <p>Diffing + reconciliation process.</p>
+</div>
+
+<div class="box">
+  <h2>18. State vs Props ⭐⭐⭐</h2>
+  <p>State is mutable, props are read-only.</p>
+</div>
+
+<div class="box">
+  <h2>19. useState & setState Internals</h2>
+  <p>Batching, async updates.</p>
+</div>
+
+<div class="box">
+  <h2>20. useEffect Deep Dive ⭐⭐⭐</h2>
+  <pre>
+useEffect(()=>{},[])
+  </pre>
+  <ul>
+    <li>No deps → every render</li>
+    <li>[] → once</li>
+    <li>[x] → on x change</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>21. useMemo vs useCallback ⭐⭐⭐</h2>
+</div>
+
+<div class="box">
+  <h2>22. Controlled vs Uncontrolled Components</h2>
+</div>
+
+<div class="box">
+  <h2>23. Lifting State Up</h2>
+</div>
+
+<div class="box">
+  <h2>24. Context API vs Redux ⭐⭐⭐</h2>
+</div>
+
+<div class="box">
+  <h2>25. Redux Architecture ⭐⭐⭐</h2>
+  <ul>
+    <li>Store</li>
+    <li>Action</li>
+    <li>Reducer (pure function)</li>
+    <li>Middleware</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>26. Performance Optimization ⭐⭐⭐</h2>
+  <ul>
+    <li>React.memo</li>
+    <li>Lazy loading</li>
+    <li>Code splitting</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>27. Error Boundaries</h2>
+</div>
+
+<div class="box">
+  <h2>28. Authentication & Authorization Flow</h2>
+</div>
+
+<div class="box">
+  <h2>29. SSR vs CSR vs SSG</h2>
+</div>
+
+<div class="box">
+  <h2>30. Security Concepts ⭐⭐⭐</h2>
+  <ul>
+    <li>XSS</li>
+    <li>CSRF</li>
+    <li>CORS</li>
+  </ul>
+</div>
+
+<!-- ===================== SYSTEM DESIGN ===================== -->
+
+<div class="box">
+  <h2>31. Frontend System Design ⭐⭐⭐</h2>
+  <ul>
+    <li>Component architecture</li>
+    <li>State management strategy</li>
+    <li>API caching</li>
+    <li>Error handling</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>32. Machine Coding Expectations ⭐⭐⭐</h2>
+  <ul>
+    <li>Clean architecture</li>
+    <li>Reusable components</li>
+    <li>Edge cases</li>
+    <li>Performance</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>33. Testing Knowledge</h2>
+  <ul>
+    <li>Unit Testing (Jest)</li>
+    <li>Component Testing</li>
+    <li>E2E (Cypress)</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>34. CI/CD & Build Tools</h2>
+  <ul>
+    <li>Webpack / Vite</li>
+    <li>Babel</li>
+    <li>Env configs</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>35. Senior Developer Mindset ⭐⭐⭐</h2>
+  <ul>
+    <li>Readable code > clever code</li>
+    <li>Scalability > shortcuts</li>
+    <li>Mentoring juniors</li>
+    <li>Trade-off discussions</li>
+  </ul>
+</div>
+
+<div class="box">
+  <h2>⭐ FINAL INTERVIEW TRUTH</h2>
+  <p class="important">
+    A 10+ year developer is judged on thinking, architecture,
+    trade-offs, and clarity — not just syntax.
+  </p>
+</div>
+
+</body>
+</html>
