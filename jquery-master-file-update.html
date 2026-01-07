@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>jQuery Master File | Zero to Hero</title>
+
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            line-height: 1.7;
+            background: #fafafa;
+        }
+        section {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        pre {
+            background: #f4f4f4;
+            padding: 10px;
+            overflow-x: auto;
+        }
+        .box {
+            width: 150px;
+            height: 100px;
+            background: #4CAF50;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+        button {
+            padding: 6px 12px;
+            margin-top: 6px;
+            cursor: pointer;
+        }
+        input {
+            padding: 6px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>jQuery Master File – Zero to Hero 🚀</h1>
+<p>
+This single HTML file contains <b>complete jQuery knowledge</b>:
+from <b>absolute fresher</b> to <b>interview-ready developer</b>.
+</p>
+
+<!-- ================================================= -->
+<section>
+<h2>1️⃣ What is jQuery?</h2>
+<p>
+<b>jQuery is a JavaScript library</b> built to make JavaScript:
+</p>
+<ul>
+    <li>Easier to write</li>
+    <li>Shorter</li>
+    <li>Cross-browser compatible</li>
+</ul>
+
+<p><b>Simple definition (for fresher):</b></p>
+<p>
+jQuery helps you write less JavaScript code to do common tasks like
+DOM manipulation, events, animations, and AJAX.
+</p>
+
+<pre>
+Basic rule:
+$(selector).action();
+</pre>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>2️⃣ Why jQuery was created? (Problem before jQuery)</h2>
+
+<h3>❌ Problems with old JavaScript</h3>
+<ul>
+    <li>Different browser behavior (IE vs Chrome vs Firefox)</li>
+    <li>Too much code for small tasks</li>
+    <li>Complex DOM manipulation</li>
+    <li>AJAX was difficult</li>
+    <li>Animations were painful</li>
+</ul>
+
+<h3>Example</h3>
+<pre>
+// JavaScript
+document.getElementById("title").style.color = "red";
+
+// jQuery
+$("#title").css("color", "red");
+</pre>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>3️⃣ What jQuery Solves (Why use jQuery)</h2>
+<ul>
+    <li>✔ Cross-browser compatibility</li>
+    <li>✔ Less and readable code</li>
+    <li>✔ Easy DOM manipulation</li>
+    <li>✔ Simple AJAX</li>
+    <li>✔ Built-in animations</li>
+</ul>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>4️⃣ Where jQuery is Used?</h2>
+<ul>
+    <li>Legacy enterprise applications</li>
+    <li>WordPress (VERY heavily)</li>
+    <li>Admin dashboards</li>
+    <li>PHP + HTML projects</li>
+    <li>Interview coding rounds</li>
+</ul>
+
+<p>
+⚠ Modern apps prefer React/Vue, but jQuery knowledge is still valuable.
+</p>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>5️⃣ How to Use jQuery (Setup)</h2>
+
+<h3>Using CDN</h3>
+<pre>
+&lt;script src="https://code.jquery.com/jquery-3.7.1.min.js"&gt;&lt;/script&gt;
+</pre>
+
+<p>
+Once added, you can use <b>$</b> anywhere in JavaScript.
+</p>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>6️⃣ jQuery Ready Function (MOST IMPORTANT)</h2>
+<p>
+Ensures HTML loads before JavaScript runs.
+</p>
+
+<pre>
+$(document).ready(function () {
+    // code
+});
+</pre>
+
+<p>Short version:</p>
+<pre>
+$(function () {
+    // code
+});
+</pre>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>7️⃣ Selectors</h2>
+<pre>
+$("#id")
+$(".class")
+$("tag")
+$("#box p")
+</pre>
+
+<div id="selectorDemo" class="box">Hello</div>
+<button id="selectorBtn">Change Text</button>
+
+<script>
+$(function () {
+    $("#selectorBtn").click(function () {
+        $("#selectorDemo").text("jQuery Works!");
+    });
+});
+</script>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>8️⃣ Events</h2>
+
+<button id="clickBtn">Click Me</button>
+<p id="clickResult"></p>
+
+<script>
+$(function () {
+    $("#clickBtn").click(function () {
+        $("#clickResult").text("Button Clicked!");
+    });
+});
+</script>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>9️⃣ DOM Manipulation</h2>
+
+<input id="nameInput" placeholder="Enter name">
+<button id="setName">Set Name</button>
+<p id="nameResult"></p>
+
+<script>
+$(function () {
+    $("#setName").click(function () {
+        var name = $("#nameInput").val();
+        $("#nameResult").html("<b>Hello " + name + "</b>");
+    });
+});
+</script>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>🔟 CSS Manipulation</h2>
+
+<div id="cssBox" class="box">Style Me</div>
+<button id="styleBtn">Apply CSS</button>
+
+<script>
+$(function () {
+    $("#styleBtn").click(function () {
+        $("#cssBox").css({
+            backgroundColor: "black",
+            color: "yellow",
+            width: "220px"
+        });
+    });
+});
+</script>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>1️⃣1️⃣ Show / Hide / Toggle</h2>
+
+<div id="toggleBox" class="box">Toggle Box</div>
+<button id="toggleBtn">Toggle</button>
+
+<script>
+$(function () {
+    $("#toggleBtn").click(function () {
+        $("#toggleBox").toggle();
+    });
+});
+</script>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>1️⃣2️⃣ Animations</h2>
+
+<div id="animateBox" class="box">Animate</div>
+<button id="animateBtn">Animate</button>
+
+<script>
+$(function () {
+    $("#animateBtn").click(function () {
+        $("#animateBox").animate({
+            width: "300px",
+            opacity: 0.5
+        }, 1000);
+    });
+});
+</script>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>1️⃣3️⃣ Add / Remove Elements</h2>
+
+<input id="itemInput" placeholder="Add item">
+<button id="addItem">Add</button>
+<ul id="itemList"></ul>
+
+<script>
+$(function () {
+    $("#addItem").click(function () {
+        var item = $("#itemInput").val();
+        $("#itemList").append("<li>" + item + "</li>");
+        $("#itemInput").val("");
+    });
+});
+</script>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>1️⃣4️⃣ AJAX (Interview Critical)</h2>
+
+<pre>
+$.ajax({
+    url: "/api",
+    method: "GET",
+    success: function(response) {
+        console.log(response);
+    }
+});
+</pre>
+
+<p>Used with PHP, Node, REST APIs</p>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>1️⃣5️⃣ jQuery vs JavaScript</h2>
+
+<table border="1" cellpadding="6">
+<tr>
+<th>JavaScript</th>
+<th>jQuery</th>
+</tr>
+<tr>
+<td>Language</td>
+<td>Library</td>
+</tr>
+<tr>
+<td>More code</td>
+<td>Less code</td>
+</tr>
+<tr>
+<td>Manual DOM</td>
+<td>Simplified DOM</td>
+</tr>
+</table>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>1️⃣6️⃣ Is jQuery Dead?</h2>
+<p>
+❌ No<br>
+✅ Less popular<br>
+Still very relevant for:
+</p>
+<ul>
+    <li>WordPress</li>
+    <li>Legacy projects</li>
+    <li>Interview rounds</li>
+</ul>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>1️⃣7️⃣ Fresher → Hero Learning Path</h2>
+<ul>
+    <li><b>Basics:</b> selectors, events, DOM</li>
+    <li><b>Intermediate:</b> animations, forms</li>
+    <li><b>Advanced:</b> AJAX, plugins</li>
+</ul>
+</section>
+
+<!-- ================================================= -->
+<section>
+<h2>1️⃣8️⃣ Mini Project (Must Practice)</h2>
+
+<input id="todoInput" placeholder="Todo">
+<button id="addTodo">Add Todo</button>
+<ul id="todoList"></ul>
+
+<script>
+$(function () {
+    $("#addTodo").click(function () {
+        var todo = $("#todoInput").val();
+        $("#todoList").append("<li>" + todo + "</li>");
+        $("#todoInput").val("");
+    });
+});
+</script>
+</section>
+
+<h2>🎉 Congratulations!</h2>
+<p>
+You now have a <b>complete jQuery master reference file</b>
+covering theory, practice, interview, and real-world usage.
+</p>
+
+</body>
+</html>
