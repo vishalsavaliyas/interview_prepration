@@ -206,7 +206,7 @@ p.greet();</code></pre>
     id: 'day20', title: 'Day 20: Advanced JS Recap', content: `
 <pre><code>async function fetchUser(id){
   try{
-    let res = await fetch("https://jsonplaceholder.typicode.com/users/${id}");
+    let res = await fetch("https://jsonplaceholder.typicode.com/users/1");
     let data = await res.json();
     console.log(data.name);
   }catch(err){ console.log(err.message);}
