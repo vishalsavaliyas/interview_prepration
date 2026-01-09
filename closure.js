@@ -55,3 +55,12 @@ The "Why" behind count error: In your original code, console.log(count) failed b
 Naming: Renamed counter to createCounter to follow the "Factory Function" naming convention, and used descriptive method names.
 */
 
+/*
+Feature 	          Benefit	                  Example Use Case
+Data Privacy	      Encapsulation	            Private state in a counter or stack
+Function Factories	Reusability	              Creating specific "adders" or "loggers"
+Memoization	        Performance	              Caching expensive calculation results
+Event Listeners	    Context	                  Keeping track of clicks or input values
+Async Callbacks	    Continuity	              Remembering IDs during a database fetch
+
+*/
