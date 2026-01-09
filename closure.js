@@ -8,9 +8,17 @@ function createCounter(initialValue = 0) {
 
   // Private helper functions (Internal logic)
   const logAction = (action) => console.log(`Action performed: ${action}`);
-
+  
+ // This was private before cn not access directly from outside scop
+  function myFunction(){
+  console.log("this is my function");
+}
+  
   //this is return object that is contain anonymous methods
   return {
+    // Reveal it here to make it accessible via myCounter.myFunction()
+    myFunction: myFunction,
+    
     // 1. Increment method
     increment: function() {
       count += 1;
@@ -41,6 +49,8 @@ function createCounter(initialValue = 0) {
 
 // Usage:
 const myCounter = createCounter(10);
+
+myCounter.myFunction(); // Now this works!
 
 console.log(`Initial Value: ${myCounter.getValue()}`); // 10
 console.log(`After Increment: ${myCounter.increment()}`); // 11
