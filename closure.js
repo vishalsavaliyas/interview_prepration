@@ -64,3 +64,64 @@ Event Listeners	    Context	                  Keeping track of clicks or input v
 Async Callbacks	    Continuity	              Remembering IDs during a database fetch
 
 */
+
+
+//2nd cluaser example
+/**
+ * Creates an async task handler using a closure.
+ */
+function createAsyncFetcher() {
+  // Private variables remembered by the closure
+  let isLoading = false;
+  let lastData = null;
+
+  // Returning an object with async methods
+  return {
+    fetchUserData: async function(userId) {
+      if (isLoading) {
+        console.log("Please wait, a request is already in progress...");
+        return;
+      }
+
+      isLoading = true; // State persists across the await boundary
+      console.log(`Fetching data for User: ${userId}...`);
+
+      try {
+        // The closure remembers 'userId' even after this function pauses here
+        const response = await fetch(`jsonplaceholder.typicode.com{userId}`);
+        lastData = await response.json();
+        
+        console.log("Success!", lastData.name);
+        return lastData;
+      } catch (error) {
+        console.error("Fetch failed:", error);
+      } finally {
+        isLoading = false; // Resetting state so next call can proceed
+      }
+    },
+
+    getStatus: () => ({ isLoading, lastData })
+  };
+}
+
+// Usage
+const userFetcher = createAsyncFetcher();
+
+// Call 1: Starts the task
+userFetcher.fetchUserData(1);
+
+// Call 2: Immediately tries to start another (blocked by the closure state)
+userFetcher.fetchUserData(2); 
+
+// Check state after a delay
+setTimeout(() => {
+  console.log("Final State:", userFetcher.getStatus());
+}, 2000);
+
+/**
+Why this is powerful:
+Async State Persistence: The isLoading variable lives in the closure. Even though the fetchUserData function "pauses" at the await line, it still has access to that exact same variable when the network request returns.
+Request Throttling: You can prevent duplicate API calls (or "race conditions") by checking the private isLoading flag before starting a new task.
+Modular Cleanup: In 2026, you can use the await using syntax for automatic resource disposal within async closures, ensuring memory is cleared once the task finishes.
+Encapsulation: External code cannot accidentally set isLoading = false because it is hidden inside the createAsyncFetcher scope. 
+*/
