@@ -11,6 +11,7 @@
 /*******************************************************
  * 1. PRIMITIVE VALUES
  * Primitive values are copied by VALUE automatically
+ * Shallow vs Deep has NOTHING to do with primitives
  *******************************************************/
 let x = 10;
 let y = x;
