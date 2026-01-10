@@ -1,3 +1,4 @@
+//my manualy logic change in some better way that handle also priitive data, object, array
 const flattenArray = (arr) => arr.flat(Infinity);
 
 function deepFlatten(arr) {
