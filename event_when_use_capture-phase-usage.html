@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Capture Phase – Why, Where & When to Use</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      line-height: 1.7;
+      color: #222;
+    }
+
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    section {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+
+    .note {
+      background: #e8f4fd;
+      padding: 12px;
+      border-left: 4px solid #3498db;
+      margin: 10px 0;
+    }
+
+    .important {
+      background: #eafaf1;
+      padding: 12px;
+      border-left: 4px solid #2ecc71;
+      margin: 10px 0;
+    }
+
+    .warn {
+      background: #fff3cd;
+      padding: 12px;
+      border-left: 4px solid #f1c40f;
+      margin: 10px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    th, td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #ecf0f1;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Capture Phase  
+<br><small>Why Needed, Where Used & When to Use</small></h1>
+
+<!-- INTRO -->
+<section>
+  <h2>1. What is Capture Phase?</h2>
+  <p>
+    <strong>Capture Phase</strong> is the first stage of event propagation
+    where the event travels from the <strong>top (document)</strong>
+    down to the <strong>target element</strong>.
+  </p>
+
+  <pre>
+Document
+ ↓
+Parent
+ ↓
+Child (Target)
+  </pre>
+
+  <div class="note">
+    Capture phase is also called <strong>Trickling Phase</strong>.
+  </div>
+</section>
+
+<!-- WHY NEEDED -->
+<section>
+  <h2>2. Why Do We Need Capture Phase?</h2>
+
+  <p>
+    By default, JavaScript uses <strong>event bubbling</strong>.
+    That means the child element runs first.
+  </p>
+
+  <div class="warn">
+    Sometimes this is a problem because the parent or system logic
+    needs to run <strong>before</strong> the child logic.
+  </div>
+
+  <h3>Problems Without Capture Phase</h3>
+  <ul>
+    <li>Security checks run too late</li>
+    <li>Invalid actions already executed</li>
+    <li>Analytics can be skipped</li>
+    <li>Global validation fails</li>
+  </ul>
+
+  <div class="important">
+    👉 Capture phase exists to <strong>intercept, validate, or block</strong>
+    events before the target element executes its logic.
+  </div>
+</section>
+
+<!-- WHAT CAPTURE DOES -->
+<section>
+  <h2>3. What Capture Phase Actually Does</h2>
+
+  <pre>
+User Click
+ ↓
+CAPTURE (Parent / System logic first)
+ ↓
+TARGET (Button logic)
+ ↓
+BUBBLE (Normal UI logic)
+  </pre>
+
+  <p>
+    Capture phase is used for:
+  </p>
+  <ul>
+    <li>Early validation</li>
+    <li>Security enforcement</li>
+    <li>Analytics & logging</li>
+    <li>Global rules</li>
+  </ul>
+</section>
+
+<!-- WHERE USED -->
+<section>
+  <h2>4. Where Capture Phase Is Used (Real-World)</h2>
+
+  <h3>🔐 A. Security & Permission Checks</h3>
+  <p>
+    Prevent unauthorized actions before button logic runs.
+  </p>
+
+  <pre>
+document.addEventListener("click", (e) => {
+  if (!isAdmin && e.target.classList.contains("delete")) {
+    e.preventDefault();
+    e.stopPropagation();
+    alert("Access Denied");
+  }
+}, true);
+  </pre>
+
+  <div class="note">
+    Parent blocks event BEFORE child executes.
+  </div>
+
+  <hr>
+
+  <h3>📊 B. Analytics & Event Tracking</h3>
+  <p>
+    Track clicks even if bubbling is stopped.
+  </p>
+
+  <pre>
+document.addEventListener("click", (e) => {
+  console.log("User clicked:", e.target);
+}, true);
+  </pre>
+
+  <div class="important">
+    Analytics tools rely heavily on capture phase.
+  </div>
+
+  <hr>
+
+  <h3>🧪 C. Global Form Validation</h3>
+
+  <pre>
+document.addEventListener("submit", (e) => {
+  if (!isValid(e.target)) {
+    e.preventDefault();
+    alert("Form Invalid");
+  }
+}, true);
+  </pre>
+
+  <p>
+    Stops invalid submission before form handler runs.
+  </p>
+
+  <hr>
+
+  <h3>🧱 D. Modal / Popup Control</h3>
+
+  <pre>
+document.addEventListener("click", () => closeModal(), true);
+
+modal.addEventListener("click", (e) => {
+  e.stopPropagation();
+});
+  </pre>
+
+  <p>
+    Capture detects outside click first.
+  </p>
+</section>
+
+<!-- WHEN TO USE -->
+<section>
+  <h2>5. When Should You Use Capture Phase?</h2>
+
+  <table>
+    <tr>
+      <th>Scenario</th>
+      <th>Use Capture?</th>
+    </tr>
+    <tr>
+      <td>Security / permission check</td>
+      <td>✅ Yes</td>
+    </tr>
+    <tr>
+      <td>Analytics / logging</td>
+      <td>✅ Yes</td>
+    </tr>
+    <tr>
+      <td>Global validation</td>
+      <td>✅ Yes</td>
+    </tr>
+    <tr>
+      <td>Intercept event early</td>
+      <td>✅ Yes</td>
+    </tr>
+    <tr>
+      <td>Normal UI click handling</td>
+      <td>❌ No</td>
+    </tr>
+    <tr>
+      <td>Event delegation</td>
+      <td>❌ No</td>
+    </tr>
+  </table>
+</section>
+
+<!-- WHEN NOT -->
+<section>
+  <h2>6. When NOT to Use Capture Phase</h2>
+
+  <ul>
+    <li>Normal button click handling</li>
+    <li>Dynamic lists (delegation)</li>
+    <li>High-frequency events (scroll, mousemove)</li>
+    <li>When bubbling already solves the problem</li>
+  </ul>
+
+  <div class="warn">
+    ⚠️ Overusing capture can reduce performance and readability.
+  </div>
+</section>
+
+<!-- COMPARISON -->
+<section>
+  <h2>7. Capture vs Bubbling (Interview Table)</h2>
+
+  <table>
+    <tr>
+      <th>Feature</th>
+      <th>Capture</th>
+      <th>Bubbling</th>
+    </tr>
+    <tr>
+      <td>Direction</td>
+      <td>Top → Down</td>
+      <td>Bottom → Up</td>
+    </tr>
+    <tr>
+      <td>Default</td>
+      <td>❌ No</td>
+      <td>✅ Yes</td>
+    </tr>
+    <tr>
+      <td>Early interception</td>
+      <td>✅ Yes</td>
+      <td>❌ No</td>
+    </tr>
+    <tr>
+      <td>Event Delegation</td>
+      <td>❌ No</td>
+      <td>✅ Yes</td>
+    </tr>
+  </table>
+</section>
+
+<!-- INTERVIEW ANSWER -->
+<section>
+  <h2>8. Interview-Perfect One-Line Answer</h2>
+
+  <pre>
+Capture phase is used when we want parent or system-level logic
+to execute before child logic, such as security checks,
+analytics tracking, or global validations.
+  </pre>
+</section>
+
+<!-- MEMORY -->
+<section>
+  <h2>9. Easy Memory Trick</h2>
+
+  <pre>
+CAPTURE = CONTROL FIRST
+BUBBLE  = HANDLE LATER
+  </pre>
+</section>
+
+<!-- SUMMARY -->
+<section>
+  <h2>10. Final Summary</h2>
+  <ul>
+    <li>Capture phase is NOT default</li>
+    <li>Used for early interception</li>
+    <li>Common in security & analytics</li>
+    <li>Bubbling handles most UI logic</li>
+    <li>Important interview concept</li>
+  </ul>
+</section>
+
+</body>
+</html>
