@@ -335,7 +335,27 @@ CAPTURE = CONTROL FIRST
 BUBBLE  = HANDLE LATER
   </pre>
 </section>
+<section>
+  <h2>5. Frameworks & Libraries (Hidden but Heavy Use)</h2>
+  <pre>
+Frameworks like:
 
+React (Synthetic events)
+
+Angular
+
+Vue
+
+UI libraries
+
+They use capture phase to:
+✔ Normalize behavior
+✔ Control event priority
+✔ Improve performance
+
+📌 You don’t see it — but it’s used internally.
+  </pre>
+</section>
 <!-- SUMMARY -->
 <section>
   <h2>10. Final Summary</h2>
