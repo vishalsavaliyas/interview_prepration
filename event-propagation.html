@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Event Bubbling & Capturing – Complete Interview Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      background: #f4f6f8;
+      margin: 0;
+      padding: 20px;
+      color: #222;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    h1 {
+      text-align: center;
+    }
+    section {
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    code {
+      color: #e6db74;
+    }
+    .note {
+      background: #e8f4fd;
+      padding: 10px;
+      border-left: 4px solid #3498db;
+      margin: 10px 0;
+    }
+    .warn {
+      background: #fff3cd;
+      padding: 10px;
+      border-left: 4px solid #f1c40f;
+      margin: 10px 0;
+    }
+    .important {
+      background: #eafaf1;
+      padding: 10px;
+      border-left: 4px solid #2ecc71;
+      margin: 10px 0;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    table, th, td {
+      border: 1px solid #ccc;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #ecf0f1;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Event Bubbling & Event Capturing  
+<br><small>Complete JavaScript Interview & Practical Guide</small></h1>
+
+<!-- INTRO -->
+<section>
+  <h2>1. What is an Event?</h2>
+  <p>
+    An <strong>event</strong> is an action that happens in the browser:
+  </p>
+  <ul>
+    <li>click</li>
+    <li>keydown</li>
+    <li>submit</li>
+    <li>mouseover</li>
+    <li>load</li>
+  </ul>
+  <p>
+    When an event occurs, the browser decides <strong>how the event travels through DOM elements</strong>.
+    This process is called <strong>Event Propagation</strong>.
+  </p>
+</section>
+
+<!-- EVENT PROPAGATION -->
+<section>
+  <h2>2. Event Propagation</h2>
+  <p>
+    Event Propagation defines the <strong>order</strong> in which elements receive an event.
+  </p>
+
+  <div class="important">
+    There are <strong>3 phases</strong> in event propagation.
+  </div>
+
+  <pre>
+1️⃣ Capturing Phase  (Top → Down)
+2️⃣ Target Phase     (Actual Element)
+3️⃣ Bubbling Phase   (Bottom → Up)
+  </pre>
+</section>
+
+<!-- DOM STRUCTURE -->
+<section>
+  <h2>3. DOM Structure Example</h2>
+
+  <pre>
+&lt;div id="grandparent"&gt;
+  &lt;div id="parent"&gt;
+    &lt;button id="child"&gt;Click Me&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+  </pre>
+
+  <h3>DOM Tree</h3>
+  <pre>
+Document
+ └── grandparent
+      └── parent
+           └── child (button)
+  </pre>
+</section>
+
+<!-- BUBBLING -->
+<section>
+  <h2>4. Event Bubbling (Default Behavior)</h2>
+
+  <p>
+    <strong>Event Bubbling</strong> means the event starts from the
+    <strong>target element</strong> and moves <strong>upward</strong> to its parents.
+  </p>
+
+  <div class="note">
+    👉 Bubbling is the <strong>default</strong> behavior in JavaScript.
+  </div>
+
+  <h3>Order</h3>
+  <pre>
+child → parent → grandparent → document
+  </pre>
+
+  <h3>Example: Event Bubbling</h3>
+  <pre>
+&lt;script&gt;
+document.getElementById("grandparent")
+  .addEventListener("click", () =&gt; {
+    console.log("Grandparent clicked");
+  });
+
+document.getElementById("parent")
+  .addEventListener("click", () =&gt; {
+    console.log("Parent clicked");
+  });
+
+document.getElementById("child")
+  .addEventListener("click", () =&gt; {
+    console.log("Child clicked");
+  });
+&lt;/script&gt;
+  </pre>
+
+  <h3>Output (Click on Button)</h3>
+  <pre>
+Child clicked
+Parent clicked
+Grandparent clicked
+  </pre>
+</section>
+
+<!-- CAPTURING -->
+<section>
+  <h2>5. Event Capturing (Trickling Phase)</h2>
+
+  <p>
+    <strong>Event Capturing</strong> means the event starts from the
+    <strong>top (document)</strong> and moves <strong>downward</strong> to the target.
+  </p>
+
+  <div class="warn">
+    Capturing does <strong>not</strong> happen by default.
+  </div>
+
+  <h3>How to Enable Capturing?</h3>
+  <p>
+    Pass <code>true</code> as the third argument in <code>addEventListener</code>.
+  </p>
+
+  <h3>Example: Event Capturing</h3>
+  <pre>
+&lt;script&gt;
+document.getElementById("grandparent")
+  .addEventListener("click", () =&gt; {
+    console.log("Grandparent clicked");
+  }, true);
+
+document.getElementById("parent")
+  .addEventListener("click", () =&gt; {
+    console.log("Parent clicked");
+  }, true);
+
+document.getElementById("child")
+  .addEventListener("click", () =&gt; {
+    console.log("Child clicked");
+  }, true);
+&lt;/script&gt;
+  </pre>
+
+  <h3>Output</h3>
+  <pre>
+Grandparent clicked
+Parent clicked
+Child clicked
+  </pre>
+</section>
+
+<!-- TARGET PHASE -->
+<section>
+  <h2>6. Target Phase</h2>
+
+  <p>
+    The <strong>Target Phase</strong> is when the event reaches the
+    <strong>actual element</strong> that was clicked.
+  </p>
+
+  <pre>
+CAPTURE → TARGET → BUBBLE
+        (Button)
+  </pre>
+</section>
+
+<!-- BOTH -->
+<section>
+  <h2>7. Capturing + Bubbling Together (Interview Favorite)</h2>
+
+  <pre>
+&lt;script&gt;
+document.getElementById("grandparent")
+  .addEventListener("click", () =&gt; {
+    console.log("Grandparent CAPTURE");
+  }, true);
+
+document.getElementById("parent")
+  .addEventListener("click", () =&gt; {
+    console.log("Parent CAPTURE");
+  }, true);
+
+document.getElementById("child")
+  .addEventListener("click", () =&gt; {
+    console.log("Child BUBBLE");
+  });
+
+document.getElementById("parent")
+  .addEventListener("click", () =&gt; {
+    console.log("Parent BUBBLE");
+  });
+
+document.getElementById("grandparent")
+  .addEventListener("click", () =&gt; {
+    console.log("Grandparent BUBBLE");
+  });
+&lt;/script&gt;
+  </pre>
+
+  <h3>Output</h3>
+  <pre>
+Grandparent CAPTURE
+Parent CAPTURE
+Child BUBBLE
+Parent BUBBLE
+Grandparent BUBBLE
+  </pre>
+</section>
+
+<!-- STOP PROPAGATION -->
+<section>
+  <h2>8. stopPropagation()</h2>
+
+  <p>
+    <code>stopPropagation()</code> stops the event from moving further
+    in capturing or bubbling.
+  </p>
+
+  <pre>
+document.getElementById("child")
+  .addEventListener("click", (e) =&gt; {
+    e.stopPropagation();
+    console.log("Child clicked only");
+  });
+  </pre>
+
+  <h3>Output</h3>
+  <pre>
+Child clicked only
+  </pre>
+</section>
+
+<!-- EVENT DELEGATION -->
+<section>
+  <h2>9. Event Delegation (VERY IMPORTANT)</h2>
+
+  <p>
+    <strong>Event Delegation</strong> means attaching one event listener
+    to a parent instead of many children.
+  </p>
+
+  <div class="important">
+    Event Delegation works because of <strong>Event Bubbling</strong>.
+  </div>
+
+  <h3>Example</h3>
+  <pre>
+&lt;ul id="list"&gt;
+  &lt;li&gt;Item 1&lt;/li&gt;
+  &lt;li&gt;Item 2&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;script&gt;
+document.getElementById("list")
+  .addEventListener("click", (e) =&gt; {
+    if (e.target.tagName === "LI") {
+      console.log(e.target.innerText);
+    }
+  });
+&lt;/script&gt;
+  </pre>
+</section>
+
+<!-- INTERVIEW -->
+<section>
+  <h2>10. Interview One-Line Answers</h2>
+
+  <table>
+    <tr>
+      <th>Question</th>
+      <th>Answer</th>
+    </tr>
+    <tr>
+      <td>Default event flow?</td>
+      <td>Bubbling</td>
+    </tr>
+    <tr>
+      <td>How to enable capturing?</td>
+      <td>Third argument = true</td>
+    </tr>
+    <tr>
+      <td>What does stopPropagation do?</td>
+      <td>Stops event propagation</td>
+    </tr>
+    <tr>
+      <td>Event delegation uses?</td>
+      <td>Bubbling</td>
+    </tr>
+    <tr>
+      <td>Capturing another name?</td>
+      <td>Trickling</td>
+    </tr>
+  </table>
+</section>
+
+<!-- DIAGRAM -->
+<section>
+  <h2>11. Final Diagram (Must Remember)</h2>
+
+  <pre>
+CAPTURE PHASE
+Document
+ ↓
+Grandparent
+ ↓
+Parent
+ ↓
+Target
+ ↑
+Parent
+ ↑
+Grandparent
+ ↑
+Document
+BUBBLE PHASE
+  </pre>
+</section>
+
+<!-- END -->
+<section>
+  <h2>12. Summary</h2>
+  <ul>
+    <li>Bubbling is default</li>
+    <li>Capturing needs true</li>
+    <li>Target phase is the clicked element</li>
+    <li>Delegation = Bubbling</li>
+    <li>Very common interview topic</li>
+  </ul>
+</section>
+
+</body>
+</html>
