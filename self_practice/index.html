@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Practice</title>
+  </head>
+  <body>
+    <div id="myFirstDiv"></div>
+    <div id="itemModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Add New Item</h2>
+        <form id="itemForm">
+          <label for="itemName">Item Name:</label>
+          <input type="text" id="itemName" required />
+          <label for="itemQuantity">Quantity:</label>
+          <input type="number" id="itemQuantity" required min="1" />
+          <button type="submit">Save Item</button>
+        </form>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
