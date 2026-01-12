@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Interactive Event Bubbling & Capturing Demo</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f6f8;
+      padding: 20px;
+    }
+
+    h1, h2 {
+      text-align: center;
+      color: #2c3e50;
+    }
+
+    .container {
+      display: flex;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .demo, .log {
+      flex: 1;
+      min-width: 300px;
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .box {
+      padding: 30px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 8px;
+    }
+
+    #grandparent {
+      background: #ffcccc;
+    }
+
+    #parent {
+      background: #ccffcc;
+      margin-top: 20px;
+    }
+
+    #child {
+      background: #ccccff;
+      border: none;
+      padding: 15px 30px;
+      font-size: 16px;
+      margin-top: 20px;
+      cursor: pointer;
+      border-radius: 6px;
+    }
+
+    button.control {
+      padding: 10px 15px;
+      margin: 5px;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background: #3498db;
+      color: white;
+    }
+
+    button.control:hover {
+      background: #2980b9;
+    }
+
+    pre {
+      background: #272822;
+      color: #f8f8f2;
+      padding: 15px;
+      border-radius: 6px;
+      height: 300px;
+      overflow-y: auto;
+    }
+
+    .note {
+      background: #e8f4fd;
+      padding: 10px;
+      border-left: 4px solid #3498db;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🎯 Interactive Event Bubbling & Capturing Demo</h1>
+<p style="text-align:center">
+  Click the <strong>Button</strong> and watch how events travel!
+</p>
+
+<div class="container">
+
+  <!-- DEMO AREA -->
+  <div class="demo">
+    <h2>DOM Structure</h2>
+
+    <div id="grandparent" class="box">
+      Grandparent
+      <div id="parent" class="box">
+        Parent
+        <button id="child">Child Button</button>
+      </div>
+    </div>
+
+    <h3>Controls</h3>
+    <button class="control" onclick="enableBubbling()">Enable Bubbling</button>
+    <button class="control" onclick="enableCapturing()">Enable Capturing</button>
+    <button class="control" onclick="enableBoth()">Enable Both</button>
+    <button class="control" onclick="enableStop()">Enable stopPropagation</button>
+    <button class="control" onclick="clearLog()">Clear Log</button>
+
+    <div class="note">
+      👉 Open browser console OR see logs on right panel
+    </div>
+  </div>
+
+  <!-- LOG AREA -->
+  <div class="log">
+    <h2>Event Log</h2>
+    <pre id="output"></pre>
+  </div>
+
+</div>
+
+<script>
+  const output = document.getElementById("output");
+  const gp = document.getElementById("grandparent");
+  const p = document.getElementById("parent");
+  const c = document.getElementById("child");
+
+  function log(msg) {
+    output.textContent += msg + "\n";
+  }
+
+  function clearListeners() {
+    gp.replaceWith(gp.cloneNode(true));
+    location.reload();
+  }
+
+  function clearLog() {
+    output.textContent = "";
+  }
+
+  /* ===========================
+     EVENT MODES
+  ============================ */
+
+  function enableBubbling() {
+    clearLog();
+
+    gp.addEventListener("click", () => log("Grandparent (BUBBLE)"));
+    p.addEventListener("click", () => log("Parent (BUBBLE)"));
+    c.addEventListener("click", () => log("Child (BUBBLE)"));
+
+    log("👉 Bubbling Enabled (Default)");
+  }
+
+  function enableCapturing() {
+    clearLog();
+
+    gp.addEventListener("click", () => log("Grandparent (CAPTURE)"), true);
+    p.addEventListener("click", () => log("Parent (CAPTURE)"), true);
+    c.addEventListener("click", () => log("Child (CAPTURE)"), true);
+
+    log("👉 Capturing Enabled");
+  }
+
+  function enableBoth() {
+    clearLog();
+
+    gp.addEventListener("click", () => log("Grandparent (CAPTURE)"), true);
+    p.addEventListener("click", () => log("Parent (CAPTURE)"), true);
+
+    c.addEventListener("click", () => log("Child (TARGET/BUBBLE)"));
+
+    p.addEventListener("click", () => log("Parent (BUBBLE)"));
+    gp.addEventListener("click", () => log("Grandparent (BUBBLE)"));
+
+    log("👉 Capturing + Bubbling Enabled");
+  }
+
+  function enableStop() {
+    clearLog();
+
+    gp.addEventListener("click", () => log("Grandparent"));
+    p.addEventListener("click", () => log("Parent"));
+
+    c.addEventListener("click", (e) => {
+      e.stopPropagation();
+      log("Child ONLY (stopPropagation)");
+    });
+
+    log("👉 stopPropagation Enabled");
+  }
+</script>
+
+</body>
+</html>
