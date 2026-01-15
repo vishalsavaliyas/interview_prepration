@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Jest Master Guide – Real World Testing (Beginner to Interview)</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+      color: #020617;
+      padding: 24px;
+      line-height: 1.8;
+    }
+    h1, h2, h3 {
+      color: #7c3aed;
+    }
+    pre {
+      background: #020617;
+      color: #e5e7eb;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 14px;
+    }
+    code {
+      background: #e5e7eb;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .real {
+      background: #f3e8ff;
+      border-left: 5px solid #7c3aed;
+      padding: 14px;
+      margin: 18px 0;
+    }
+    .question {
+      background: #fff7ed;
+      border-left: 5px solid #f97316;
+      padding: 14px;
+      margin: 18px 0;
+    }
+    .answer {
+      background: #ecfdf5;
+      border-left: 5px solid #10b981;
+      padding: 14px;
+      margin: 18px 0;
+    }
+    .danger {
+      background: #fef2f2;
+      border-left: 5px solid #ef4444;
+      padding: 14px;
+      margin: 18px 0;
+    }
+    hr {
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🧪 JEST – Real World Testing Master Guide</h1>
+<p><strong>Goal:</strong> Understand how testing is ACTUALLY done in companies.</p>
+
+<hr />
+
+<h2>🤔 WHAT IS JEST (REAL MEANING)</h2>
+
+<div class="real">
+<strong>Jest</strong> is a <b>JavaScript testing framework</b> used to:
+<ul>
+  <li>Check if your code works</li>
+  <li>Prevent bugs before production</li>
+  <li>Ensure changes don’t break old features</li>
+</ul>
+</div>
+
+<div class="question">
+❓ Why do companies care about Jest?
+</div>
+<div class="answer">
+Because broken production = money + reputation loss.
+</div>
+
+<hr />
+
+<h2>🏗️ WHAT DO COMPANIES ACTUALLY TEST?</h2>
+
+<div class="real">
+<ul>
+  <li>Utility functions (MOST COMMON)</li>
+  <li>Business logic</li>
+  <li>React components (with RTL)</li>
+  <li>API behavior (mocked)</li>
+</ul>
+</div>
+
+<div class="danger">
+❌ Companies DO NOT test CSS colors, animations, or trivial JSX
+</div>
+
+<hr />
+
+<h2>1️⃣ BASIC JEST TEST (FOUNDATION)</h2>
+
+<h3>📌 Code to Test</h3>
+
+<pre>
+// math.js
+export function add(a, b) {
+  return a + b;
+}
+</pre>
+
+<h3>📌 Test File</h3>
+
+<pre>
+// math.test.js
+import { add } from "./math";
+
+test("adds two numbers", () => {
+  expect(add(2, 3)).toBe(5);
+});
+</pre>
+
+<div class="real">
+✔ test() = test case  
+✔ expect() = actual result  
+✔ toBe() = matcher
+</div>
+
+<hr />
+
+<h2>2️⃣ MULTIPLE TEST CASES (REAL STYLE)</h2>
+
+<pre>
+describe("add function", () => {
+  test("positive numbers", () => {
+    expect(add(2, 2)).toBe(4);
+  });
+
+  test("negative numbers", () => {
+    expect(add(-1, -1)).toBe(-2);
+  });
+});
+</pre>
+
+<div class="question">
+❓ Why use describe?
+</div>
+<div class="answer">
+To group related tests for readability and reporting.
+</div>
+
+<hr />
+
+<h2>3️⃣ TESTING REAL BUSINESS LOGIC</h2>
+
+<h3>📌 Production Code</h3>
+
+<pre>
+// discount.js
+export function getDiscount(price) {
+  if (price > 1000) return price * 0.1;
+  return 0;
+}
+</pre>
+
+<h3>📌 Test</h3>
+
+<pre>
+import { getDiscount } from "./discount";
+
+test("discount applied for high price", () => {
+  expect(getDiscount(2000)).toBe(200);
+});
+
+test("no discount for low price", () => {
+  expect(getDiscount(500)).toBe(0);
+});
+</pre>
+
+<div class="real">
+This is EXACTLY what companies expect you to test.
+</div>
+
+<hr />
+
+<h2>4️⃣ JEST MATCHERS YOU MUST KNOW</h2>
+
+<pre>
+toBe()        // exact match
+toEqual()    // objects & arrays
+toBeTruthy()
+toBeFalsy()
+toContain()
+toHaveLength()
+</pre>
+
+<div class="question">
+❓ Difference between toBe & toEqual?
+</div>
+<div class="answer">
+toBe → primitive comparison<br />
+toEqual → deep object comparison
+</div>
+
+<hr />
+
+<h2>5️⃣ MOCK FUNCTIONS (VERY IMPORTANT)</h2>
+
+<h3>📌 Real Problem</h3>
+<p>You don’t want to call real APIs or DB in tests.</p>
+
+<h3>📌 Jest Mock</h3>
+
+<pre>
+const mockFn = jest.fn();
+
+mockFn("hello");
+
+expect(mockFn).toHaveBeenCalled();
+expect(mockFn).toHaveBeenCalledWith("hello");
+</pre>
+
+<div class="real">
+✔ Used for API calls  
+✔ Used for event handlers  
+✔ Used for callbacks
+</div>
+
+<hr />
+
+<h2>6️⃣ MOCKING REAL FUNCTION DEPENDENCY</h2>
+
+<pre>
+function saveUser(api) {
+  api.post("/user");
+}
+</pre>
+
+<pre>
+test("saveUser calls API", () => {
+  const api = { post: jest.fn() };
+  saveUser(api);
+  expect(api.post).toHaveBeenCalledWith("/user");
+});
+</pre>
+
+<div class="question">
+❓ Why mock api?
+</div>
+<div class="answer">
+To test logic, not external services.
+</div>
+
+<hr />
+
+<h2>7️⃣ ASYNC TESTING (REAL LIFE)</h2>
+
+<pre>
+test("async data", async () => {
+  const data = await Promise.resolve(5);
+  expect(data).toBe(5);
+});
+</pre>
+
+<div class="real">
+Used heavily for API & async logic.
+</div>
+
+<hr />
+
+<h2>8️⃣ JEST WITH REACT (MENTAL MODEL)</h2>
+
+<div class="real">
+Jest + React Testing Library is used to:
+<ul>
+  <li>Render component</li>
+  <li>Find elements</li>
+  <li>Simulate user behavior</li>
+</ul>
+</div>
+
+<div class="danger">
+❌ Jest alone is NOT used for DOM testing
+</div>
+
+<hr />
+
+<h2>🎯 INTERVIEW QUESTIONS (VERY COMMON)</h2>
+
+<div class="question">
+❓ Why testing is important?
+</div>
+<div class="answer">
+To prevent regression bugs and ensure reliability.
+</div>
+
+<div class="question">
+❓ What should not be tested?
+</div>
+<div class="answer">
+Implementation details and UI styles.
+</div>
+
+<div class="question">
+❓ What is mocking?
+</div>
+<div class="answer">
+Replacing real dependencies with fake ones.
+</div>
+
+<hr />
+
+<h2>💡 FINAL INTERVIEW ONE-LINER</h2>
+
+<p>
+<strong>
+Jest is a testing framework used to verify business logic, prevent regressions,
+and ensure code reliability using unit and integration tests.
+</strong>
+</p>
+
+<hr />
+
+<h2>📌 HOW TO PRACTICE JEST (OFFLINE)</h2>
+
+<ul>
+  <li>Write logic functions</li>
+  <li>Write tests for edge cases</li>
+  <li>Explain test logic aloud</li>
+</ul>
+
+</body>
+</html>
