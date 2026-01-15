@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Machine Coding – Real World Tasks with Solutions</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+      color: #020617;
+      padding: 24px;
+      line-height: 1.8;
+    }
+    h1, h2, h3 {
+      color: #1d4ed8;
+    }
+    pre {
+      background: #020617;
+      color: #e5e7eb;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 14px;
+    }
+    code {
+      background: #e5e7eb;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .task {
+      background: #eff6ff;
+      border-left: 5px solid #2563eb;
+      padding: 16px;
+      margin: 24px 0;
+    }
+    .expect {
+      background: #fff7ed;
+      border-left: 5px solid #f97316;
+      padding: 16px;
+      margin: 24px 0;
+    }
+    .solution {
+      background: #ecfdf5;
+      border-left: 5px solid #10b981;
+      padding: 16px;
+      margin: 24px 0;
+    }
+    .tip {
+      background: #fef2f2;
+      border-left: 5px solid #ef4444;
+      padding: 16px;
+      margin: 24px 0;
+    }
+    hr {
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>⚛️ React Machine Coding Tasks – Real World Based</h1>
+<p><strong>Based on:</strong> Lazy Loading, Suspense, Memoization, React 19</p>
+
+<hr />
+
+<h2>🏗️ Scenario Used in All Tasks</h2>
+
+<div class="task">
+You are building an <strong>Admin Dashboard</strong> with:
+<ul>
+  <li>Home page</li>
+  <li>Users list</li>
+  <li>Heavy analytics dashboard</li>
+  <li>Forms</li>
+</ul>
+</div>
+
+<hr />
+
+<h2>🧩 TASK 1 – Lazy Load Heavy Page</h2>
+
+<div class="task">
+<strong>Problem:</strong><br />
+The <code>AnalyticsDashboard</code> component is very heavy and should load
+only when user clicks the button.
+</div>
+
+<div class="expect">
+<strong>Interviewer Expects:</strong>
+<ul>
+  <li>Use <code>React.lazy</code></li>
+  <li>Wrap with <code>Suspense</code></li>
+  <li>Show loader</li>
+</ul>
+</div>
+
+<div class="solution">
+<strong>Solution:</strong>
+<pre>
+const AnalyticsDashboard = React.lazy(
+  () => import("./AnalyticsDashboard")
+);
+
+function App() {
+  const [show, setShow] = React.useState(false);
+
+  return (
+    &lt;&gt;
+      &lt;button onClick={() => setShow(true)}&gt;
+        Open Analytics
+      &lt;/button&gt;
+
+      &lt;Suspense fallback={&lt;p&gt;Loading Analytics...&lt;/p&gt;}&gt;
+        {show && &lt;AnalyticsDashboard /&gt;}
+      &lt;/Suspense&gt;
+    &lt;/&gt;
+  );
+}
+</pre>
+</div>
+
+<div class="tip">
+❗ Interview Tip: Mention “This reduces initial bundle size”
+</div>
+
+<hr />
+
+<h2>🧩 TASK 2 – Prevent Unnecessary Re-render</h2>
+
+<div class="task">
+<strong>Problem:</strong><br />
+A <code>UserCard</code> component re-renders even when its props don’t change.
+</div>
+
+<div class="solution">
+<pre>
+const UserCard = React.memo(function UserCard({ name }) {
+  console.log("Rendered:", name);
+  return &lt;div&gt;{name}&lt;/div&gt;;
+});
+</pre>
+</div>
+
+<div class="tip">
+Explain: React.memo skips re-render if props are same
+</div>
+
+<hr />
+
+<h2>🧩 TASK 3 – Optimize Heavy Calculation</h2>
+
+<div class="task">
+<strong>Problem:</strong><br />
+Filtering 10,000 users on every render causes UI lag.
+</div>
+
+<div class="solution">
+<pre>
+const activeUsers = React.useMemo(() => {
+  return users.filter(u => u.active);
+}, [users]);
+</pre>
+</div>
+
+<div class="tip">
+Say: “useMemo avoids recalculating on every render”
+</div>
+
+<hr />
+
+<h2>🧩 TASK 4 – Fix Function Re-creation Issue</h2>
+
+<div class="task">
+<strong>Problem:</strong><br />
+Child component re-renders because function prop changes.
+</div>
+
+<div class="solution">
+<pre>
+const handleDelete = React.useCallback(() => {
+  console.log("Delete clicked");
+}, []);
+</pre>
+</div>
+
+<div class="tip">
+Explain: useCallback returns same function reference
+</div>
+
+<hr />
+
+<h2>🧩 TASK 5 – React 19 use() Concept Question</h2>
+
+<div class="task">
+<strong>Question:</strong><br />
+How would you fetch data without <code>useEffect</code> in React 19?
+</div>
+
+<div class="solution">
+<pre>
+function UserProfile() {
+  const user = use(USER_PROMISE);
+  return &lt;h2&gt;{user.name}&lt;/h2&gt;;
+}
+</pre>
+</div>
+
+<div class="tip">
+Mention: Suspense handles loading automatically
+</div>
+
+<hr />
+
+<h2>🧩 TASK 6 – Server Action Form</h2>
+
+<div class="task">
+<strong>Problem:</strong><br />
+Submit form data securely without API & fetch.
+</div>
+
+<div class="solution">
+<pre>
+&lt;form action={createUser}&gt;
+  &lt;input name="email" /&gt;
+  &lt;button&gt;Create&lt;/button&gt;
+&lt;/form&gt;
+</pre>
+
+<pre>
+"use server";
+
+export async function createUser(formData) {
+  const email = formData.get("email");
+}
+</pre>
+</div>
+
+<div class="tip">
+Say: “Runs only on server, more secure”
+</div>
+
+<hr />
+
+<h2>🧩 TASK 7 – Combined Real Interview Task</h2>
+
+<div class="task">
+<strong>Build:</strong>
+<ul>
+  <li>Lazy-loaded dashboard</li>
+  <li>Memoized cards</li>
+  <li>Optimized filtering</li>
+</ul>
+Explain WHY each optimization is used.
+</div>
+
+<div class="expect">
+Interviewer checks your <strong>thinking</strong>, not just code.
+</div>
+
+<hr />
+
+<h2>🎯 HOW TO PRACTICE</h2>
+
+<ul>
+  <li>Read task</li>
+  <li>Explain solution aloud</li>
+  <li>Then code</li>
+</ul>
+
+<hr />
+
+<h2>💡 FINAL INTERVIEW LINE</h2>
+
+<p>
+<strong>
+I focus on performance, scalability, and clean architecture using
+lazy loading, memoization, and modern React features.
+</strong>
+</p>
+
+</body>
+</html>
