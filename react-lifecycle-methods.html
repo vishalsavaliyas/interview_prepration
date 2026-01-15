@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Lifecycle Methods – Real World Master Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f8fafc;
+      color: #020617;
+      padding: 24px;
+      line-height: 1.8;
+    }
+    h1, h2, h3 {
+      color: #0f766e;
+    }
+    pre {
+      background: #020617;
+      color: #e5e7eb;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-size: 14px;
+    }
+    code {
+      background: #e5e7eb;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .real {
+      background: #ecfeff;
+      border-left: 5px solid #0f766e;
+      padding: 14px;
+      margin: 18px 0;
+    }
+    .question {
+      background: #fff7ed;
+      border-left: 5px solid #f97316;
+      padding: 14px;
+      margin: 18px 0;
+    }
+    .answer {
+      background: #ecfdf5;
+      border-left: 5px solid #10b981;
+      padding: 14px;
+      margin: 18px 0;
+    }
+    .danger {
+      background: #fef2f2;
+      border-left: 5px solid #ef4444;
+      padding: 14px;
+      margin: 18px 0;
+    }
+    hr {
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🔁 React Lifecycle Methods – Real World Guide</h1>
+<p><strong>Goal:</strong> Understand how components are born, updated, and destroyed.</p>
+
+<hr />
+
+<h2>🤔 WHAT ARE LIFECYCLE METHODS?</h2>
+
+<div class="real">
+<strong>Lifecycle methods</strong> are special methods that run
+<strong>at specific stages</strong> of a React component’s life.
+</div>
+
+<div class="question">
+❓ Why does React need lifecycle methods?
+</div>
+<div class="answer">
+To let developers run logic when a component loads, updates, or unmounts.
+</div>
+
+<hr />
+
+<h2>🏗️ COMPONENT LIFE IN REALITY</h2>
+
+<div class="real">
+Every React component goes through 3 phases:
+<ul>
+  <li><strong>Mounting</strong> → component appears on screen</li>
+  <li><strong>Updating</strong> → props/state change</li>
+  <li><strong>Unmounting</strong> → component removed</li>
+</ul>
+</div>
+
+<hr />
+
+<h2>1️⃣ MOUNTING PHASE (Component is Created)</h2>
+
+<h3>📌 Common Lifecycle Methods</h3>
+
+<pre>
+constructor()
+render()
+componentDidMount()
+</pre>
+
+<h3>📌 Real Example</h3>
+
+<pre>
+class UserProfile extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { user: null };
+  }
+
+  componentDidMount() {
+    // API calls
+    // subscriptions
+    // timers
+  }
+
+  render() {
+    return &lt;div&gt;User Profile&lt;/div&gt;;
+  }
+}
+</pre>
+
+<div class="real">
+✔ componentDidMount is used for:
+<ul>
+  <li>API calls</li>
+  <li>Subscriptions</li>
+  <li>Event listeners</li>
+</ul>
+</div>
+
+<div class="question">
+❓ Why NOT call API in constructor?
+</div>
+<div class="answer">
+Because component is not mounted yet.
+</div>
+
+<hr />
+
+<h2>2️⃣ UPDATING PHASE (State / Props Change)</h2>
+
+<h3>📌 Lifecycle Methods</h3>
+
+<pre>
+shouldComponentUpdate()
+render()
+componentDidUpdate()
+</pre>
+
+<h3>📌 Real Example</h3>
+
+<pre>
+componentDidUpdate(prevProps, prevState) {
+  if (prevProps.userId !== this.props.userId) {
+    // fetch new user data
+  }
+}
+</pre>
+
+<div class="question">
+❓ Why check previous props?
+</div>
+<div class="answer">
+To avoid infinite loops.
+</div>
+
+<div class="danger">
+❌ Calling setState blindly inside componentDidUpdate causes infinite render
+</div>
+
+<hr />
+
+<h2>3️⃣ UNMOUNTING PHASE (Component Removed)</h2>
+
+<h3>📌 Lifecycle Method</h3>
+
+<pre>
+componentWillUnmount()
+</pre>
+
+<h3>📌 Real Example</h3>
+
+<pre>
+componentWillUnmount() {
+  clearInterval(this.timer);
+  window.removeEventListener("resize", this.handleResize);
+}
+</pre>
+
+<div class="real">
+✔ Used for cleanup:
+<ul>
+  <li>Timers</li>
+  <li>Subscriptions</li>
+  <li>Event listeners</li>
+</ul>
+</div>
+
+<hr />
+
+<h2>4️⃣ RARE & ADVANCED LIFECYCLE METHODS</h2>
+
+<h3>📌 shouldComponentUpdate</h3>
+
+<pre>
+shouldComponentUpdate(nextProps) {
+  return nextProps.value !== this.props.value;
+}
+</pre>
+
+<div class="real">
+Manual performance optimization (mostly replaced by React.memo).
+</div>
+
+<hr />
+
+<h2>5️⃣ DEPRECATED LIFECYCLE METHODS (INTERVIEW ALERT)</h2>
+
+<div class="danger">
+❌ componentWillMount  
+❌ componentWillReceiveProps  
+❌ componentWillUpdate
+</div>
+
+<div class="question">
+❓ Why deprecated?
+</div>
+<div class="answer">
+They caused bugs with async rendering.
+</div>
+
+<hr />
+
+<h2>6️⃣ LIFECYCLE METHODS vs HOOKS (MOST IMPORTANT)</h2>
+
+<table border="1" cellpadding="8" cellspacing="0">
+  <tr>
+    <th>Class Lifecycle</th>
+    <th>Hook Equivalent</th>
+  </tr>
+  <tr>
+    <td>componentDidMount</td>
+    <td>useEffect(() => {}, [])</td>
+  </tr>
+  <tr>
+    <td>componentDidUpdate</td>
+    <td>useEffect(() => {}, [deps])</td>
+  </tr>
+  <tr>
+    <td>componentWillUnmount</td>
+    <td>cleanup function in useEffect</td>
+  </tr>
+</table>
+
+<h3>📌 Hook Example</h3>
+
+<pre>
+useEffect(() => {
+  // mount logic
+
+  return () => {
+    // cleanup logic
+  };
+}, []);
+</pre>
+
+<div class="real">
+Hooks combine multiple lifecycle phases into one API.
+</div>
+
+<hr />
+
+<h2>7️⃣ REAL INTERVIEW QUESTIONS</h2>
+
+<div class="question">
+❓ When is componentDidMount called?
+</div>
+<div class="answer">
+After first render, when component is mounted to DOM.
+</div>
+
+<div class="question">
+❓ Where do you clean subscriptions?
+</div>
+<div class="answer">
+componentWillUnmount or useEffect cleanup.
+</div>
+
+<div class="question">
+❓ Do we still use class components?
+</div>
+<div class="answer">
+Rarely. Mostly for legacy codebases.
+</div>
+
+<hr />
+
+<h2>8️⃣ WHAT COMPANIES EXPECT TODAY</h2>
+
+<div class="real">
+✔ Strong understanding of lifecycle concepts  
+✔ Ability to map lifecycle → hooks  
+✔ Awareness of deprecated methods  
+✔ Cleanup handling
+</div>
+
+<hr />
+
+<h2>💡 FINAL INTERVIEW ONE-LINER</h2>
+
+<p>
+<strong>
+React lifecycle methods define what happens when a component mounts,
+updates, and unmounts, and today they are mostly handled using hooks like useEffect.
+</strong>
+</p>
+
+<hr />
+
+<h2>📌 HOW TO PRACTICE</h2>
+
+<ul>
+  <li>Visualize mount → update → unmount</li>
+  <li>Map each lifecycle to useEffect</li>
+  <li>Explain cleanup clearly</li>
+</ul>
+
+</body>
+</html>
