@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Memoization – React.memo, useMemo & useCallback</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9fafb;
+      color: #1f2937;
+      padding: 20px;
+      line-height: 1.6;
+    }
+    h1, h2, h3 {
+      color: #0f766e;
+    }
+    code {
+      background: #e5e7eb;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    pre {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+    th, td {
+      border: 1px solid #d1d5db;
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #ecfeff;
+    }
+    .box {
+      background: #ecfeff;
+      border-left: 5px solid #0f766e;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    .warning {
+      background: #fff7ed;
+      border-left: 5px solid #f97316;
+      padding: 15px;
+      margin: 15px 0;
+    }
+    .success {
+      background: #ecfdf5;
+      border-left: 5px solid #10b981;
+      padding: 15px;
+      margin: 15px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🧠 Memoization in React</h1>
+<p><strong>Level:</strong> Fresher → Interview Ready</p>
+
+<hr />
+
+<h2>🤔 What is Memoization?</h2>
+
+<p>
+<strong>Memoization</strong> means remembering the result of an operation so that
+it does not need to be calculated again.
+</p>
+
+<div class="box">
+If input is same → reuse output → skip recalculation
+</div>
+
+<hr />
+
+<h2>🧑‍🎓 Real-Life Example</h2>
+
+<p>
+You calculate <code>2 + 2 = 4</code>.  
+Next time someone asks <code>2 + 2</code>, you instantly answer <strong>4</strong>.
+</p>
+
+<p><strong>This remembering = Memoization</strong></p>
+
+<hr />
+
+<h2>🚨 Why Memoization is Needed in React?</h2>
+
+<ul>
+  <li>React components re-render frequently</li>
+  <li>Heavy calculations run again and again</li>
+  <li>Functions are recreated on every render</li>
+</ul>
+
+<div class="warning">
+Without memoization → unnecessary re-renders → poor performance
+</div>
+
+<hr />
+
+<h2>🧩 Memoization Tools in React</h2>
+
+<table>
+  <tr>
+    <th>Tool</th>
+    <th>Used For</th>
+  </tr>
+  <tr>
+    <td>React.memo</td>
+    <td>Memoize component</td>
+  </tr>
+  <tr>
+    <td>useMemo</td>
+    <td>Memoize value / calculation</td>
+  </tr>
+  <tr>
+    <td>useCallback</td>
+    <td>Memoize function</td>
+  </tr>
+</table>
+
+<hr />
+
+<h2>1️⃣ React.memo – Memoize Component</h2>
+
+<h3>❌ Without React.memo</h3>
+
+<pre>
+function Child({ name }) {
+  console.log("Child rendered");
+  return &lt;h3&gt;{name}&lt;/h3&gt;;
+}
+</pre>
+
+<p>
+Child re-renders even if <code>name</code> does not change ❌
+</p>
+
+<h3>✅ With React.memo</h3>
+
+<pre>
+const Child = React.memo(function Child({ name }) {
+  console.log("Child rendered");
+  return &lt;h3&gt;{name}&lt;/h3&gt;;
+});
+</pre>
+
+<div class="success">
+Child renders only when props change
+</div>
+
+<hr />
+
+<h2>2️⃣ useMemo – Memoize Value</h2>
+
+<h3>❌ Problem</h3>
+
+<pre>
+const result = expensiveCalculation(number);
+</pre>
+
+<p>Runs on every render ❌</p>
+
+<h3>✅ Solution: useMemo</h3>
+
+<pre>
+const result = useMemo(() => {
+  return expensiveCalculation(number);
+}, [number]);
+</pre>
+
+<div class="success">
+Recalculates only when <code>number</code> changes
+</div>
+
+<h3>📌 Simple Example</h3>
+
+<pre>
+const square = useMemo(() => {
+  console.log("Calculating...");
+  return count * count;
+}, [count]);
+</pre>
+
+<hr />
+
+<h2>3️⃣ useCallback – Memoize Function</h2>
+
+<h3>❌ Problem</h3>
+
+<pre>
+const handleClick = () => {
+  console.log("Clicked");
+};
+</pre>
+
+<p>New function created on every render ❌</p>
+
+<h3>✅ Solution</h3>
+
+<pre>
+const handleClick = useCallback(() => {
+  console.log("Clicked");
+}, []);
+</pre>
+
+<div class="success">
+Same function reference reused
+</div>
+
+<h3>📌 With Child Component</h3>
+
+<pre>
+const Child = React.memo(({ onClick }) => {
+  console.log("Child rendered");
+  return &lt;button onClick={onClick}&gt;Click&lt;/button&gt;;
+});
+</pre>
+
+<hr />
+
+<h2>🧠 React.memo vs useMemo vs useCallback</h2>
+
+<table>
+  <tr>
+    <th>Feature</th>
+    <th>React.memo</th>
+    <th>useMemo</th>
+    <th>useCallback</th>
+  </tr>
+  <tr>
+    <td>Memoizes</td>
+    <td>Component</td>
+    <td>Value</td>
+    <td>Function</td>
+  </tr>
+  <tr>
+    <td>Prevents</td>
+    <td>Re-render</td>
+    <td>Re-calculation</td>
+    <td>Re-creation</td>
+  </tr>
+  <tr>
+    <td>Used</td>
+    <td>Outside component</td>
+    <td>Inside component</td>
+    <td>Inside component</td>
+  </tr>
+</table>
+
+<hr />
+
+<h2>⚠️ Common Mistakes (Interview Favorite)</h2>
+
+<div class="warning">
+❌ Overusing memoization without performance issue
+</div>
+
+<div class="warning">
+❌ Wrong dependency array
+<pre>
+useMemo(() => value, []) // wrong if value depends on props/state
+</pre>
+</div>
+
+<hr />
+
+<h2>✅ Best Practices</h2>
+
+<div class="success">
+<strong>Use memoization when:</strong>
+<ul>
+  <li>Heavy calculations</li>
+  <li>Large lists</li>
+  <li>Frequent re-renders</li>
+</ul>
+</div>
+
+<div class="warning">
+<strong>Avoid memoization when:</strong>
+<ul>
+  <li>Small components</li>
+  <li>Simple UI</li>
+  <li>No performance issue</li>
+</ul>
+</div>
+
+<hr />
+
+<h2>🧑‍🎓 Memory Trick</h2>
+
+<div class="box">
+memo → remember<br />
+useMemo → remember value<br />
+useCallback → remember function<br />
+React.memo → remember component
+</div>
+
+<hr />
+
+<h2>🎯 One-Line Interview Answer</h2>
+
+<p>
+<strong>
+Memoization is an optimization technique that prevents unnecessary recalculation
+and re-rendering by caching previous results.
+</strong>
+</p>
+
+</body>
+</html>
