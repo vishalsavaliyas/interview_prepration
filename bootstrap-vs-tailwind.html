@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Bootstrap vs Tailwind CSS – Interview Study Guide</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.7;
+      background: #f9fafb;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      background: #0f172a;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    section {
+      background: #fff;
+      margin: 20px;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: #0f172a;
+      border-bottom: 2px solid #e5e7eb;
+      padding-bottom: 5px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 15px 0;
+    }
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+    th, td {
+      padding: 10px;
+      text-align: left;
+    }
+    th {
+      background: #f1f5f9;
+    }
+    code {
+      background: #f3f4f6;
+      padding: 2px 5px;
+      border-radius: 4px;
+      font-family: Consolas, monospace;
+    }
+    pre {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .highlight {
+      background: #e0f2fe;
+      padding: 10px;
+      border-left: 4px solid #0284c7;
+      margin: 10px 0;
+    }
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #0f172a;
+      color: #fff;
+      margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bootstrap vs Tailwind CSS</h1>
+  <p>Complete Interview & Revision Guide</p>
+</header>
+
+<section>
+  <h2>1. Core Philosophy (MOST IMPORTANT)</h2>
+  <p><strong>Bootstrap</strong> is <b>component-based</b>.  
+     <br><strong>Tailwind CSS</strong> is <b>utility-first</b>.</p>
+
+  <div class="highlight">
+    <b>Interview Line:</b><br/>
+    Bootstrap gives ready-made UI components,  
+    Tailwind gives low-level utility classes to build custom UI.
+  </div>
+</section>
+
+<section>
+  <h2>2. Code Style Difference</h2>
+
+  <h3>Bootstrap Button</h3>
+  <pre><code>&lt;button class="btn btn-primary btn-lg"&gt;
+  Submit
+&lt;/button&gt;</code></pre>
+
+  <h3>Tailwind Button</h3>
+  <pre><code>&lt;button class="bg-blue-500 text-white px-4 py-2 rounded-lg text-lg"&gt;
+  Submit
+&lt;/button&gt;</code></pre>
+
+  <div class="highlight">
+    Tailwind shows exact styling in HTML,  
+    Bootstrap hides styling inside predefined classes.
+  </div>
+</section>
+
+<section>
+  <h2>3. Customization & Design Freedom</h2>
+  <table>
+    <tr>
+      <th>Aspect</th>
+      <th>Bootstrap</th>
+      <th>Tailwind</th>
+    </tr>
+    <tr>
+      <td>Custom Design</td>
+      <td>Limited</td>
+      <td>Very High</td>
+    </tr>
+    <tr>
+      <td>Unique UI</td>
+      <td>Hard</td>
+      <td>Easy</td>
+    </tr>
+    <tr>
+      <td>Overrides</td>
+      <td>Heavy CSS overrides</td>
+      <td>No overrides needed</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>4. Learning Curve</h2>
+  <table>
+    <tr>
+      <th>Scenario</th>
+      <th>Best Choice</th>
+    </tr>
+    <tr>
+      <td>Beginner</td>
+      <td>Bootstrap</td>
+    </tr>
+    <tr>
+      <td>Modern React Developer</td>
+      <td>Tailwind</td>
+    </tr>
+    <tr>
+      <td>Rapid Prototype</td>
+      <td>Bootstrap</td>
+    </tr>
+    <tr>
+      <td>Design System</td>
+      <td>Tailwind</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>5. Performance & CSS Size</h2>
+  <ul>
+    <li><b>Bootstrap:</b> Includes many unused styles</li>
+    <li><b>Tailwind:</b> Removes unused classes using PurgeCSS</li>
+  </ul>
+
+  <div class="highlight">
+    <b>Interview Answer:</b>  
+    Tailwind produces smaller CSS bundles in production.
+  </div>
+</section>
+
+<section>
+  <h2>6. Responsive Design</h2>
+
+  <h3>Bootstrap</h3>
+  <pre><code>&lt;div class="col-md-6 col-lg-4"&gt;&lt;/div&gt;</code></pre>
+
+  <h3>Tailwind</h3>
+  <pre><code>&lt;div class="w-full md:w-1/2 lg:w-1/3"&gt;&lt;/div&gt;</code></pre>
+
+  <p>
+    Bootstrap uses predefined grid rules.  
+    Tailwind uses mobile-first utility classes.
+  </p>
+</section>
+
+<section>
+  <h2>7. Team & Project Suitability</h2>
+  <table>
+    <tr>
+      <th>Use Case</th>
+      <th>Preferred</th>
+    </tr>
+    <tr>
+      <td>Large team, fast UI</td>
+      <td>Bootstrap</td>
+    </tr>
+    <tr>
+      <td>Custom design product</td>
+      <td>Tailwind</td>
+    </tr>
+    <tr>
+      <td>Startup / SaaS</td>
+      <td>Tailwind</td>
+    </tr>
+  </table>
+</section>
+
+<section>
+  <h2>8. Common Interview Questions</h2>
+
+  <p><b>Q: Why Tailwind over Bootstrap?</b></p>
+  <ul>
+    <li>More control</li>
+    <li>No override issues</li>
+    <li>Smaller CSS</li>
+    <li>Scales well</li>
+  </ul>
+
+  <p><b>Q: When should Bootstrap be used?</b></p>
+  <ul>
+    <li>Admin panels</li>
+    <li>Quick MVPs</li>
+    <li>No design customization</li>
+  </ul>
+
+  <p><b>Q: Does Tailwind break separation of concerns?</b></p>
+  <p>No. It separates logic and behavior, not class location.</p>
+</section>
+
+<section>
+  <h2>9. One-Line Interview Summary</h2>
+  <div class="highlight">
+    Bootstrap is best for quick standard UI,  
+    Tailwind is best for scalable and custom design systems.
+  </div>
+</section>
+
+<section>
+  <h2>10. Final Recommendation</h2>
+  <p>
+    For modern React development and interviews,  
+    <b>Tailwind CSS is the better long-term choice.</b>
+  </p>
+</section>
+
+<footer>
+  <p>Prepared for Interview & Revision Practice</p>
+</footer>
+
+</body>
+</html>
