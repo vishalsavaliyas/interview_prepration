@@ -813,6 +813,78 @@ export default function SimpleForm() {
 }
         </pre
       >
+<pre>
+  // Main App
+import { useState } from "react";
+export default function App() {
+
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const [errors, setErrors] = useState({});
+
+  function handleChange(e) {
+    const { name, value } = e.target;
+    console.log(name,value);
+    setForm({ ...form, [name]: value });
+  }
+
+  function validate() {
+    const newErrors = {};
+
+    if (!form.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(form.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!form.password.trim()) {
+      newErrors.password = "Password is required";
+    } else if (form.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    if (!validate()) return;
+
+    console.log("Form submitted:", form);
+  }
+
+  return (
+     &lt;form onSubmit={handleSubmit}&gt;
+       &lt;h2&gt;Login &lt;/h2&gt;
+
+       &lt;input
+        name="email"
+        placeholder="Email"
+        value={form.email}
+        onChange={handleChange}
+      /&gt;
+      {errors.email &&  &lt;p style={{ color: "red" }}&gt;{errors.email} &lt;/p&gt;}
+
+       &lt;input
+        type="password"
+        name="password"
+        placeholder="Password"
+        value={form.password}
+        onChange={handleChange}
+      /&gt;
+      {errors.password &&  &lt;p style={{ color: "red" }}&gt;{errors.password} &lt;/p&gt;}
+
+       &lt;button type="submit"&gt;Login &lt;/button&gt;
+     &lt;/form &gt;
+  );
+}
+
+</pre>
+      
       <h3>Reverse a string</h3>
       <pre>
 function reverseString(str) {
