@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React useReducer & useContext – Practical Study Guide</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f9f9f9;
+      color: #222;
+      line-height: 1.7;
+      padding: 30px;
+    }
+    h1, h2, h3 {
+      color: #2c3e50;
+    }
+    code {
+      background: #eee;
+      padding: 3px 6px;
+      border-radius: 4px;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      overflow-x: auto;
+      border-radius: 6px;
+    }
+    .box {
+      background: #ffffff;
+      border-left: 5px solid #4CAF50;
+      padding: 15px;
+      margin: 20px 0;
+    }
+    .warning {
+      border-left-color: #e74c3c;
+    }
+    ul li {
+      margin-bottom: 6px;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>React useReducer & useContext – Practical Revision Guide</h1>
+
+<div class="box">
+  <strong>Golden Rule (REMEMBER THIS):</strong><br/>
+  <code>useReducer = HOW state changes</code><br/>
+  <code>useContext = WHERE state is available</code>
+</div>
+
+<hr/>
+
+
+<div class="box">
+
+<strong>Correct way (developer mindset)</strong><br/>
+<code>Is my state complex? →<strong> useReducer</strong></code><br/>
+<code>Is my state needed in many components? → <strong>useContext</strong></code><br/>
+<code>Both true? → <strong>combine them</strong></code><br/>
+
+</div>
+
+<hr/>
+
+<h2>1️⃣ Why These Hooks Exist (Big Picture)</h2>
+
+<p>
+React apps grow fast. When state becomes:
+</p>
+
+<ul>
+  <li>Complex</li>
+  <li>Updated by many actions</li>
+  <li>Needed in many components</li>
+</ul>
+
+<p>
+👉 <strong>useState fails to scale cleanly</strong>
+</p>
+
+<div class="box">
+  <strong>Solution:</strong><br/>
+  useReducer manages logic<br/>
+  useContext shares state globally
+</div>
+
+<hr/>
+
+<h2>2️⃣ useReducer – HOW State Changes</h2>
+
+<h3>When to Use</h3>
+<ul>
+  <li>Multiple state values</li>
+  <li>Complex update logic</li>
+  <li>Actions like ADD / DELETE / UPDATE</li>
+</ul>
+
+<h3>Mental Model</h3>
+<div class="box">
+UI ➜ dispatch(action) ➜ reducer ➜ new state
+</div>
+
+<h3>Basic Pattern</h3>
+
+<pre>
+const initialState = { count: 0 }
+
+function reducer(state, action) {
+  switch (action.type) {
+    case "INCREMENT":
+      return { count: state.count + 1 }
+
+    case "DECREMENT":
+      return { count: state.count - 1 }
+
+    default:
+      return state
+  }
+}
+
+const [state, dispatch] = useReducer(reducer, initialState)
+</pre>
+
+<h3>Key Rules (EXAM + INTERVIEW)</h3>
+<ul>
+  <li>Reducer must be pure</li>
+  <li>No direct state mutation</li>
+  <li>Always return new state</li>
+  <li>Actions describe events, not logic</li>
+</ul>
+
+<hr/>
+
+<h2>3️⃣ useContext – WHERE State Is Available</h2>
+
+<h3>Problem It Solves</h3>
+<p>
+Avoids <strong>prop drilling</strong> when data is needed deeply.
+</p>
+
+<h3>Pattern</h3>
+
+<pre>
+const AppContext = React.createContext()
+
+function App() {
+  return (
+    &lt;AppContext.Provider value={{ user: "Nisha" }}&gt;
+      &lt;Home /&gt;
+    &lt;/AppContext.Provider&gt;
+  )
+}
+
+function Home() {
+  const data = useContext(AppContext)
+  return &lt;h2&gt;Hello {data.user}&lt;/h2&gt;
+}
+</pre>
+
+<h3>Rules</h3>
+<ul>
+  <li>Context does NOT manage logic</li>
+  <li>Context only shares data</li>
+  <li>Too much context causes re-renders</li>
+</ul>
+
+<hr/>
+
+<h2>4️⃣ useReducer + useContext (REAL-WORLD PATTERN)</h2>
+
+<h3>When to Combine</h3>
+<ul>
+  <li>Global state</li>
+  <li>Complex updates</li>
+  <li>Redux-like behavior without Redux</li>
+</ul>
+
+<h3>Industry Folder Structure (MEMORIZE)</h3>
+
+<pre>
+src/
+ ├─ context/
+ │   ├─ AppContext.js
+ │   ├─ reducer.js
+ │   └─ initialState.js
+ ├─ components/
+ └─ App.jsx
+</pre>
+
+<h3>Step-by-Step Flow</h3>
+
+<div class="box">
+1. initialState ➜ define data<br/>
+2. reducer ➜ define actions<br/>
+3. Context ➜ create store<br/>
+4. Provider ➜ pass state + dispatch<br/>
+5. Components ➜ consume + dispatch
+</div>
+
+<h3>Code Flow</h3>
+
+<pre>
+// initialState.js
+export const initialState = {
+  todos: [],
+  user: null
+}
+
+// reducer.js
+export function reducer(state, action) {
+  switch (action.type) {
+    case "ADD_TODO":
+      return {
+        ...state,
+        todos: [...state.todos, action.payload]
+      }
+
+    case "LOGIN":
+      return {
+        ...state,
+        user: action.payload
+      }
+
+    default:
+      return state
+  }
+}
+</pre>
+
+<pre>
+// AppContext.js
+export const AppContext = createContext()
+
+export function AppProvider({ children }) {
+  const [state, dispatch] = useReducer(reducer, initialState)
+
+  return (
+    &lt;AppContext.Provider value={{ state, dispatch }}&gt;
+      {children}
+    &lt;/AppContext.Provider&gt;
+  )
+}
+</pre>
+
+<pre>
+// Any component
+const { state, dispatch } = useContext(AppContext)
+
+dispatch({ type: "ADD_TODO", payload: "Learn React" })
+</pre>
+
+<hr/>
+
+<h2>5️⃣ Comparison Table (REVISION GOLD)</h2>
+
+<table border="1" cellpadding="10">
+  <tr>
+    <th>Scenario</th>
+    <th>Hook</th>
+  </tr>
+  <tr>
+    <td>Single input</td>
+    <td>useState</td>
+  </tr>
+  <tr>
+    <td>Complex logic</td>
+    <td>useReducer</td>
+  </tr>
+  <tr>
+    <td>Shared state</td>
+    <td>useContext</td>
+  </tr>
+  <tr>
+    <td>Global + complex</td>
+    <td>useReducer + useContext</td>
+  </tr>
+</table>
+
+<hr/>
+
+<h2>6️⃣ Common Mistakes (VERY IMPORTANT)</h2>
+
+<div class="box warning">
+❌ Putting logic in components<br/>
+❌ Using Context for everything<br/>
+❌ Mutating state inside reducer<br/>
+❌ Missing default case in reducer
+</div>
+
+<hr/>
+
+<h2>7️⃣ Interview One-Liners (MEMORIZE)</h2>
+
+<ul>
+  <li><strong>useReducer</strong>: Predictable state transitions</li>
+  <li><strong>useContext</strong>: Dependency injection for React</li>
+  <li><strong>Combined</strong>: Lightweight Redux alternative</li>
+</ul>
+
+<hr/>
+
+<h2>8️⃣ Daily Practice Plan (15–30 min)</h2>
+
+<div class="box">
+Day 1: Counter with useReducer<br/>
+Day 2: Todo app with useReducer<br/>
+Day 3: Theme switcher with Context<br/>
+Day 4: Todo + Context<br/>
+Day 5: Login + Cart system<br/>
+Repeat 🔁
+</div>
+
+<hr/>
+
+<h2>FINAL MEMORY SENTENCE</h2>
+
+<div class="box">
+State lives in reducer.<br/>
+Actions describe events.<br/>
+Dispatch sends events.<br/>
+Context shares state.<br/>
+Components stay dumb.
+</div>
+
+<h3>🎯 If you remember this page, you can build ANY React app.</h3>
+
+</body>
+</html>
