@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arrow Functions vs Arguments Object</title>
+    <style>
+        body { font-family: sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 20px auto; padding: 0 20px; }
+        code { background: #f4f4f4; border: 1px solid #ddd; border-left: 3px solid #f36d33; color: #666; page-break-inside: avoid; font-family: monospace; font-size: 15px; line-height: 1.6; margin-bottom: 1.6em; max-width: 100%; overflow: auto; padding: 1em 1.5em; display: block; word-wrap: break-word; }
+        h2 { color: #2c3e50; border-bottom: 2px solid #eee; padding-bottom: 10px; }
+        h3 { color: #e67e22; }
+        .warning { background-color: #fff3cd; border-left: 5px solid #ffecb5; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+
+    <h1>Understanding Arrow Functions and the Arguments Object</h1>
+
+    <p>In JavaScript, <strong>arrow functions do not have their own <code>arguments</code> object</strong>. They are lexically scoped, meaning they inherit the <code>arguments</code> from their nearest non-arrow parent function.</p>
+
+    <h2>1. The Comparison Example</h2>
+    
+    <h3>Regular Function (Has its own arguments)</h3>
+    <p>A standard function creates its own local <code>arguments</code> array-like object automatically.</p>
+    <code>
+function regularFunc() {<br>
+&nbsp;&nbsp;console.log(arguments); // Output: [1, 2, 3]<br>
+}<br>
+regularFunc(1, 2, 3);
+    </code>
+
+    <h3>Arrow Function (No arguments object)</h3>
+    <p>If you try to access <code>arguments</code> in an arrow function defined in the global scope, it will throw an error.</p>
+    <code>
+const arrowFunc = () => {<br>
+&nbsp;&nbsp;console.log(arguments); // ReferenceError: arguments is not defined<br>
+};<br>
+arrowFunc(1, 2, 3);
+    </code>
+
+    <h2>2. When it creates an Issue (Lexical Scope)</h2>
+    <p>If an arrow function is inside a regular function, it will "leak" the parent's arguments, which can lead to bugs if you expect it to have its own data.</p>
+    <code>
+function outer(a, b) {<br>
+&nbsp;&nbsp;const innerArrow = () => {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;console.log(arguments[0]); // Logs "Outer Value", NOT "Inner Value"<br>
+&nbsp;&nbsp;};<br>
+&nbsp;&nbsp;innerArrow("Inner Value");<br>
+}<br>
+outer("Outer Value");
+    </code>
+
+    <h2>3. The Solution: Rest Parameters</h2>
+    <p>If you need to access multiple arguments in an arrow function, you must use the <strong>Rest Parameter</strong> (<code>...args</code>). This is the modern and preferred way for both arrow and regular functions.</p>
+    <code>
+const sumAll = (...args) => {<br>
+&nbsp;&nbsp;return args.reduce((sum, n) => sum + n, 0);<br>
+};<br>
+console.log(sumAll(10, 20, 30)); // Output: 60
+    </code>
+
+    <h2>4. Other Critical Differences</h2>
+    <ul>
+        <li><strong>No <code>this</code> binding:</strong> Arrow functions do not have their own <code>this</code>. They inherit it from the parent scope. This makes them bad for object methods but great for callbacks.</li>
+        <li><strong>No <code>new</code> keyword:</strong> You cannot use an arrow function as a constructor. <code>const x = new MyArrow()</code> will fail.</li>
+        <li><strong>No Hoisting:</strong> Arrow functions must be defined <em>before</em> they are called because they are usually assigned to variables (<code>const</code>/<code>let</code>).</li>
+    </ul>
+
+    <div class="warning">
+        <strong>Tip:</strong> Always use <strong>Rest Parameters</strong> instead of the <strong>Arguments object</strong> to ensure your code works consistently across both regular and arrow functions.
+    </div>
+
+    <p>For more technical details, you can visit the <a href="https://developer.mozilla.org">MDN Web Docs on Arrow Functions</a>.</p>
+
+</body>
+</html>
