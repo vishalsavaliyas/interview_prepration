@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>JavaScript Hidden Rules – Interview & Development Revision Sheet</title>
+  <style>
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f7f9fc;
+      color: #333;
+      line-height: 1.6;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      color: #1a73e8;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    h2 {
+      border-bottom: 2px solid #1a73e8;
+      padding-bottom: 5px;
+      margin-top: 40px;
+    }
+    code {
+      background: #eef1f6;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    pre {
+      background: #1e1e1e;
+      color: #dcdcdc;
+      padding: 15px;
+      border-radius: 6px;
+      overflow-x: auto;
+    }
+    .note {
+      background: #fff3cd;
+      border-left: 5px solid #ffca2c;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    .rule {
+      background: #e7f3ff;
+      border-left: 5px solid #1a73e8;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    ul {
+      margin-left: 20px;
+    }
+    footer {
+      margin-top: 50px;
+      text-align: center;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🔥 JavaScript Hidden Rules</h1>
+<p style="text-align:center;">Interview + Real Development Revision Sheet</p>
+
+<h2>1. Truthy & Falsy Values</h2>
+<p><strong>Only these values are falsy:</strong></p>
+<pre>
+false, 0, -0, 0n, "", null, undefined, NaN
+</pre>
+<div class="rule">
+Everything else is <strong>truthy</strong> — including <code>[]</code>, <code>{}</code>, and <code>"0"</code>.
+</div>
+
+<h2>2. == vs ===</h2>
+<pre>
+0 == false      // true ❌
+0 === false     // false ✅
+null == undefined   // true ❌
+null === undefined  // false ✅
+</pre>
+<div class="rule">
+Always use <strong>===</strong>. <code>==</code> performs type coercion.
+</div>
+
+<h2>3. null vs undefined</h2>
+<ul>
+  <li><strong>null</strong> → intentional empty value (set by developer)</li>
+  <li><strong>undefined</strong> → value not assigned (JS engine)</li>
+</ul>
+<pre>
+typeof null // "object" ❌ (JS bug)
+</pre>
+
+<h2>4. Hoisting</h2>
+<pre>
+console.log(a); // undefined
+var a = 10;
+</pre>
+<pre>
+console.log(b); // ReferenceError
+let b = 10;
+</pre>
+<div class="rule">
+<code>var</code> is hoisted and initialized.  
+<code>let</code> and <code>const</code> are hoisted but in TDZ.
+</div>
+
+<h2>5. Temporal Dead Zone (TDZ)</h2>
+<pre>
+{
+  console.log(x); // ❌ ReferenceError
+  let x = 5;
+}
+</pre>
+
+<h2>6. typeof Weirdness</h2>
+<pre>
+typeof null        // "object"
+typeof []          // "object"
+typeof NaN         // "number"
+typeof function(){} // "function"
+</pre>
+<div class="rule">
+Use <code>Array.isArray()</code> and <code>Number.isNaN()</code>.
+</div>
+
+<h2>7. this Keyword Rules</h2>
+<pre>
+const obj = {
+  name: "JS",
+  show() {
+    console.log(this.name);
+  }
+};
+
+obj.show(); // JS
+</pre>
+<pre>
+const fn = obj.show;
+fn(); // undefined
+</pre>
+<div class="note">
+<code>this</code> depends on how the function is called, not where it is written.
+</div>
+
+<h2>8. Arrow Functions</h2>
+<ul>
+  <li>No <code>this</code></li>
+  <li>No <code>arguments</code></li>
+  <li>Cannot be used with <code>new</code></li>
+</ul>
+
+<h2>9. Object Comparison</h2>
+<pre>
+{} === {}   // false
+[] === []   // false
+</pre>
+<pre>
+const a = {};
+const b = a;
+a === b; // true
+</pre>
+
+<h2>10. Primitive vs Reference</h2>
+<pre>
+let a = 10;
+let b = a;
+b = 20;
+console.log(a); // 10
+</pre>
+<pre>
+let obj1 = { x: 1 };
+let obj2 = obj1;
+obj2.x = 2;
+console.log(obj1.x); // 2
+</pre>
+
+<h2>11. NaN Rule</h2>
+<pre>
+NaN === NaN // false ❌
+</pre>
+<pre>
+Number.isNaN(NaN) // true ✅
+</pre>
+
+<h2>12. + Operator Coercion</h2>
+<pre>
+1 + "2" + 3 // "123"
+1 + 2 + "3" // "33"
+</pre>
+
+<h2>13. setTimeout Is Not Exact</h2>
+<pre>
+setTimeout(() => console.log("Hi"), 0);
+console.log("Bye");
+</pre>
+<p>Output:</p>
+<pre>
+Bye
+Hi
+</pre>
+
+<h2>14. Event Loop Priority</h2>
+<pre>
+console.log("A");
+
+setTimeout(() => console.log("B"), 0);
+
+Promise.resolve().then(() => console.log("C"));
+
+console.log("D");
+</pre>
+<p>Output:</p>
+<pre>
+A
+D
+C
+B
+</pre>
+
+<h2>15. Closures</h2>
+<pre>
+function counter() {
+  let count = 0;
+  return function () {
+    count++;
+    return count;
+  };
+}
+
+const c = counter();
+c(); // 1
+c(); // 2
+</pre>
+
+<h2>16. for Loop + var Trap</h2>
+<pre>
+for (var i = 0; i < 3; i++) {
+  setTimeout(() => console.log(i), 1000);
+}
+// 3 3 3
+</pre>
+<div class="rule">
+Use <code>let</code> instead of <code>var</code>.
+</div>
+
+<h2>17. Default Parameters</h2>
+<pre>
+let x = 10;
+function test(a = x) {
+  console.log(a);
+}
+x = 20;
+test(); // 20
+</pre>
+
+<h2>18. delete Operator</h2>
+<pre>
+let a = 10;
+delete a; // false
+
+const obj = { x: 1 };
+delete obj.x; // true
+</pre>
+
+<h2>19. arguments Object</h2>
+<pre>
+function test() {
+  console.log(arguments.map); // undefined
+}
+</pre>
+
+<h2>20. parseInt Traps</h2>
+<pre>
+parseInt("10px") // 10
+parseInt("px10") // NaN
+</pre>
+<div class="rule">
+Always specify radix: <code>parseInt("10", 10)</code>
+</div>
+
+<h2>21. Object.freeze Is Shallow</h2>
+<pre>
+const obj = Object.freeze({
+  a: { b: 1 }
+});
+obj.a.b = 2; // allowed
+</pre>
+
+<h2>22. map / filter Mutation Trap</h2>
+<pre>
+arr.map(x => x.a = 5); // mutates objects
+</pre>
+
+<h2>23. Spread Operator Is Shallow</h2>
+<pre>
+const a = { x: { y: 1 } };
+const b = { ...a };
+b.x.y = 2;
+console.log(a.x.y); // 2
+</pre>
+
+<h2>24. Famous == Interview Trap</h2>
+<pre>
+[] == ![] // true
+</pre>
+
+<h2>25. console.log Is Not Snapshot</h2>
+<pre>
+const obj = { a: 1 };
+console.log(obj);
+obj.a = 2;
+</pre>
+
+<h2>🎯 Final Interview Rule</h2>
+<div class="rule">
+If you understand:
+<ul>
+  <li>Execution Context</li>
+  <li>Scope Chain</li>
+  <li>Event Loop</li>
+  <li>Closures</li>
+  <li>this keyword</li>
+</ul>
+You will crack JavaScript interviews confidently.
+</div>
+
+<footer>
+  JavaScript Hidden Rules – One Page Revision Sheet 🚀
+</footer>
+
+</body>
+</html>
