@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Mastery Guide 2026</title>
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --accent: #e67e22;
+        }
+        body { font-family: 'Segoe UI', system-ui, sans-serif; line-height: 1.6; color: var(--text); background: var(--bg); max-width: 900px; margin: 0 auto; padding: 40px 20px; }
+        h1 { color: var(--primary); border-bottom: 3px solid var(--primary); padding-bottom: 10px; text-align: center; }
+        h2 { background: var(--primary); color: white; padding: 10px 15px; border-radius: 6px; margin-top: 40px; font-size: 1.4rem; }
+        h3 { color: var(--accent); border-left: 4px solid var(--accent); padding-left: 10px; margin-top: 25px; }
+        .rule-card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); margin: 15px 0; border: 1px solid #e2e8f0; }
+        code { background: #f1f5f9; padding: 2px 6px; border-radius: 4px; font-family: 'Consolas', monospace; font-weight: bold; color: #d63384; }
+        pre { background: #1e293b; color: #f8fafc; padding: 15px; border-radius: 8px; overflow-x: auto; font-size: 0.9rem; }
+        .highlight { font-weight: bold; color: var(--primary); }
+        .pro-tip { background: #fef3c7; border: 1px solid #f59e0b; padding: 10px; border-radius: 6px; font-size: 0.9rem; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+    <h1>JavaScript Interview & Mastery Guide (2026 Edition)</h1>
+
+    <!-- SECTION 1: COMPARISONS -->
+    <h2>1. Comparison & Type Coercion</h2>
+    <div class="rule-card">
+        <h3>Loose (==) vs. Strict (===) Equality</h3>
+        <p><span class="highlight">Rule:</span> <code>==</code> checks <strong>Value</strong> only (allows coercion); <code>===</code> checks <strong>Value AND Type</strong> (strict).</p>
+        <p><span class="highlight">Hidden Truth:</span> <code>NaN</code> is the only value not equal to itself (<code>NaN === NaN</code> is <code>false</code>). Always use <code>Number.isNaN()</code>.</p>
+        <pre>5 == "5";   // true (String "5" becomes Number 5)
+5 === "5";  // false (Different types)
+null == undefined; // true (Common interview trick)
+null === undefined; // false</pre>
+    </div>
+
+    <!-- SECTION 2: SCOPE & HOISTING -->
+    <h2>2. Variables, Scope & Hoisting</h2>
+    <div class="rule-card">
+        <h3>The Temporal Dead Zone (TDZ)</h3>
+        <p><span class="highlight">Rule:</span> <code>var</code> is hoisted and initialized as <code>undefined</code>. <code>let</code> and <code>const</code> are hoisted but stay in the <strong>TDZ</strong> until their declaration line.</p>
+        <div class="pro-tip"><strong>Interview Answer:</strong> "Accessing let/const before declaration throws a ReferenceError due to the TDZ, unlike var which just gives undefined."</div>
+        <pre>console.log(a); // undefined
+var a = 10;
+
+console.log(b); // ReferenceError (TDZ)
+let b = 20;</pre>
+    </div>
+
+    <div class="rule-card">
+        <h3>Lexical "this"</h3>
+        <p><span class="highlight">Rule:</span> Regular functions determine <code>this</code> by <strong>how they are called</strong>. Arrow functions <strong>inherit</strong> <code>this</code> from their surrounding parent scope.</p>
+    </div>
+
+    <!-- SECTION 3: ASYNC & EXECUTION -->
+    <h2>3. Asynchronous Execution</h2>
+    <div class="rule-card">
+        <h3>The Event Loop Hierarchy</h3>
+        <p><span class="highlight">Rule:</span> Synchronous code executes first, followed by the <span class="highlight">Microtask Queue</span>, then the <span class="highlight">Macrotask Queue</span>.</p>
+        <ul>
+            <li><strong>Microtasks:</strong> Promises, <code>queueMicrotask</code>, <code>MutationObserver</code>.</li>
+            <li><strong>Macrotasks:</strong> <code>setTimeout</code>, <code>setInterval</code>, <code>setImmediate</code>.</li>
+        </ul>
+        <pre>console.log("1");
+setTimeout(() => console.log("2"), 0); 
+Promise.resolve().then(() => console.log("3"));
+console.log("4");
+// Output: 1, 4, 3, 2 (Microtask "3" runs before Macrotask "2")</pre>
+    </div>
+
+    <!-- SECTION 4: 2026 MODERN UPDATES -->
+    <h2>4. Modern JS Features (ES2025 - ES2026)</h2>
+    <div class="rule-card">
+        <h3>Explicit Resource Management (<code>using</code>)</h3>
+        <p><span class="highlight">New in 2026:</span> The <code>using</code> keyword automatically cleans up resources (database connections, file handles) when they exit the block scope.</p>
+        <pre>async function processData() {
+    await using connection = await db.connect(); 
+    // Connection closes automatically here!
+}</pre>
+    </div>
+
+    <div class="rule-card">
+        <h3>Records & Tuples</h3>
+        <p><span class="highlight">Concept:</span> Immutable objects (<code>#{}</code>) and arrays (<code>#[]</code>) that are compared by <strong>Value</strong> instead of reference.</p>
+        <pre>#{ a: 1 } === #{ a: 1 }; // true (Deep equality by default!)</pre>
+    </div>
+
+    <!-- SECTION 5: PERFORMANCE & MEMORY -->
+    <h2>5. Advanced Performance Rules</h2>
+    <div class="rule-card">
+        <h3>Deep Cloning vs. Shallow Copy</h3>
+        <p><span class="highlight">Standard:</span> Use <code>structuredClone(obj)</code> for true deep copies. Avoid <code>JSON.parse(JSON.stringify(obj))</code> as it destroys Dates, Sets, and Functions.</p>
+    </div>
+
+    <div class="rule-card">
+        <h3>WeakMap & Garbage Collection</h3>
+        <p><span class="highlight">Rule:</span> <code>WeakMap</code> keys must be objects. If the object key is deleted elsewhere, the entry is automatically removed from the WeakMap, preventing <strong>memory leaks</strong>.</p>
+    </div>
+
+    <div style="text-align: center; margin-top: 50px; color: #94a3b8; font-size: 0.8rem;">
+        &copy; 2026 JavaScript Interview Prep Guide. References: ECMAScript 2026 Standards.
+    </div>
+
+</body>
+</html>
