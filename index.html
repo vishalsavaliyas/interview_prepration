@@ -1894,6 +1894,46 @@ function sum(...nums) {}
         Debouncing limits function execution by delaying it until a certain time
         has passed since the last call, commonly used in search inputs.
       </p>
+      <h3>Add leading/trailing debounce</h3>
+      <p><h4>Trailing: </h4> Run after user stops</p>
+      <p><h4>Leading: </h4> Run immediately on first event</p>
+      <p><h4>Leading + Trailing: </h4> 👉 Run immediately, and also once at the end</p>
+      <p>by Default debounce is trailing</p>
+      <p>Leading + Trailing Debounce like lodash library doing</p>
+<pre>
+function debounce(fn, delay, options = {}) {
+  let timer = null;
+  let hasCalledLeading = false;
+
+  const { leading = false, trailing = true } = options;
+
+  return function (...args) {
+    const context = this;
+
+    // Leading
+    if (leading && !timer) {
+      fn.apply(context, args);
+      hasCalledLeading = true;
+    }
+
+    clearTimeout(timer);
+
+    timer = setTimeout(() => {
+      // Trailing
+      if (trailing && (!leading || hasCalledLeading)) {
+        fn.apply(context, args);
+      }
+
+      timer = null;
+      hasCalledLeading = false;
+    }, delay);
+  };
+}
+
+  
+</pre>
+
+      
       <h3>What is throttling?</h3>
       <p>
         Throttling is a technique to limit the rate at which a function is
