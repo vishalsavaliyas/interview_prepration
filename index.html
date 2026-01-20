@@ -1865,6 +1865,8 @@ function myArr(arg1, arg2) {
   // 'this' points to the 'arr' array
   console.log("Arguments:", arg1, arg2);
   console.log("First element name:", this[0].name); 
+
+   this.map((item)=>console.log(item.id,item.name))      
 }
 
 // 1. Call: Pass arguments individually
