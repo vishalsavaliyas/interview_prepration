@@ -1851,6 +1851,32 @@ function greet(city) {
 
 greet.call({name:"Nisha"}, "Delhi");
 
+3. Complete Understanding
+
+const obj = { id: 1, name: "bhavesh" };
+const arr = [{ id: 1, name: "sagar" }, { id: 2, name: "bhautik" }, { id: 3, name: "rajani" }];
+
+function myFn(abc) {
+  // Works correctly: 'this' points to 'obj'
+  console.log(abc, "id:", this.id, "name:", this.name);
+}
+
+function myArr(arg1, arg2) {
+  // 'this' points to the 'arr' array
+  console.log("Arguments:", arg1, arg2);
+  console.log("First element name:", this[0].name); 
+}
+
+// 1. Call: Pass arguments individually
+myFn.call(obj, "hello"); 
+
+// 2. Apply: Pass arguments as an array
+myArr.apply(arr, ["sagar", "bhavesh"]);
+
+// 3. Bind: Returns a new function to be called later
+const boundFn = myFn.bind(obj, "hi");
+boundFn();        
+        
       </pre>
 
       <p>What is rest operator?</p>
