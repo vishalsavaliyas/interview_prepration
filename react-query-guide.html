@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>React Query – Complete Industry Guide</title>
+  <style>
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, Arial, sans-serif;
+      line-height: 1.6;
+      padding: 24px;
+      max-width: 1100px;
+      margin: auto;
+      background: #f7f9fc;
+      color: #222;
+    }
+
+    h1, h2, h3 {
+      color: #0d47a1;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    section {
+      background: #ffffff;
+      padding: 20px;
+      margin-bottom: 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    }
+
+    code {
+      background: #f1f3f4;
+      padding: 4px 6px;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    pre {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 16px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    .rule {
+      background: #e3f2fd;
+      border-left: 5px solid #1976d2;
+      padding: 12px;
+      margin: 12px 0;
+      font-weight: 500;
+    }
+
+    .danger {
+      background: #ffebee;
+      border-left: 5px solid #d32f2f;
+      padding: 12px;
+      margin: 12px 0;
+    }
+
+    .success {
+      background: #e8f5e9;
+      border-left: 5px solid #388e3c;
+      padding: 12px;
+      margin: 12px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>React Query – Complete Industry Usage Guide</h1>
+
+<section>
+  <h2>1. What React Query REALLY Is</h2>
+  <p>
+    React Query is <strong>not a state manager</strong>.
+    It is a <strong>server-state manager</strong>.
+  </p>
+
+  <div class="rule">
+    Server data → React Query <br />
+    UI data → useState / useReducer
+  </div>
+
+  <p>
+    React Query handles:
+  </p>
+  <ul>
+    <li>Fetching</li>
+    <li>Caching</li>
+    <li>Background refetching</li>
+    <li>Deduplication</li>
+    <li>Pagination</li>
+    <li>Optimistic updates</li>
+    <li>Error & retry logic</li>
+  </ul>
+</section>
+
+<section>
+  <h2>2. useQuery – Fetching Server Data</h2>
+
+  <p><strong>When to use:</strong></p>
+  <ul>
+    <li>GET requests</li>
+    <li>Read-only data</li>
+    <li>Data you want cached</li>
+  </ul>
+
+  <pre>
+useQuery({
+  queryKey: ["products"],
+  queryFn: fetchProducts,
+});
+  </pre>
+
+  <div class="success">
+    ✔ Product list<br/>
+    ✔ User profile<br/>
+    ✔ Dashboard stats
+  </div>
+
+  <div class="danger">
+    ❌ Form state<br/>
+    ❌ Modal open/close
+  </div>
+</section>
+
+<section>
+  <h2>3. useMutation – Creating / Updating / Deleting</h2>
+
+  <p><strong>When to use:</strong></p>
+  <ul>
+    <li>POST</li>
+    <li>PUT</li>
+    <li>PATCH</li>
+    <li>DELETE</li>
+  </ul>
+
+  <pre>
+useMutation({
+  mutationFn: createProduct,
+  onSuccess: () => {
+    queryClient.invalidateQueries(["products"]);
+  },
+});
+  </pre>
+
+  <div class="rule">
+    Mutations NEVER cache automatically.<br/>
+    They change data → then refetch queries.
+  </div>
+</section>
+
+<section>
+  <h2>4. Query Keys – The Heart of React Query</h2>
+
+  <pre>
+["products"]
+["product", 1]
+["users", { page: 2 }]
+  </pre>
+
+  <ul>
+    <li>Unique identity of data</li>
+    <li>Controls caching</li>
+    <li>Controls refetching</li>
+  </ul>
+
+  <div class="rule">
+    Same queryKey = shared cache
+  </div>
+</section>
+
+<section>
+  <h2>5. Pagination & Infinite Queries</h2>
+
+  <h3>Normal Pagination</h3>
+  <pre>
+useQuery({
+  queryKey: ["products", page],
+  queryFn: () => fetchProducts(page),
+});
+  </pre>
+
+  <h3>Infinite Scroll</h3>
+  <pre>
+useInfiniteQuery({
+  queryKey: ["products"],
+  queryFn: fetchProducts,
+  getNextPageParam: (lastPage) => lastPage.nextPage,
+});
+  </pre>
+
+  <div class="success">
+    ✔ Infinite scroll<br/>
+    ✔ Load more buttons
+  </div>
+</section>
+
+<section>
+  <h2>6. Dependent Queries</h2>
+
+  <p>
+    Fetch data only after another query succeeds.
+  </p>
+
+  <pre>
+useQuery({
+  queryKey: ["orders", userId],
+  queryFn: () => fetchOrders(userId),
+  enabled: !!userId,
+});
+  </pre>
+
+  <div class="rule">
+    enabled = conditional fetching
+  </div>
+</section>
+
+<section>
+  <h2>7. Background Refetching</h2>
+
+  <pre>
+useQuery({
+  queryKey: ["products"],
+  queryFn: fetchProducts,
+  refetchOnWindowFocus: true,
+  refetchInterval: 30000,
+});
+  </pre>
+
+  <ul>
+    <li>Auto-refresh data</li>
+    <li>Keeps UI fresh</li>
+  </ul>
+</section>
+
+<section>
+  <h2>8. Optimistic Updates</h2>
+
+  <p>
+    Update UI BEFORE server responds.
+  </p>
+
+  <pre>
+onMutate: async (newItem) => {
+  await queryClient.cancelQueries(["products"]);
+  const previous = queryClient.getQueryData(["products"]);
+  queryClient.setQueryData(["products"], old => [...old, newItem]);
+  return { previous };
+}
+  </pre>
+
+  <div class="success">
+    ✔ Instant UI response<br/>
+    ✔ Better UX
+  </div>
+</section>
+
+<section>
+  <h2>9. Error Handling & Retry</h2>
+
+  <pre>
+useQuery({
+  queryKey: ["products"],
+  queryFn: fetchProducts,
+  retry: 3,
+  retryDelay: 2000,
+});
+  </pre>
+
+  <div class="rule">
+    React Query retries failed requests automatically
+  </div>
+</section>
+
+<section>
+  <h2>10. Prefetching</h2>
+
+  <p>
+    Load data BEFORE user navigates.
+  </p>
+
+  <pre>
+queryClient.prefetchQuery({
+  queryKey: ["product", id],
+  queryFn: () => fetchProduct(id),
+});
+  </pre>
+
+  <div class="success">
+    ✔ Faster navigation<br/>
+    ✔ Zero loading screens
+  </div>
+</section>
+
+<section>
+  <h2>11. Cache Control</h2>
+
+  <pre>
+useQuery({
+  queryKey: ["products"],
+  queryFn: fetchProducts,
+  staleTime: 60000,
+  cacheTime: 300000,
+});
+  </pre>
+
+  <ul>
+    <li>staleTime → when data becomes stale</li>
+    <li>cacheTime → how long unused data stays</li>
+  </ul>
+</section>
+
+<section>
+  <h2>12. React Query vs Context vs Redux</h2>
+
+  <pre>
+SERVER DATA  → React Query
+UI STATE    → useState / useReducer
+AUTH INFO   → Context
+APP STATE   → Redux (rare now)
+  </pre>
+
+  <div class="rule">
+    Do NOT store API data in Context or Redux.
+  </div>
+</section>
+
+<section>
+  <h2>13. Interview Golden Answer</h2>
+
+  <p>
+    <strong>
+      “React Query manages server state by handling fetching, caching,
+      background refetching, mutations, and synchronization automatically.
+      Local UI state remains inside components or reducers, keeping concerns
+      separated and performance optimized.”
+    </strong>
+  </p>
+</section>
+
+<section>
+  <h2>14. One-Line Memory Cheat Sheet</h2>
+
+  <pre>
+GET        → useQuery
+POST/PUT   → useMutation
+Cache      → queryKey
+Refetch    → invalidateQueries
+Pagination → query params
+Optimistic → onMutate
+  </pre>
+</section>
+
+</body>
+</html>
