@@ -246,3 +246,17 @@ Correct:
 ✅ await only waits
 
 */
+
+
+//actual async wait
+async function getServiceData(){
+    try{
+    const data=await fetch('https://jsonplaceholder.typicode.com/posts/1');//here suspend function and fetch return promise
+    const jsonValue=await data.json();//data.json return promise
+    console.log(jsonValue);//execute again and come back into call stacke when promise resolve
+    }catch(err){
+        console.log(err);
+    }   
+}
+
+getServiceData();
