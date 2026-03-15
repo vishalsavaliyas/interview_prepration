@@ -1,5 +1,54 @@
 /***********************************************************************
  * JAVASCRIPT ASYNC / AWAIT & PROMISES - COMPLETE LEARNING EXAMPLE
+ Basics of Javascript
+*Variables
+ var, let, const
+* Hoisting of variables
+
+Functions:
+-Arrow Functions
+-Higher order Functions
+
+
+Array & Object
+-Array Destructuring
+-Object Destructuring
+-rest operator
+-spread operator
+
+COnditions in Javascript
+-if else
+-ternary operator
+-using && and ||
+-optional chaning
+
+Array Methods
+-map()
+-filter()
+-reduce()
+-sort()
+
+Event Listner
+-onClick
+-onBlur
+-onChange
+-onFocue
+
+setTimeout() & setInterval()
+
+Event Bubbling & Capturing & Event Delegation
+
+
+Asynchronous Events
+-Callbacks
+-Callback Hell
+-Promises
+-Promises APIs
+-async/await
+
+-this keyword, call,apply & bind
+
+  
  **********************************************************************/
 
 
