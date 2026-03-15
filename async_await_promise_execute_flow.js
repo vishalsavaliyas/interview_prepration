@@ -125,7 +125,7 @@ async function handlePromiseWithAsyncAwait() {
     /*
      * await pauses the execution until promiseExample resolves.
      */
-    const result = await promiseExample;
+    const result = await promiseExample; //suspend execution and remove from call stack until promiseExample resolves   after complete promise its come back in call stack for execution
 
     console.log("Step 2: Promise resolved ->", result);
 
