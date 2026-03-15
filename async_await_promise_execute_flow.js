@@ -260,3 +260,26 @@ async function getServiceData(){
 }
 
 getServiceData();
+//other way handle error if not write try catch there getServiceData().catch((err)=>console.log(err));
+//async keyword used with function to make it async function, its return promise and await keyword used only inside async function to wait promise  execution    
+
+
+/*
+Async await vs Promise 
+
+
+While Async/Await is built on top of Promises, they differ in how they look and handle the flow of your code. Think of async/await as "syntactic sugar" that makes asynchronous code look and behave like synchronous code.
+
+Feature	Promises (.then)	Async/Await
+Readability	Can lead to "Promise Hell" with deep nesting.  **	Very clean; reads like standard synchronous code.
+Error Handling	Uses .catch() at the end of the chain.	** Uses standard try/catch blocks.
+Debugging	Harder to set breakpoints inside arrow functions.	** Easy to debug; you can step through lines one by one.
+Conditionals	Messy; often requires nesting or repeating code.	** Simple; use standard if/else around await.
+
+
+ When to use which?
+Use Async/Await for 90% of your daily work. It is easier to read, write, and maintain, especially when one request depends on the result of a previous one.
+Use Promises when you need to run tasks in parallel. For example, Promise.all([request1, request2]) starts both at the same time, whereas await would run them one after the other.
+
+
+*/
