@@ -81,6 +81,15 @@ const promiseExample2 = new Promise((resolve, reject) => {
 });
 
 
+const promiseExample3 = new Promise((resolve, reject) => {
+
+    console.log("Promise3 executor runs immediately");
+
+    setTimeout(() => {
+        resolve("Promise3 resolved after 15 seconds");
+    }, 15000);    
+
+});
 
 /***********************************************************************
  * 4️⃣ HANDLING PROMISE USING .then()
@@ -143,6 +152,9 @@ async function handlePromiseWithAsyncAwait() {
     const result3 = await promiseExample2;
 
     console.log("Step 6: Promise2 result ->", result3);
+
+    const result4 = await promiseExample3;
+    console.log("Step 7: Promise3 result ->", result4);
 
 }
 
